@@ -1,0 +1,184 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<TEKA.Models.LOG_MO>
+
+@{
+    ViewBag.Title = "LOG MO";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    var index = 0;
+
+}
+<style>
+    .form-group {
+        margin-bottom: 3px;
+    }
+
+    td a {
+        font-size: 31px;
+    }
+</style>
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('#tungay').datetimepicker({
+                format: 'DD/MM/YYYY',
+                allowInputToggle: true,
+                useCurrent: false
+            }).on('dp.change', function (e) {
+                var minNew = e.date;
+                var maxNew = e.date.clone().add(9, 'days');
+                var pickEnd = $('#denngay');
+                var minOld = pickEnd.data('DateTimePicker').minDate();
+                var maxOld = pickEnd.data('DateTimePicker').maxDate();
+                if (minOld && minOld.isAfter(maxNew)) {
+                    pickEnd.data('DateTimePicker').minDate(minNew);
+                    pickEnd.data('DateTimePicker').maxDate(maxNew);
+                } else {
+                    pickEnd.data('DateTimePicker').maxDate(maxNew);
+                    pickEnd.data('DateTimePicker').minDate(minNew);
+                }
+            });
+            $('#denngay').datetimepicker({
+                format: 'DD/MM/YYYY',
+                allowInputToggle: true,
+                useCurrent: true
+            });
+
+        });
+
+        $("#mytable .call").click(function () {
+
+            var Id = $(this).closest("tr").find("td").eq(2).html();
+            $("#Phone").val(Id);
+            $('#myModal').modal('show');
+        });
+
+        function callnow() {
+            document.getElementById("btncallnow").disabled = true;
+            $("#box-loading").css('display', 'block');
+            var phone = $("#Phone").val();
+            var key = $("#Key").val();
+            $.ajax
+                ({
+                    url: '/Admin/HistoryCall/CallNow',
+                    type: 'POST',
+                    datatype: 'application/json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        key: key,
+                        phone: phone
+                    }),
+                    success: function (result) {
+                        $("#box-loading").css('display', 'none');
+                        if (result.code != "1000") {
+                            alert("Request timeout !");
+                            document.getElementById("btncallnow").disabled = false;
+                        }
+                    }
+                });
+        }
+    </script>
+
+    <script type="text/javascript">
+        function exportexcel() {
+            $("#mytable").table2excel({
+                name: "Table2Excel",
+                filename: "ds-khachhang",
+                fileext: ".xls"
+            });
+        }
+    </script>
+}
+<div class="row">
+    <div class="col-lg-12 stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <form class="forms-sample">
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">
+                            Số điện thoại
+                        </label>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                @Html.TextBox("s6", ViewBag.c6 as string, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+
+                    @*<div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">Ngày gửi</label>
+                        <div class="col-sm-6">
+                            <div class="col-sm-5 row">
+                                <div class="form-group">
+                                    <div class='input-group date'>
+                                        @Html.TextBox("s4", ViewBag.c4 as string, new { @class = "form-control tungay" })
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-5 row" style="float:right;">
+                                <div class="form-group">
+                                    <div class='input-group date'>
+                                        @Html.TextBox("s5", ViewBag.c5 as string, new { @class = "form-control denngay" })
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+                    <button class="btn btn-outline-primary btn-fw">
+                        <i class="mdi mdi-magnify"></i>Tìm kiếm
+                    </button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover" id="mytable">
+                        <thead style="background-color:aqua">
+                            <tr>
+                                <th>#</th>
+                                <th>Số điện thoại</th>
+                                <th>Tin nhắn đến</th>
+                                <th>Ngày gửi</th>
+                                <th>Trạng thái</th>
+                                <th>Tin nhắn trả khách</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                index++;
+                                <tr>
+                                    <td>@index</td>
+                                    <td>@Html.DisplayFor(modelItem => item.User_Id)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Message)</td>
+
+                                    <td>
+                                        @if (item.Createdate != null)
+                                        {@Convert.ToDateTime(item.Createdate).ToString("dd/MM/yyyy")}
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Response)</td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div>
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, c1 = ViewBag.c1, c2 = ViewBag.c2, c3 = ViewBag.c3, c4 = ViewBag.c4, c5 = ViewBag.c5, c6 = ViewBag.c6 }))
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="30ac9fe8ad2e4e07ab26797044171d04" Name="Diagram1" ZoomLevel="85">
+        <EntityTypeShape EntityType="Model.Province" Width="1.5" PointX="0.75" PointY="7" />
+        <EntityTypeShape EntityType="Model.Country" Width="1.5" PointX="0.75" PointY="11.375" />
+        <EntityTypeShape EntityType="Model.District" Width="1.5" PointX="3" PointY="7.25" />
+        <EntityTypeShape EntityType="Model.Ward" Width="1.5" PointX="5.25" PointY="7.25" />
+        <AssociationConnector Association="Model.FK_Province_Country" />
+        <AssociationConnector Association="Model.FK_District_Province" />
+        <AssociationConnector Association="Model.FK_Ward_District" />
+        <EntityTypeShape EntityType="Model.QuayThuong" Width="1.5" PointX="7.375" PointY="8.75" />
+        <EntityTypeShape EntityType="Model.LogWaranti" Width="1.5" PointX="3.375" PointY="11.75" />
+        <EntityTypeShape EntityType="Model.Device" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.DeviceSendKey" Width="1.5" PointX="3.375" PointY="3.75" />
+        <EntityTypeShape EntityType="Model.Product" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.ImageWarr" Width="1.5" PointX="7.375" PointY="5.75" />
+        <EntityTypeShape EntityType="Model.Banner" Width="1.5" PointX="13.375" PointY="3.375" />
+        <EntityTypeShape EntityType="Model.Customer" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.AspNetUserRole" Width="1.5" PointX="7.625" PointY="16.375" />
+        <EntityTypeShape EntityType="Model.AspNetUser" Width="1.5" PointX="5.375" PointY="14.125" />
+        <AssociationConnector Association="Model.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" />
+        <EntityTypeShape EntityType="Model.User_Device" Width="1.5" PointX="9.375" PointY="7.75" />
+        <EntityTypeShape EntityType="Model.Phutung_Warranti" Width="1.5" PointX="13.375" PointY="12.75" />
+        <EntityTypeShape EntityType="Model.MoveFee" Width="1.5" PointX="11.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.Setup" Width="1.5" PointX="11.375" PointY="6.75" />
+        <EntityTypeShape EntityType="Model.Article" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.AddKey" Width="1.5" PointX="10.375" PointY="13.75" />
+        <EntityTypeShape EntityType="Model.Model" Width="1.5" PointX="9.375" PointY="10.75" />
+        <EntityTypeShape EntityType="Model.Warranti" Width="1.5" PointX="15.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.SentNotifi" Width="1.5" PointX="13.375" PointY="8.75" />
+        <EntityTypeShape EntityType="Model.CurrentURL" Width="1.5" PointX="7.375" PointY="13.75" />
+        <EntityTypeShape EntityType="Model.LOG_MO" Width="1.5" PointX="15.375" PointY="8.75" />
+        <EntityTypeShape EntityType="Model.Service_Fee" Width="1.5" PointX="15.375" PointY="12.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,48 @@
+﻿@model TEKA.Models.Khachhang
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<table class="table table-hover" id="mytable">
+    <thead>
+        <tr>
+            <th>@Resources.Resources.cus_name</th>
+            <th>@Resources.Resources.cus_phone</th>
+            <th>@Resources.Resources.cus_address</th>
+            <th>Email</th>
+            <th>@Resources.Resources.birthday</th>
+            <th>@Resources.Resources.prod_code</th>
+            <th>Serial</th>
+            <th>@Resources.Resources.active_date</th>
+            <th>@Resources.Resources.end_date</th>
+            <th>@Resources.Resources.agent</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Customers)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Phone)</td>
+                <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                <td>
+                    @if (item.Birthday != null)
+                    {@Convert.ToDateTime(item.Birthday).ToString("dd/MM/yyyy")}
+                            </td>
+                <td>@Html.DisplayFor(modelItem => item.CodeProduct)</td>
+                <td>@Html.DisplayFor(modelItem => item.Serial)</td>
+                <td>
+                    @if (item.ActiveDate != null)
+                    {@Convert.ToDateTime(item.ActiveDate).ToString("dd/MM/yyyy")}
+                            </td>
+                <td>
+                    @if (item.EndDate != null)
+                    {@Convert.ToDateTime(item.EndDate).ToString("dd/MM/yyyy")}
+                            </td>
+                <td>@Html.DisplayFor(modelItem => item.NameAgency)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

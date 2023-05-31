@@ -1,0 +1,251 @@
+﻿@model PagedList.IPagedList<TEKA.Models.Product>
+@using PagedList.Mvc;
+@{
+    /**/
+
+    ViewBag.Title = "Product";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    .form-group {
+        margin-bottom: 3px;
+    }
+</style>
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('#tungay').datetimepicker({
+                format: 'DD/MM/YYYY',
+                allowInputToggle: true,
+                useCurrent: false
+            }).on('dp.change', function (e) {
+                var minNew = e.date;
+                var maxNew = e.date.clone().add(30, 'days');
+                var pickEnd = $('#denngay');
+                var minOld = pickEnd.data('DateTimePicker').minDate();
+                var maxOld = pickEnd.data('DateTimePicker').maxDate();
+                if (minOld && minOld.isAfter(maxNew)) {
+                    pickEnd.data('DateTimePicker').minDate(minNew);
+                    pickEnd.data('DateTimePicker').maxDate(maxNew);
+                } else {
+                    pickEnd.data('DateTimePicker').maxDate(maxNew);
+                    pickEnd.data('DateTimePicker').minDate(minNew);
+                }
+            });
+            $('#denngay').datetimepicker({
+                format: 'DD/MM/YYYY',
+                allowInputToggle: true,
+                useCurrent: true
+            });
+
+        });
+    </script>
+
+    <script type="text/javascript">
+        function exportexcel() {
+            $("#mytable").table2excel({
+                name: "Table2Excel",
+                filename: "ds-sanpham",
+                fileext: ".xls"
+            });
+        }
+    </script>
+
+}
+<div class="row">
+    <div class="col-lg-12 stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <form class="forms-sample">
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">@Resources.Resources.prod_name / @Resources.Resources.PXK</label>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <div class='input-group date' id="name">
+                                    @Html.TextBox("s1", ViewBag.c1 as string, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">Serial</label>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <div class='input-group date' id="serial">
+                                    @Html.TextBox("s2", ViewBag.c2 as string, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">Username</label>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <div class='input-group date' id="username">
+                                    @Html.TextBox("s6", ViewBag.c6 as string, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">@Resources.Resources.status</label>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <div class='input-group date' id="status">
+                                    <select class="form-control" id="s3" name="s3">
+                                        <option value="">@Resources.Resources.all</option>
+                                        <option value="0">@Resources.Resources.not_active</option>
+                                        <option value="1">@Resources.Resources.active</option>
+                                        <option value="2">@Resources.Resources.outdate</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">@Resources.Resources.exportdate</label>
+                        <div class="col-sm-6">
+                            <div class="col-sm-6 row">
+                                <div class="form-group">
+                                    <div class='input-group date' id="tungay">
+                                        @Html.TextBox("s4", ViewBag.c4 as string, new { @class = "form-control" })
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 row">
+                                <div class="form-group">
+                                    <div class='input-group date' id="denngay">
+                                        @Html.TextBox("s5", ViewBag.c5 as string, new { @class = "form-control" })
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-primary btn-fw">
+                        <i class="mdi mdi-magnify"></i>@Resources.Resources.search
+                    </button>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a href="/Admin/Product/Create" class="btn btn-outline-info btn-fw">
+                            <i class="mdi mdi-plus"></i>@Resources.Resources.create_new
+                        </a>
+                        <a href="/Admin/Product/UploadProduct" class="btn btn-outline-info btn-fw">
+                            <i class="mdi mdi-upload"></i>Upload Excel
+                        </a>
+                        <a href="/Admin/Product/SanPham_Export" class="btn btn-outline-info btn-fw">
+                            <i class="mdi mdi-export"></i>Export file
+                        </a>
+                    }
+                    @*<a href="/Admin/Product/UploadOldProduct" class="btn btn-outline-info btn-fw">
+            <i class="mdi mdi-upload hidden"></i>UploadOldProduct
+        </a>*@
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover" id="mytable">
+                        <thead style="background-color:aqua">
+                            <tr>
+                                <th>#</th>
+                                <th>@Resources.Resources.prod_name</th>
+                                <th>Code</th>
+                                <th>Serial</th>
+                                <th>Model</th>
+                                <th>@Resources.Resources.PXK</th>
+                                <th>@Resources.Resources.exportdate</th>
+                                <th>@Resources.Resources.buydate</th>
+                                <th>@Resources.Resources.installdate</th>
+                                <th>@Resources.Resources.active_date</th>
+                                <th>@Resources.Resources.end_date</th>
+                                <th>@Resources.Resources.agent</th>
+                                @*<th>Số lượng</th>*@
+                                <th>@Resources.Resources.status</th>
+                                <th>@Resources.Resources.date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td style="width:100px">
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <a href="/admin/product/edit/@item.Id"><i class="mdi mdi-edit"></i></a>
+                                            <a href="/admin/product/details/@item.Id"><i class="mdi mdi-eye"></i></a>
+                                            if (item.ActiveDate != null)
+                                            {
+                                                <a href="/admin/product/unactive/@item.Id"><i class="mdi mdi-key-minus"></i></a>
+                                            }
+                                            else
+                                            {
+                                                <a href="/admin/product/active/@item.Id"><i class="mdi mdi-key-plus"></i></a>
+                                            }
+                                        }
+
+
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Code)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Serial)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Model)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.PXK)</td>
+                                    <td>
+                                        @if (item.ExportDate != null)
+                                        {@Convert.ToDateTime(item.ExportDate).ToString("dd/MM/yyyy")}
+                                    </td>
+                                    <td>
+                                        @if (item.Buydate != null)
+                                        {@Convert.ToDateTime(item.Buydate).ToString("dd/MM/yyyy")}
+                                    </td>
+                                    <td>
+                                        @if (item.Installdate != null)
+                                        {@Convert.ToDateTime(item.Installdate).ToString("dd/MM/yyyy")}
+                                    </td>
+                                    <td>
+                                        @if (item.ActiveDate != null)
+                                        {@Convert.ToDateTime(item.ActiveDate).ToString("dd/MM/yyyy")}
+                                    </td>
+                                    <td>
+                                        @if (item.EndDate != null)
+                                        {@Convert.ToDateTime(item.EndDate).ToString("dd/MM/yyyy")}
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.NameAgency)</td>
+                                    @*<td>@Html.DisplayFor(modelItem => item.Quantity)</td>*@
+                                    <td>
+                                        @if (item.Status == 1)
+                                        {
+                                            <p>@Resources.Resources.active</p>
+                                        }
+                                        else
+                                        {
+                                            <p>@Resources.Resources.not_active</p>
+                                        }
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.Limited)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*@using (Html.BeginForm("ExportToExcel", "Product", FormMethod.Post))
+{
+    <input type="submit" value="Export to Excel" class="button btn" />
+}*@
+<br />
+@Html.PagedListPager(Model, page => Url.Action("Index",
+                                       new { page, c1 = ViewBag.c1, c2 = ViewBag.c2, c3 = ViewBag.c3, c4 = ViewBag.c4, c5 = ViewBag.c5, c6 = ViewBag.c6 }))

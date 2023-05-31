@@ -1,0 +1,90 @@
+﻿@model PagedList.IPagedList<TEKA.Models.AspNetUser>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="agency">
+    <div>
+        <h2 class="p-red" style="text-align:center;">@Resources.Resources.menu_search</h2>
+        <div style="text-align:center;margin: 15px 0;"><img src="~/Image/teka3_03.png" alt="" class="img-responsive" /></div>
+    </div>
+    @using (Html.BeginForm("Index", "KTV", FormMethod.Get))
+    {
+        <table>
+            <tr>
+                <td><label class="">@Resources.Resources.phone_call</label></td>
+                <td>
+                    <div class="form-group">
+                        @Html.TextBox("s1", ViewBag.c1 as string, new { @class = "form-control" })
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label class="">@Resources.Resources.account</label></td>
+                <td>
+                    <div class="form-group">
+                        @Html.TextBox("s2", ViewBag.c2 as string, new { @class = "form-control" })
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button class="btn">@Resources.Resources.menu_search</button>
+                    <a href="/account/registerktv" class="btn">@Resources.Resources.create_new</a>
+                </td>
+            </tr>
+        </table>
+    }
+    <table class="table" id="mytable">
+        <tr>
+            <th>
+                @Resources.Resources.account
+            </th>
+            <th>
+                @Resources.Resources.phone_call
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                @Resources.Resources.cus_name
+            </th>
+            <th>#</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    <a href="/tho-bao-hanh/edit?id=@item.Id">
+                        <i class="mdi mdi-pen"></i>
+                    </a>
+                    <a href="/tho-bao-hanh/delete?id=@item.Id" onclick="return confirm('Are you sure?')">
+                        <i class="mdi  mdi-delete"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+                                           new { page, c1 = ViewBag.c1, c2 = ViewBag.c2, c3 = ViewBag.c3, c4 = ViewBag.c4, c5 = ViewBag.c5, c6 = ViewBag.c6, c7 = ViewBag.c7 }))
+</section>
+

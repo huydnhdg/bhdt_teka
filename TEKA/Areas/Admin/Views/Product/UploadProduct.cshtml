@@ -1,0 +1,95 @@
+﻿@model IEnumerable<TEKA.Models.Product>
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@using (Html.BeginForm("UploadProduct", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div style="margin:100px 100px;line-height:30px;">
+        <div class="form-group">
+            <input class="form-control" type="file" name="UploadedFile" placeholder="" />
+        </div>
+        <div class="form-group">
+            <input type="submit" name="Submit" value="Upload" class="btn btn-outline-info btn-fw" />
+            <a class="btn btn-danger" href="~/Areas/Admin/Data/template_product_teka.xlsx" download="/template_product_teka"><i class="fa fa-file-excel-o"></i> File mẫu</a>
+        </div>
+    </div>
+
+    if (ViewBag.count > 0)
+    {
+        <p>
+            Đã duyệt đến dòng @ViewBag.count
+        </p>
+    }
+
+    <p>@ViewBag.text</p>
+}
+@if (ViewBag.error == 0)
+{
+    using (Html.BeginForm("SAVEDB", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <input type="submit" name="Submit" value="SAVE TO DB" class="btn btn-outline-info btn-fw" />
+    }
+}
+else
+{
+    <p>
+        Có @ViewBag.error lỗi
+    </p>
+}
+
+
+@if (Model != null)
+{
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Seri</th>
+                <th>Model</th>
+                <th>PXK</th>
+                <th>Exportdate</th>
+                <th>Limited</th>
+                <th>Quantity</th>
+                <th>Createdate</th>
+                <th>Createby</th>
+                <th>Status</th>
+                <th>Username</th>
+                <th>Agency</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @if (item.Name != "SP bị trùng")
+                        {
+                            @item.Name
+                        }
+                        else
+                        {
+                            <span class="text-danger"> @item.Name</span>
+                        }
+
+                    </td>
+                    <td>@item.Code</td>
+                    <td>@item.Serial</td>
+                    <td>@item.Model</td>
+                    <td>@item.PXK</td>
+                    <td>@item.ExportDate</td>
+                    <td>@item.Limited</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.CreateDate</td>
+                    <td>@item.CreateBy</td>
+                    <td>@item.Status</td>
+                    <td>@item.UserName</td>
+                    <td>@item.NameAgency</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}
+

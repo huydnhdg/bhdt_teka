@@ -1,0 +1,260 @@
+﻿@model TEKA.Models.KhachhangDaily
+@{
+    ViewBag.Title = "Quản trị cửa hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int index = 0;
+}
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('#tungay').datetimepicker({
+                format: 'DD/MM/YYYY',
+                allowInputToggle: true,
+                useCurrent: false
+            }).on('dp.change', function (e) {
+                var minNew = e.date;
+                var maxNew = e.date.clone().add(9, 'days');
+                var pickEnd = $('#denngay');
+                var minOld = pickEnd.data('DateTimePicker').minDate();
+                var maxOld = pickEnd.data('DateTimePicker').maxDate();
+                if (minOld && minOld.isAfter(maxNew)) {
+                    pickEnd.data('DateTimePicker').minDate(minNew);
+                    pickEnd.data('DateTimePicker').maxDate(maxNew);
+                } else {
+                    pickEnd.data('DateTimePicker').maxDate(maxNew);
+                    pickEnd.data('DateTimePicker').minDate(minNew);
+                }
+            });
+            $('#denngay').datetimepicker({
+                format: 'DD/MM/YYYY',
+                allowInputToggle: true,
+                useCurrent: true
+            });
+
+        });
+    </script>
+    <script type="text/javascript">
+        function exportexcel() {
+            $("#mytable").table2excel({
+                name: "Table2Excel",
+                filename: "ds-daily-sp",
+                fileext: ".xls"
+            });
+        }
+    </script>
+
+}
+
+<section id="agency">
+    <div>
+        <h1>QUẢN TRỊ CỬA HÀNG</h1>
+        <h2 class="p-red" style="text-align:center;">KHÁCH HÀNG</h2>
+        <div style="text-align:center;margin: 15px 0;"><img src="~/Image/teka3_03.png" alt="" class="img-responsive" /></div>
+    </div>
+    <form class="forms-sample">
+        <table>
+            <tr>
+                <td><label class="">SĐT Khách hàng</label></td>
+                <td>
+                    <div class="form-group">
+                        <div id="phone">
+                            <input class="form-control" type="tel" name="phone" placeholder="" value="@Model.phone"/>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label class="">Serial sản phẩm</label></td>
+                <td>
+                    <div class="form-group">
+                        <div id="serial">
+                            <input class="form-control" type="text" name="serial" placeholder="" style="text-transform:uppercase" value="@Model.serial"/>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label class="">Họ tên khách hàng</label></td>
+                <td>
+                    <div class="form-group">
+                        <div id="name">
+                            <input class="form-control" type="text" name="name" placeholder="" value="@Model.name"/>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label class="">Trạng thái</label></td>
+                <td>
+                    <div class="form-group">
+                        <div id="status" class="input-group">
+                            <select class="form-control form-control-sm" name="status">
+                                @if (Model.status == "0")
+    {
+                            <option value="0">Not set (Chưa kích hoạt)</option>
+                            <option value="">All (Tất cả)</option>
+                            <option value="1">True (Kích hoạt)</option>
+                            <option value="2">False (Hết hạn)</option>
+}
+else if (Model.status == "1")
+{
+                            <option value="1">True (Kích hoạt)</option>
+                            <option value="">All (Tất cả)</option>
+                            <option value="0">Not set (Chưa kích hoạt)</option>
+                            <option value="2">False (Hết hạn)</option>
+}
+else if (Model.status == "2")
+{
+                            <option value="2">False (Hết hạn)</option>
+                            <option value="">All (Tất cả)</option>
+                            <option value="0">Not set (Chưa kích hoạt)</option>
+                            <option value="1">True (Kích hoạt)</option>
+}
+else
+{
+                            <option value="">All (Tất cả)</option>
+                            <option value="0">Not set (Chưa kích hoạt)</option>
+                            <option value="1">True (Kích hoạt)</option>
+                            <option value="2">False (Hết hạn)</option>
+}
+                            </select>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label class="">Thanh toán</label></td>
+                <td>
+                    <div class="form-group">
+                        <div id="status" class="input-group">
+                            <select class="form-control form-control-sm" name="thanhtoan">
+                                @if (Model.thanhtoan == "0")
+    {
+                            <option value="0">Đã thanh toán</option>
+                            <option value="">Tất cả</option>
+                            <option value="1">Khách hàng kích hoạt</option>
+                            <option value="2">Chưa thanh toán</option>
+}
+else if (Model.thanhtoan == "1")
+{
+                            <option value="1">Khách hàng kích hoạt</option>
+                            <option value="">Tất cả</option>
+                            <option value="0">Đã thanh toán</option>
+                            <option value="2">Chưa thanh toán</option>
+}
+else if (Model.thanhtoan == "2")
+{
+                            <option value="2">Chưa thanh toán</option>
+                            <option value="">Tất cả</option>
+                            <option value="0">Đã thanh toán</option>
+                            <option value="1">Khách hàng kích hoạt</option>
+}
+else
+{
+                            <option value="">Tất cả</option>
+                            <option value="0">Đã thanh toán</option>
+                            <option value="1">Khách hàng kích hoạt</option>
+                            <option value="2">Chưa thanh toán</option>
+}
+                            </select>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label class="">Từ ngày</label></td>
+                <td>
+                    <div class="col-sm-6 col-lg-6 col-md-6 col-xs-6 row">
+                        <div class="form-group">
+                            <div class='input-group date' id="tungay" style="width:220px;">
+                                <input type='text' class="form-control" name="tungay" placeholder="Từ ngày" value="@Model.tungay"/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-6 col-md-6 row" style="float:right;">
+                        <div class="form-group">
+                            <div class='input-group date' id="denngay" style="width:220px;">
+                                <input type='text' class="form-control" name="denngay" placeholder="Đến ngày" value="@Model.denngay"/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td style="text-align:center;">
+                    <button class="btn">TRA CỨU</button>
+
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <div style="text-align:center;margin: 15px 0;"><img src="~/Image/teka3_03.png" alt="" class="img-responsive" /></div>
+
+    <div class="col-lg-12 grid-margin row">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="mytable">
+                        <thead>
+                            <tr>
+                                @*<th>#</th>*@
+                                <th>STT</th>
+                                <th>Serial SP</th>
+                                <th>Mã SP</th>
+                                <th>Số điện thoại</th>
+                                <th>Họ tên</th>
+                                <th>Địa chỉ</th>
+                                <th>Ngày kích hoạt</th>
+                                <th>Hạn bảo hành</th>
+                                <th>Ngày xuất kho</th>
+                                <th>Thanh toán</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.KhachhangDailys)
+                            {
+                                index++;
+                                <tr>
+                                    @*<td>@Html.ActionLink("Edit", "Edit", new { id = item.Serial })</td>*@
+                                    <td>@index</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Serial)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.ProductCode)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Phone)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                                    <td>
+                                        @if (item.ActiveDate != null)
+                                        {@Convert.ToDateTime(item.ActiveDate).ToString("dd/MM/yyyy")}
+                                                                    </td>
+                                    <td>
+                                        @if (item.EndDate != null)
+                                        {@Convert.ToDateTime(item.EndDate).ToString("dd/MM/yyyy")}
+                                                                    </td>
+                                    <td>
+                                        @if (item.ExportDate != null)
+                                        {@Convert.ToDateTime(item.ExportDate).ToString("dd/MM/yyyy")}
+                                                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.ThanhToan)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button onclick="exportexcel()" class="btn" style="background-color:#18bb32;"><i class="mdi mdi-download"></i>XUẤT EXCEL</button>
+</section>
+
+<ul class="pagination">
+    @Html.Raw((String)ViewBag.PagingHtml)
+</ul>
+

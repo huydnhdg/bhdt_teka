@@ -1,0 +1,630 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="accessary" xml:space="preserve">
+    <value>Spare part</value>
+  </data>
+  <data name="access_code" xml:space="preserve">
+    <value>Spare part code</value>
+  </data>
+  <data name="access_name" xml:space="preserve">
+    <value>Spare part name</value>
+  </data>
+  <data name="account" xml:space="preserve">
+    <value>Login account</value>
+  </data>
+  <data name="active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="active_date" xml:space="preserve">
+    <value>Activation date</value>
+  </data>
+  <data name="active_description" xml:space="preserve">
+    <value>Welcome members of TEKA, to activate the product please fill out the information below.</value>
+  </data>
+  <data name="active_list" xml:space="preserve">
+    <value>Activated Customers</value>
+  </data>
+  <data name="add_late" xml:space="preserve">
+    <value>Add later</value>
+  </data>
+  <data name="agent" xml:space="preserve">
+    <value>Authorized dealer</value>
+  </data>
+  <data name="agent_info" xml:space="preserve">
+    <value>AGENT INFORMATION</value>
+  </data>
+  <data name="agent_store" xml:space="preserve">
+    <value>Name of Dealer</value>
+  </data>
+  <data name="all" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="answered" xml:space="preserve">
+    <value>Answered</value>
+  </data>
+  <data name="article" xml:space="preserve">
+    <value>Artice</value>
+  </data>
+  <data name="birthday" xml:space="preserve">
+    <value>Date of birth</value>
+  </data>
+  <data name="bringback" xml:space="preserve">
+    <value>Workshop</value>
+  </data>
+  <data name="busy" xml:space="preserve">
+    <value>Busy</value>
+  </data>
+  <data name="buydate" xml:space="preserve">
+    <value>Purchase date</value>
+  </data>
+  <data name="calling" xml:space="preserve">
+    <value>Calling</value>
+  </data>
+  <data name="call_center" xml:space="preserve">
+    <value>Call center</value>
+  </data>
+  <data name="call_date" xml:space="preserve">
+    <value>Call date</value>
+  </data>
+  <data name="call_key" xml:space="preserve">
+    <value>Extensions</value>
+  </data>
+  <data name="call_now" xml:space="preserve">
+    <value>Call now</value>
+  </data>
+  <data name="call_time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="call_to" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="cate" xml:space="preserve">
+    <value>Classify</value>
+  </data>
+  <data name="cate_service" xml:space="preserve">
+    <value>Classify service</value>
+  </data>
+  <data name="center_warranti" xml:space="preserve">
+    <value>CUSTOMER CARE CENTER</value>
+  </data>
+  <data name="chanel" xml:space="preserve">
+    <value>Channel</value>
+  </data>
+  <data name="change_pass" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="change_pass_des" xml:space="preserve">
+    <value>To change your password, please fill out the form below.</value>
+  </data>
+  <data name="change_station" xml:space="preserve">
+    <value>Sending</value>
+  </data>
+  <data name="charge" xml:space="preserve">
+    <value>Charge</value>
+  </data>
+  <data name="choose_ktv" xml:space="preserve">
+    <value>Choose</value>
+  </data>
+  <data name="code_notvalid" xml:space="preserve">
+    <value>Code not valid</value>
+  </data>
+  <data name="code_warranti" xml:space="preserve">
+    <value>Warranty code</value>
+  </data>
+  <data name="comfirm" xml:space="preserve">
+    <value>Do you agree to do this action?</value>
+  </data>
+  <data name="contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="content" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="count" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="count_warranti" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="createdate" xml:space="preserve">
+    <value>Created Date</value>
+  </data>
+  <data name="create_new" xml:space="preserve">
+    <value>Create new</value>
+  </data>
+  <data name="create_warranti" xml:space="preserve">
+    <value>Online tickets</value>
+  </data>
+  <data name="customer" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="customer_active" xml:space="preserve">
+    <value>Activation Customer</value>
+  </data>
+  <data name="cus_address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="cus_district" xml:space="preserve">
+    <value>District</value>
+  </data>
+  <data name="cus_name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="cus_phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="cus_province" xml:space="preserve">
+    <value>Province/City</value>
+  </data>
+  <data name="date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="deadline" xml:space="preserve">
+    <value>Dead line</value>
+  </data>
+  <data name="description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="des_for_home" xml:space="preserve">
+    <value>Description for home page</value>
+  </data>
+  <data name="duration" xml:space="preserve">
+    <value>Duration (day)</value>
+  </data>
+  <data name="end_date" xml:space="preserve">
+    <value>Warranty period</value>
+  </data>
+  <data name="err_install" xml:space="preserve">
+    <value>installation error</value>
+  </data>
+  <data name="err_product" xml:space="preserve">
+    <value>product error</value>
+  </data>
+  <data name="err_use" xml:space="preserve">
+    <value>use error</value>
+  </data>
+  <data name="export" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="exportdate" xml:space="preserve">
+    <value>Date of inventory</value>
+  </data>
+  <data name="export_file" xml:space="preserve">
+    <value>Export file</value>
+  </data>
+  <data name="fee" xml:space="preserve">
+    <value>Cost</value>
+  </data>
+  <data name="fee_access" xml:space="preserve">
+    <value>Spare part cost</value>
+  </data>
+  <data name="fee_move" xml:space="preserve">
+    <value>Transport cost</value>
+  </data>
+  <data name="fee_warranti" xml:space="preserve">
+    <value>Waranty cost</value>
+  </data>
+  <data name="for_station" xml:space="preserve">
+    <value>Station</value>
+  </data>
+  <data name="from_number" xml:space="preserve">
+    <value>Source</value>
+  </data>
+  <data name="help_active" xml:space="preserve">
+    <value>ACTIVATION INSTRUCTIONS</value>
+  </data>
+  <data name="history_call" xml:space="preserve">
+    <value>Cloud phone</value>
+  </data>
+  <data name="home_hotline" xml:space="preserve">
+    <value>Toll Free</value>
+  </data>
+  <data name="home_note" xml:space="preserve">
+    <value>Note that customers can activate and report product errors via the call center</value>
+  </data>
+  <data name="index" xml:space="preserve">
+    <value>No.</value>
+  </data>
+  <data name="info" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="info_help" xml:space="preserve">
+    <value>SUPPORT INFORMATION</value>
+  </data>
+  <data name="info_prod" xml:space="preserve">
+    <value>PRODUCT INFORMATION</value>
+  </data>
+  <data name="info_warranti" xml:space="preserve">
+    <value>Ticket info</value>
+  </data>
+  <data name="input_serial" xml:space="preserve">
+    <value>Serial</value>
+  </data>
+  <data name="install" xml:space="preserve">
+    <value>Installation</value>
+  </data>
+  <data name="installdate" xml:space="preserve">
+    <value>Installation date</value>
+  </data>
+  <data name="login" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="login_des" xml:space="preserve">
+    <value>Please login using the form below</value>
+  </data>
+  <data name="logout" xml:space="preserve">
+    <value>Log out</value>
+  </data>
+  <data name="menu_active" xml:space="preserve">
+    <value>ONLINE WARRANTY ACTIVATION</value>
+  </data>
+  <data name="menu_help" xml:space="preserve">
+    <value>GUIDING</value>
+  </data>
+  <data name="menu_home" xml:space="preserve">
+    <value>HOME PAGE</value>
+  </data>
+  <data name="menu_login" xml:space="preserve">
+    <value>LOG IN</value>
+  </data>
+  <data name="menu_search" xml:space="preserve">
+    <value>SEARCH</value>
+  </data>
+  <data name="menu_warranti" xml:space="preserve">
+    <value>ONLINE TICKETS</value>
+  </data>
+  <data name="news" xml:space="preserve">
+    <value>Newly created</value>
+  </data>
+  <data name="not_active" xml:space="preserve">
+    <value>No active</value>
+  </data>
+  <data name="not_answer" xml:space="preserve">
+    <value>No answer</value>
+  </data>
+  <data name="outdate" xml:space="preserve">
+    <value>Out of date</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="pass_confirm" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="pass_new" xml:space="preserve">
+    <value>A new password</value>
+  </data>
+  <data name="pass_now" xml:space="preserve">
+    <value>Current password</value>
+  </data>
+  <data name="payment" xml:space="preserve">
+    <value>Out of warranty</value>
+  </data>
+  <data name="payment_not" xml:space="preserve">
+    <value>Unpaid</value>
+  </data>
+  <data name="payment_ok" xml:space="preserve">
+    <value>Paid</value>
+  </data>
+  <data name="pay_check" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="pay_time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="phoneserial_not_valid" xml:space="preserve">
+    <value>This phone/Serial number does not exist in the TEKA system.</value>
+  </data>
+  <data name="phone_active" xml:space="preserve">
+    <value>Activation phone number</value>
+  </data>
+  <data name="phone_call" xml:space="preserve">
+    <value>Contact number</value>
+  </data>
+  <data name="photo" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="place_teka_good" xml:space="preserve">
+    <value>Please fill in your full name so that TEKA can best support you</value>
+  </data>
+  <data name="play_rec" xml:space="preserve">
+    <value>Play</value>
+  </data>
+  <data name="policy" xml:space="preserve">
+    <value>WARRANTY POLICY</value>
+  </data>
+  <data name="price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="processing" xml:space="preserve">
+    <value>Processing</value>
+  </data>
+  <data name="product" xml:space="preserve">
+    <value>Product</value>
+  </data>
+  <data name="product_cate_list" xml:space="preserve">
+    <value>Total products</value>
+  </data>
+  <data name="product_list" xml:space="preserve">
+    <value>Actived products list</value>
+  </data>
+  <data name="prod_cate" xml:space="preserve">
+    <value>Total products</value>
+  </data>
+  <data name="prod_code" xml:space="preserve">
+    <value>Product code</value>
+  </data>
+  <data name="prod_name" xml:space="preserve">
+    <value>Product's name</value>
+  </data>
+  <data name="prod_notvalid" xml:space="preserve">
+    <value>Product not found</value>
+  </data>
+  <data name="prod_serial" xml:space="preserve">
+    <value>Product Serial</value>
+  </data>
+  <data name="PXK" xml:space="preserve">
+    <value>Delivery note</value>
+  </data>
+  <data name="question" xml:space="preserve">
+    <value>Question</value>
+  </data>
+  <data name="range" xml:space="preserve">
+    <value>Range</value>
+  </data>
+  <data name="rec" xml:space="preserve">
+    <value>Recording</value>
+  </data>
+  <data name="recall" xml:space="preserve">
+    <value>cancel</value>
+  </data>
+  <data name="refuse_station" xml:space="preserve">
+    <value>Refuse</value>
+  </data>
+  <data name="report_warranti" xml:space="preserve">
+    <value>Statistical</value>
+  </data>
+  <data name="required" xml:space="preserve">
+    <value>Items marked (*) are required</value>
+  </data>
+  <data name="result" xml:space="preserve">
+    <value>Result</value>
+  </data>
+  <data name="rule_active" xml:space="preserve">
+    <value>TERMS OF ACTIVATION</value>
+  </data>
+  <data name="save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="sch_active" xml:space="preserve">
+    <value>ACTIVATION INFO SEARCH</value>
+  </data>
+  <data name="sch_active_des" xml:space="preserve">
+    <value>Welcome members of TEKA, to search the warranty please fill out the information below.</value>
+  </data>
+  <data name="sch_warranti" xml:space="preserve">
+    <value>WARRANTY INFO SEARCH</value>
+  </data>
+  <data name="sch_warranti_des" xml:space="preserve">
+    <value>Welcome members of TEKA, to search the warranty please fill out the information below.</value>
+  </data>
+  <data name="search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="search_active" xml:space="preserve">
+    <value>ACTIVATION SEARCH</value>
+  </data>
+  <data name="search_active_product" xml:space="preserve">
+    <value>PRODUCT ACTIVATION SEARCH</value>
+  </data>
+  <data name="sent_notifi" xml:space="preserve">
+    <value>Sent notifi</value>
+  </data>
+  <data name="slogan" xml:space="preserve">
+    <value>TEKA ONLINE WARRANTY CENTER</value>
+  </data>
+  <data name="sms_active" xml:space="preserve">
+    <value>Client active</value>
+  </data>
+  <data name="sort" xml:space="preserve">
+    <value>Sort</value>
+  </data>
+  <data name="start_date" xml:space="preserve">
+    <value>Start date</value>
+  </data>
+  <data name="station" xml:space="preserve">
+    <value>Subcontractor</value>
+  </data>
+  <data name="status" xml:space="preserve">
+    <value>Status </value>
+  </data>
+  <data name="status_end" xml:space="preserve">
+    <value>Expired</value>
+  </data>
+  <data name="status_not" xml:space="preserve">
+    <value>Not activated</value>
+  </data>
+  <data name="status_ok" xml:space="preserve">
+    <value>Activated</value>
+  </data>
+  <data name="store" xml:space="preserve">
+    <value>Dealer</value>
+  </data>
+  <data name="success" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="succ_date" xml:space="preserve">
+    <value>Complete date</value>
+  </data>
+  <data name="sum_money" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="taxcode" xml:space="preserve">
+    <value>Tax code</value>
+  </data>
+  <data name="technicians" xml:space="preserve">
+    <value>Technicians</value>
+  </data>
+  <data name="title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="to_number" xml:space="preserve">
+    <value>Destination</value>
+  </data>
+  <data name="update" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="update_status" xml:space="preserve">
+    <value>Update status</value>
+  </data>
+  <data name="wait_access" xml:space="preserve">
+    <value>Spare parts</value>
+  </data>
+  <data name="wait_response" xml:space="preserve">
+    <value>Waiting for response</value>
+  </data>
+  <data name="warranti" xml:space="preserve">
+    <value>Warranty</value>
+  </data>
+  <data name="warranti_check" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
+  <data name="warranti_multi_prod" xml:space="preserve">
+    <value>Multiple Items</value>
+  </data>
+  <data name="warranti_success" xml:space="preserve">
+    <value>Complete tickets</value>
+  </data>
+  <data name="war_create" xml:space="preserve">
+    <value>Create new warranty info</value>
+  </data>
+  <data name="war_des" xml:space="preserve">
+    <value>Error description</value>
+  </data>
+  <data name="war_note" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="war_person" xml:space="preserve">
+    <value>Person in charge</value>
+  </data>
+</root>

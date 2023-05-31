@@ -1,0 +1,173 @@
+﻿
+
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav">
+        <li class="nav-item nav-profile">
+            <div class="nav-link">
+                <div class="user-wrapper">
+                    <div class="profile-image">
+                        <img src="https://www.teka.com/vi-vn/wp-content/themes/teka/img/teka-new-logo.svg" style="width:100px;" alt="">
+                    </div>
+                    <div class="text-wrapper">
+                        <p class="profile-name">TEKA</p>
+                        <div>
+                            <small class="designation text-muted">Manager</small>
+                            <span class="status-indicator online"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link @(ViewBag.Title == "Home" ? "active-war" : "")" href="/Admin/Home">
+                <i class="menu-icon mdi mdi-home-map-marker"></i>
+                <span class="menu-title">Home</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Admin/Customer">
+                <i class="menu-icon mdi mdi-human-child"></i>
+                <span class="menu-title">@Resources.Resources.customer</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Admin/HistoryCall">
+                <i class="menu-icon mdi mdi-record-rec"></i>
+                <span class="menu-title">@Resources.Resources.history_call</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/Admin/Kichhoat">
+                <i class="menu-icon mdi mdi-check-all"></i>
+                <span class="menu-title">@Resources.Resources.active_list</span>
+            </a>
+        </li>
+        @if (ViewBag.quahan > 0)
+        {
+            <li class="nav-item">
+                <a class="nav-link  active-war" href="/Admin/Error">
+                    <i class="menu-icon mdi mdi-alert-circle-outline text-danger"></i>
+                    <span class="menu-title">@Resources.Resources.create_warranti</span>
+                </a>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link" href="/Admin/Error">
+                    <i class="menu-icon mdi mdi-alert-circle-outline"></i>
+                    <span class="menu-title">@Resources.Resources.create_warranti</span>
+                </a>
+            </li>
+        }
+        <li class="nav-item">
+            <a class="nav-link" href="/Admin/SentNotifi/Index">
+                <i class="menu-icon mdi mdi-send"></i>
+                <span class="menu-title">@Resources.Resources.sent_notifi</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Admin/DSDaily/In">
+                <i class="menu-icon mdi mdi-home-map-marker"></i>
+                <span class="menu-title">@Resources.Resources.agent</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/Admin/Product">
+                <i class="menu-icon mdi mdi-package-variant"></i>
+                <span class="menu-title">@Resources.Resources.product_list</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Admin/ProductCate">
+                <i class="menu-icon mdi  mdi-zip-box"></i>
+                <span class="menu-title">@Resources.Resources.prod_cate</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Admin/MoveFee">
+                <i class="menu-icon mdi mdi-run"></i>
+                <span class="menu-title">@Resources.Resources.fee_move</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-device" aria-expanded="false" aria-controls="ui-basic">
+                <i class="menu-icon mdi mdi-wallet-giftcard"></i>
+                <span class="menu-title">@Resources.Resources.accessary</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-device">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Admin/device"> @Resources.Resources.access_code</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Admin/device/devicesendkey"> @Resources.Resources.export</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        @if (User.IsInRole("Admin"))
+        {
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="menu-icon mdi mdi-settings"></i>
+                    <span class="menu-title">@Resources.Resources.account</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-basic">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Admin/ManagePG"> PG </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Admin/Agency"> Agency </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Admin/ManagerUser"> Partner</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Admin/ManageKey"> @Resources.Resources.station</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        }
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+                <i class="menu-icon mdi mdi-tooltip-edit"></i>
+                <span class="menu-title">Config</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="auth">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Admin/Setup"> Setup </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Admin/Article"> @Resources.Resources.article</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Admin/Slide"> Slide</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Admin/DescriptionHome/Edit"> @Resources.Resources.des_for_home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Admin/Policy"> @Resources.Resources.policy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Admin/Question"> @Resources.Resources.question</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Admin/Help"> @Resources.Resources.menu_help</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</nav>

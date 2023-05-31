@@ -1,0 +1,281 @@
+﻿@model TEKA.Models.Warranti
+
+@{
+    ViewBag.Title = "Warranti";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    List<TEKA.Models.Province> lprovince = (List<TEKA.Models.Province>)TempData["province"];
+    List<String> lagent = (List<String>)TempData["agent"];
+    List<string> lcate = (List<string>)TempData["cate"];
+    List<string> lmodel = (List<string>)TempData["model"];
+}
+
+<style>
+    .control-label {
+        font-size: 11px !important;
+    }
+    .ui-helper-clearfix {
+        display: none;
+    }
+</style>
+@using (Html.BeginForm("EditNew", "Error"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>@Resources.Resources.code_warranti @Model.CodeWarr</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="panel panel-info">
+            <div class="panel-heading">@Resources.Resources.product</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    @Html.HiddenFor(model => model.IdProduct)
+                    @Html.HiddenFor(model => model.CodeWarr)
+                    @Html.HiddenFor(model => model.Outdate)
+
+                    @Html.LabelFor(model => model.Serial, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => model.Serial, new { htmlAttributes = new { @class = "form-control", @onchange = "getproduct()" } })
+                    </div>
+                    @Html.Label(Resources.Resources.product, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(model => model.ProductCate, new SelectList(lcate), Model.ProductCate ?? (Resources.Resources.add_late), new { @class = "form-control", @onchange = "getproductcate()" })
+                    </div>
+                    @Html.LabelFor(model => model.Model, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(model => model.Model, new SelectList(lmodel), Model.Model ?? (Resources.Resources.add_late),
+                       new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label(Resources.Resources.buydate, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.Buydate, "{0:dd/MM/yyyy}", new { @type = "text", @class = "form-control datepicker", @placeholder = "dd/mm/yyyy" })
+                    </div>
+                    @Html.Label(Resources.Resources.agent, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.DropDownList("Agent", new SelectList(lagent), Model.Agent ?? ("Bổ sung sau"), new { @class = "form-control" })
+                    </div>
+                    @Html.Label(Resources.Resources.active_date, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.Activedate, "{0:dd/MM/yyyy}", new { @type = "text", @class = "form-control datepicker", @placeholder = "dd/mm/yyyy" })
+                    </div>
+                    @Html.Label(Resources.Resources.end_date, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => model.Limited, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-info">
+            <div class="panel-heading">@Resources.Resources.customer</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    @Html.HiddenFor(model => model.IdCustomer)
+
+                    @Html.Label(Resources.Resources.phone_active, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" value="@Model.Phone" id="Phone" name="Phone" onchange="getcustomer()" oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
+                        @*@Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", @onchange = "getcustomer()", @oninput = "" } })*@
+                    </div>
+                    @Html.Label(Resources.Resources.cus_name, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    @Html.Label(Resources.Resources.phone_call, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => model.PhoneWarr, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label(Resources.Resources.cus_province, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(model => model.Province, new SelectList(lprovince, "Name", "Name"), "Tỉnh/ Thành phố",
+                    new { onchange = "getDistrict()", @class = "form-control" })
+                    </div>
+                    @Html.Label(Resources.Resources.cus_district, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(model => model.District, new List<SelectListItem>
+                        {
+                          new SelectListItem { Value = Model.District , Text = Model.District }
+                        }, "Quận/ Huyện",
+                       new { @class = "form-control" })
+                    </div>
+
+                    @Html.Label(Resources.Resources.cus_address, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="panel panel-info">
+            <div class="panel-heading">Bảo hành</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    @Html.HiddenFor(model => model.Status)
+                    @Html.HiddenFor(model => model.Createby)
+                    @Html.HiddenFor(model => model.Createdate)
+
+                    @Html.Label("Loại dịch vụ", htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(model => model.Category,
+                      new List<SelectListItem>
+                        {
+                        new SelectListItem { Value = "Bảo hành" , Text = Resources.Resources.warranti },
+                      
+                        new SelectListItem { Value = "Tính phí" , Text = Resources.Resources.charge },
+                        }, 
+                        new { @class = "form-control" })
+                    </div>
+                    @Html.Label(Resources.Resources.chanel, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => model.Chanel, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label(Resources.Resources.description, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.Note, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label(Resources.Resources.war_note, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-6">
+                        @Html.TextAreaFor(model => model.Extra, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="text-center">
+                <input type="submit" value="@Resources.Resources.save" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@section scripts{
+    <script>
+        function getproduct() {
+            var serial = $("#Serial").val();
+            var product = $("#Product").val();
+            var model = $("#Model").val();
+
+            $.ajax({
+                url: '/Admin/Error/getidproduct',
+                type: 'POST',
+                datatype: 'application/json',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    serial: serial
+                }),
+                success: function (result) {
+                    var ob = $.parseJSON(result);
+                    if (ob == null) {
+                    } else {
+                        $("#IdProduct").val(ob.Id);
+                        $("#Code").val(ob.Code);
+                        $("#Product").val(ob.Name);
+
+                        if (ob.Model != null) {
+                            $("#Model").val(ob.Model);
+                        }
+                        //
+                        $("#Activedate").val(ob.activedate);
+                        $("#Limited").val(ob.Limited);
+                        //$("#Agent").val(ob.NameAgency);
+                    }
+
+
+                },
+                error: function () {
+                },
+            });
+        }
+        function getcustomer() {
+            var phone = $("#Phone").val();
+            phone = phone.replace(/\s+/g, '');
+            if (phone.length < 10 && phone.length > 11) {
+                alert("Số điện thoại không đúng");
+            }
+            $.ajax({
+                url: '/Admin/Error/GetCustomer',
+                type: 'POST',
+                datatype: 'application/json',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    phone: phone
+                }),
+                success: function (result) {
+                    var ob = $.parseJSON(result);
+                    if (ob.Id == 0) {
+                    } else {
+                        $("#Name").val(ob.Name);
+                        $("#Phone").val(phone);
+                        if (ob.Address != null) {
+                            $("#Address").val(ob.Address);
+                        }
+                        if (ob.City != null) {
+                            $('#Province').append(new Option(ob.City, ob.City, true, true));
+                        }
+                        if (ob.County != null) {
+                            $('#District').append(new Option(ob.County, ob.County, true, true));
+                        }
+                        
+                        $("#PhoneWarr").val(ob.Phone);
+                    }
+
+
+
+                },
+                error: function () {
+                },
+            });
+        }
+        function getDistrict() {
+            var City = $('#Province').val();
+            $.ajax({
+                url: '/Admin/Error/GetCity',
+                type: "GET",
+                dataType: "JSON",
+                data: { City: City },
+                success: function (result) {
+                    $("#District").html("");
+                    $.each($.parseJSON(result), function (i, city) {
+                        $("#District").append
+                            ($('<option></option>').val(city).html(city))
+                    })
+                }
+            });
+        }
+        function getproductcate() {
+            $("#Model").html("");
+            var cate = $('#ProductCate').val();
+            $.ajax({
+                url: '/Admin/Error/GetProductCate',
+                type: "GET",
+                dataType: "JSON",
+                data: { cate: cate },
+                success: function (result) {
+                    
+                    $("#Model").append
+                        ($('<option></option>').val("").html("Bổ sung sau"))
+                    $.each($.parseJSON(result), function (i, data) {
+                        $("#Model").append
+                            ($('<option></option>').val(data.Model1).html(data.Model1))
+                    })
+                }
+            });
+        }
+    </script>
+}

@@ -1,0 +1,143 @@
+﻿@model TEKA.Models.AspNetUser
+
+@{
+    ViewBag.Title = "Thông tin đại lý";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<TEKA.Models.Province> province = ViewBag.province;
+}
+@section scripts{
+    <script>
+        function getCityList() {
+            var name = $("#select").val();
+            $.ajax
+                ({
+                    url: '/Error/GetCityList',
+                    type: 'POST',
+                    datatype: 'application/json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        name: name
+                    }),
+                    success: function (result) {
+                        $("#select2").html("");
+                        $.each($.parseJSON(result), function (i, city) {
+                            $("#select2").append
+                                ($('<option></option>').val(city.Name).html(city.Name))
+                        })
+                    },
+                    error: function () {
+                        alert("Whooaaa! Something went wrong..")
+                    },
+                });
+        }
+    </script>
+}
+
+<div>
+    <p class="text-justify"></p>
+    <div style="text-align:center;margin: 15px 0;"><img src="~/Image/teka3_03.png" alt="" class="img-responsive"/></div>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group" style="display:none">
+            @Html.LabelFor(model => model.PasswordHash, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PasswordHash, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PasswordHash, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" style="display:none">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" style="display:none">
+            @Html.LabelFor(model => model.SecurityStamp, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SecurityStamp, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SecurityStamp, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <table>
+            <tr>
+                <td><label>@Resources.Resources.account</label></td>
+                <td>
+                    <div class="form-group">
+                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control input-group" } })
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label>@Resources.Resources.phone_call</label></td>
+                <td>
+                    <div class="form-group">
+                        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control input-group" } })
+                        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label>@Resources.Resources.agent_store</label></td>
+                <td>
+                    <div class="form-group">
+                        @Html.EditorFor(model => model.NameAgency, new { htmlAttributes = new { @class = "form-control input-group" } })
+                        @Html.ValidationMessageFor(model => model.NameAgency, "", new { @class = "text-danger" })
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label>@Resources.Resources.cus_province</label></td>
+                <td>
+                    <div class="form-group">
+                        <select class="form-control form-control-sm" name="city" id="select" onchange="getCityList()">
+                            <option value="@Model.City">@Model.City</option>
+                            @foreach (var item in ViewBag.province)
+                            {
+                                <option value="@item.Name">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label>@Resources.Resources.cus_district</label></td>
+                <td>
+                    <div class="form-group">
+                        <select class="form-control form-control-sm" name="county" id="select2">
+                            <option value="@Model.County">@Model.County</option>
+                        </select>
+                        </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label>@Resources.Resources.taxcode</label></td>
+                <td>
+                    <div class="form-group">
+                        @Html.EditorFor(model => model.TaxCode, new { htmlAttributes = new { @class = "form-control input-group" } })
+                        @Html.ValidationMessageFor(model => model.TaxCode, "", new { @class = "text-danger" })
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label></label></td>
+                <td>
+                    <div class="form-group">
+                        <input type="submit" value="@Resources.Resources.save" class="btn" />
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+}
+

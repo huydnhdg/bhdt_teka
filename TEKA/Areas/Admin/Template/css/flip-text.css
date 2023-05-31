@@ -1,0 +1,77 @@
+﻿@-webkit-keyframes glowing {
+    0% {
+        background-color: red;
+        -webkit-box-shadow: 0 0 3px red;
+    }
+
+    50% {
+        background-color: red;
+        -webkit-box-shadow: 0 0 10px red;
+    }
+
+    100% {
+        background-color: red;
+        -webkit-box-shadow: 0 0 3px red;
+    }
+}
+
+@-moz-keyframes glowing {
+    0% {
+        background-color: red;
+        -moz-box-shadow: 0 0 3px red;
+    }
+
+    50% {
+        background-color: red;
+        -moz-box-shadow: 0 0 10px red;
+    }
+
+    100% {
+        background-color: red;
+        -moz-box-shadow: 0 0 3px red;
+    }
+}
+
+@-o-keyframes glowing {
+    0% {
+        background-color: red;
+        box-shadow: 0 0 3px red;
+    }
+
+    50% {
+        background-color: red;
+        box-shadow: 0 0 10px red;
+    }
+
+    100% {
+        background-color: red;
+        box-shadow: 0 0 3px red;
+    }
+}
+
+@keyframes glowing {
+    0% {
+        background-color: red;
+        box-shadow: 0 0 3px red;
+    }
+
+    50% {
+        background-color: red;
+        box-shadow: 0 0 10px red;
+    }
+
+    100% {
+        background-color: red;
+        box-shadow: 0 0 3px red;
+    }
+}
+.active-warranti {
+    -webkit-animation: glowing 500ms infinite;
+    -moz-animation: glowing 500ms infinite;
+    -o-animation: glowing 500ms infinite;
+    animation: glowing 500ms infinite;
+}
+
+.active-war {    
+    background: rgba(255, 0, 0, 0.2);
+}

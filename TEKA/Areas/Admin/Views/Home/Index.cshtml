@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    var home = ViewBag.HomePage;
+
+}
+<style>
+    th {
+        text-align: center;
+    }
+
+    td {
+        text-align: right;
+    }
+    input{
+        max-width:180px;
+    }
+</style>
+<div class="col-md-12">
+    <div class="panel panel-info">
+        <div class="page-header">
+            <h4 class="text-center text-danger">
+                <i class="mdi mdi-security"></i> @Resources.Resources.report_warranti
+            </h4>
+        </div>
+        <div class="panel-body">
+            <form>
+                <div class="form-horizontal">
+                    <p class="text-primary" style="margin:0">@Resources.Resources.start_date</p>
+                    <div class="col-md-4">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.TextBox("start_date", ViewBag.start_date as string, new { @class = "form-control", @type = "date" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.TextBox("end_date", ViewBag.end_date as string, new { @class = "form-control", @type = "date" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        @Html.DropDownList("cate",
+                      new List<SelectListItem>
+                        {
+                        new SelectListItem { Value = "key" , Text = Resources.Resources.for_station},
+                        new SelectListItem { Value = "cate_service" , Text = Resources.Resources.cate_service },
+                        new SelectListItem { Value = "product_cate" , Text = Resources.Resources.prod_cate },
+                        new SelectListItem { Value = "model" , Text = "Model" },
+                        new SelectListItem { Value = "city" , Text = Resources.Resources.cus_province },
+                        },
+                        new { @class = "form-control", @onchange="changecate()" })
+                    </div>
+                    <div class="col-md-2">
+                        @Html.DropDownList("cate_error",
+                      new List<SelectListItem>
+                        {
+                          new SelectListItem { Value = "" , Text = Resources.Resources.all },
+                        new SelectListItem { Value = "Lỗi lắp đặt" , Text = Resources.Resources.err_install },
+                        new SelectListItem { Value = "Lỗi sử dụng" , Text = Resources.Resources.err_use },
+                        new SelectListItem { Value = "Lỗi sản phẩm" , Text = Resources.Resources.err_product }
+                        },
+                        new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn-success" id="btnsearch" type="submit">@Resources.Resources.search</button>
+                    </div>
+
+                </div>
+            </form>
+            <table class="table table-bordered table-striped">
+                <thead class="alert-danger">
+                    <tr>
+                        <th>#</th>
+                        <th>@Resources.Resources.count_warranti</th>
+                        <th>@Resources.Resources.success</th>
+                        <th>@Resources.Resources.cancel</th>
+                        <th>@Resources.Resources.outdate</th>
+                        <th>@Resources.Resources.fee</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in home)
+                    {
+                        <tr>
+                            <td class="text-info">@item.Key</td>
+                            <td>@item.all</td>
+                            <td>@item.success</td>
+                            <td>@item.cancel</td>
+                            <td>@item.deadline</td>
+                            <td>@item.money</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            var cate = $("#cate").val();
+            if (cate == "model") {
+                $('#cate_error').css('display', 'block');
+            } else {
+                $('#cate_error').css('display', 'none');
+            }
+        });
+        function changecate() {
+            var cate = $("#cate").val();
+            if (cate == "model") {
+                $('#cate_error').css('display', 'block');
+            } else {
+                $('#cate_error').css('display', 'none');
+            }
+
+        }
+    </script>
+}

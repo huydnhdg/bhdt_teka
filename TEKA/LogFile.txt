@@ -1,0 +1,437 @@
+09/10/2018 15:25: AgencyActive-Active-serial--message-
+09/10/2018 15:27: AgencyActive-Active-serial--message-
+09/10/2018 15:29: AgencyActive-Active-serial--message-
+09/10/2018 15:35: Error-Active-serial--message-
+09/10/2018 15:35: AgencyActive-Active-serial--message-
+09/10/2018 15:43: Error-Active-serial--message-
+09/10/2018 15:43: AgencyActive-Active-serial--message-
+10/10/2018 10:17: RegisterController-Search-serial--message-
+10/10/2018 10:18: RegisterController-Error-serial--message-
+10/10/2018 10:19: RegisterController-Register-msisdn--serial--message-
+10/10/2018 10:19: RegisterController-Register-msisdn--serial--message--respone-Serial khong ton tai.
+10/10/2018 10:53: AgencyActive-Active-serial--message-
+10/10/2018 10:56: AgencyActive-Active-serial--message-
+10/10/2018 10:56: AgencyActive-Active-serial--message-
+10/10/2018 10:58: AgencyActive-Active-serial--message-
+10/10/2018 10:59: AgencyActive-Active-serial--message-
+10/10/2018 10:59: AgencyActive-Active-serial--message-
+10/10/2018 11:00: AgencyActive-Active-serial--message-
+10/10/2018 11:00: AgencyActive-Active-serial--message-
+10/10/2018 11:00: AgencyActive-Active-serial--message-
+10/10/2018 11:01: AgencyActive-Active-serial--message-
+10/10/2018 11:01: AgencyActive-Active-serial--message-
+10/10/2018 11:02: AgencyActive-Active-serial--message-
+10/10/2018 11:03: AgencyActive-Active-serial--message-
+10/10/2018 11:07: AgencyActive-Active-serial--message-
+10/10/2018 11:08: AgencyActive-Active-serial-TP185U00106-message-Serial sản phẩm đã được kích hoạt trước đó.
+10/10/2018 11:08: AgencyActive-Active-serial-TP185U00106-message-Serial sản phẩm đã được kích hoạt trước đó.
+10/10/2018 11:09: AgencyActive-Active-serial-TP185U00106-message-Serial sản phẩm đã được kích hoạt trước đó.
+10/10/2018 11:09: AgencyActive-Active-serial-TP185U00106-message-Serial sản phẩm đã được kích hoạt trước đó.
+10/10/2018 11:10: AgencyActive-Active-serial-TP185U00106-message-Serial sản phẩm đã được kích hoạt trước đó.
+10/10/2018 11:14: AgencyActive-Active-serial-TP185U00106-message-Serial sản phẩm đã được kích hoạt trước đó.
+10/10/2018 11:39: Error-Active-serial--message-
+10/10/2018 11:42: Error-Active-serial--message-
+10/10/2018 11:47: Error-Active-serial--message-
+10/10/2018 11:53: Error-Active-serial--message-
+10/10/2018 11:54: Error-Active-serial-TP185U00106-message-Báo lỗi thành công.
+10/10/2018 12:04: Error-Active-serial-TP185U00106-message-Báo lỗi thành công.
+11/10/2018 08:48: CustomerActive-Active-serial--message-
+11/10/2018 09:26: AgencyActive-Active-serial--message-
+11/10/2018 09:26: AgencyActive-Active-serial--message-
+11/10/2018 09:33: AgencyActive-Active-serial--message-
+11/10/2018 09:34: AgencyActive-Active-serial--message-
+11/10/2018 09:34: AgencyActive-Active-serial--message-
+11/10/2018 09:36: AgencyActive-Active-serial-adf-message-Serial sản phẩm không tồn tại.
+11/10/2018 09:42: AgencyActive-Active-serial--message-
+11/10/2018 09:42: AgencyActive-Active-serial-adf-message-Serial sản phẩm không tồn tại.
+11/10/2018 09:48: AgencyActive-Active-serial--message-
+11/10/2018 09:53: AgencyActive-Active-serial--message-
+11/10/2018 09:57: AgencyActive-Active-serial--message-
+11/10/2018 09:57: AgencyActive-Active-serial-SM185902155-message-Kích hoạt sản phẩm thành công.
+11/10/2018 10:09: AgencyActive-update-serial--message-
+11/10/2018 10:13: AgencyActive-update-serial-SM185902155-message-Serial sản phẩm đã được kích hoạt trước đó.
+11/10/2018 10:13: AgencyActive-update-serial-SM185902155-message-Serial sản phẩm đã hết hạn bảo hành.
+11/10/2018 10:15: AgencyActive-update-serial--message-
+11/10/2018 10:15: AgencyActive-update-serial-SM185902155-message-Serial sản phẩm đã hết hạn bảo hành.
+11/10/2018 10:15: AgencyActive-update-serial-SM185902155-message-Kích hoạt sản phẩm thành công.
+11/10/2018 11:46: CustomerActive-Active-serial--message-
+11/10/2018 11:47: CustomerActive-Active-serial--message-
+11/10/2018 11:48: CustomerActive-Active-serial--message-
+11/10/2018 11:51: AgencyActive-update-serial--message-
+11/10/2018 11:51: CustomerActive-Active-serial--message-
+16/10/2018 10:44: AgencyActive-update-serial--message-
+16/10/2018 10:44: AgencyActive-update-serial-0000000000000-message-Serial sản phẩm không tồn tại.
+16/10/2018 10:45: AgencyActive-update-serial-11111-message-Serial sản phẩm không tồn tại.
+16/10/2018 10:47: AgencyActive-update-serial-11111-message-Serial sản phẩm không tồn tại.
+16/10/2018 10:48: AgencyActive-update-serial-11111-message-Serial sản phẩm không tồn tại.
+16/10/2018 10:49: AgencyActive-update-serial-11111-message-Serial sản phẩm không tồn tại.
+16/10/2018 10:49: AgencyActive-update-serial-11111-message-Serial sản phẩm không tồn tại.
+16/10/2018 10:51: AgencyActive-update-serial-11111-message-Serial sản phẩm không tồn tại.
+16/10/2018 10:52: AgencyActive-update-serial-11111-message-Serial sản phẩm không tồn tại.
+16/10/2018 10:56: AgencyActive-update-serial--message-
+16/10/2018 10:57: AgencyActive-update-serial--message-
+16/10/2018 10:58: AgencyActive-update-serial--message-
+16/10/2018 10:58: AgencyActive-update-serial--message-
+16/10/2018 10:59: AgencyActive-update-serial--message-
+16/10/2018 10:59: AgencyActive-update-serial--message-
+16/10/2018 11:00: AgencyActive-update-serial--message-
+16/10/2018 11:01: AgencyActive-update-serial--message-
+16/10/2018 14:48: CustomerActive-Active-serial--message-
+16/10/2018 14:48: CustomerActive-Active-serial--message-
+16/10/2018 14:55: CustomerActive-Active-serial--message-
+16/10/2018 14:55: CustomerActive-Active-serial--message-
+16/10/2018 14:56: CustomerActive-Active-serial--message-
+16/10/2018 14:57: CustomerActive-Active-serial--message-
+16/10/2018 14:59: CustomerActive-Active-serial--message-
+16/10/2018 15:00: AgencyActive-update-serial--message-
+16/10/2018 15:01: CustomerActive-Active-serial--message-
+16/10/2018 15:02: CustomerActive-Active-serial--message-
+16/10/2018 15:03: CustomerActive-Active-serial--message-
+16/10/2018 15:03: CustomerActive-Active-serial--message-
+16/10/2018 15:03: AgencyActive-update-serial--message-
+16/10/2018 15:03: CustomerActive-Active-serial--message-
+16/10/2018 15:20: CustomerActive-Active-serial--message-
+16/10/2018 15:21: CustomerActive-Active-serial--message-
+16/10/2018 15:22: CustomerActive-Active-serial--message-
+16/10/2018 15:22: CustomerActive-Active-serial--message-
+16/10/2018 15:22: CustomerActive-Active-serial--message-
+16/10/2018 15:22: CustomerActive-Active-serial--message-
+16/10/2018 15:22: CustomerActive-Active-serial--message-
+16/10/2018 15:22: CustomerActive-Active-serial--message-
+16/10/2018 15:23: CustomerActive-Active-serial--message-
+16/10/2018 15:24: CustomerActive-Active-serial--message-
+16/10/2018 15:24: CustomerActive-Active-serial--message-
+16/10/2018 15:25: CustomerActive-Active-serial--message-
+16/10/2018 15:25: CustomerActive-Active-serial--message-
+16/10/2018 15:26: CustomerActive-Active-serial--message-
+19/10/2018 15:50: CustomerActive-Active-serial--message-
+19/10/2018 15:50: Error-Active-serial--message-
+23/10/2018 09:35: CustomerActive-Active-serial--message-
+23/10/2018 09:35: Error-Active-serial--message-
+29/10/2018 16:54: Error-Active-serial--message-
+01/11/2018 14:46: AgencyActive-update-serial--message-
+01/11/2018 14:46: AgencyActive-Active-serial-MD184L01163-message-Kích hoạt sản phẩm thành công.
+01/11/2018 14:51: CustomerActive-Active-serial--message-
+01/11/2018 14:55: AgencyActive-update-serial--message-
+01/11/2018 14:56: AgencyActive-Active-serial-MD184L01150-message-Kích hoạt sản phẩm thành công.
+01/11/2018 15:22: AgencyActive-update-serial--message-
+01/11/2018 15:22: AgencyActive-update-serial-MD184L01150-message-Serial sản phẩm đã được kích hoạt trước đó.
+01/11/2018 15:25: AgencyActive-update-serial--message-
+01/11/2018 15:29: AgencyActive-update-serial--message-
+01/11/2018 15:31: CustomerActive-Active-serial--message-
+01/11/2018 15:31: CustomerActive-Active-serial-MD184L01124-message-Kích hoạt sản phẩm thành công.
+01/11/2018 15:32: CustomerActive-Active-sendMT-error
+02/11/2018 14:06: CustomerActive-Active-sendMT-error
+02/11/2018 14:07: CustomerActive-Active-sendMT-error
+02/11/2018 14:20: CustomerActive-Active-sendMT-Unable to connect to the remote server
+02/11/2018 14:21: CustomerActive-Active-sendMT-error
+02/11/2018 14:37: CustomerActive-Active-sendMT-The request failed with HTTP status 401: Unauthorized.
+02/11/2018 16:29: CustomerActive-Active-sendMT-84965433459
+02/11/2018 16:45: CustomerActive-Active-sendMT-84965433459
+02/11/2018 16:45: CustomerActive-Active-sendMT-84965433459
+02/11/2018 16:45: CustomerActive-Active-serial--message-
+02/11/2018 16:46: CustomerActive-Active-serial--message-
+02/11/2018 16:46: CustomerActive-Active-serial--message-
+02/11/2018 16:48: CustomerActive-Active-serial--message-
+02/11/2018 17:22: CustomerActive-Active-sendMT-84965433459
+02/11/2018 17:22: CustomerActive-Active-sendMT-84965433459
+02/11/2018 17:23: CustomerActive-Active-sendMT-84965433459
+02/11/2018 17:23: CustomerActive-Active-serial--message-
+02/11/2018 17:34: CustomerActive-Active-serial--message-
+02/11/2018 17:34: CustomerActive-Active-serial--message-
+02/11/2018 17:35: CustomerActive-Active-serial--message-
+02/11/2018 17:35: CustomerActive-Active-serial--message-
+02/11/2018 17:37: CustomerActive-Active-serial--message-
+02/11/2018 17:37: CustomerActive-Active-serial--message-
+03/11/2018 09:22: AgencyActive-update-serial--message-
+03/11/2018 09:31: Product-Upload-Excel-System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 263
+03/11/2018 09:32: Product-Upload-Excel-System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 263
+03/11/2018 10:34: Product-Upload-Excel-System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.ParseExact(String s, String format, DateTimeFormatInfo dtfi, DateTimeStyles style)
+   at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 263
+03/11/2018 10:35: Product-Upload-Excel-System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.ParseExact(String s, String format, DateTimeFormatInfo dtfi, DateTimeStyles style)
+   at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 263
+03/11/2018 10:35: Product-Upload-Excel-System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.ParseExact(String s, String format, DateTimeFormatInfo dtfi, DateTimeStyles style)
+   at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 263
+03/11/2018 10:38: Product-Upload-Excel-System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.DateTime.Parse(String s, IFormatProvider provider)
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 263
+03/11/2018 10:41: Product-Upload-Excel-System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.DateTime.Parse(String s, IFormatProvider provider, DateTimeStyles styles)
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 264
+03/11/2018 10:44: Product-Upload-Excel-System.FormatException: The string was not recognized as a valid DateTime. There is an unknown word starting at index 0.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value, IFormatProvider provider)
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 264
+03/11/2018 10:45: Product-Upload-Excel-System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value, IFormatProvider provider)
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 264
+03/11/2018 10:48: Product-Upload-Excel-System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.ParseExact(String s, String format, DateTimeFormatInfo dtfi, DateTimeStyles style)
+   at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 264
+03/11/2018 10:53: Product-Upload-Excel-System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.DateTime.Parse(String s, IFormatProvider provider, DateTimeStyles styles)
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 264
+03/11/2018 10:57: Product-Upload-Excel-System.Data.Entity.Validation.DbEntityValidationException: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 275
+03/11/2018 11:04: Product-Upload-Excel-System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.ParseExact(String s, String format, DateTimeFormatInfo dtfi, DateTimeStyles style)
+   at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 263
+03/11/2018 11:08: Product-Upload-Excel-System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.ParseExact(String s, String format, DateTimeFormatInfo dtfi, DateTimeStyles style)
+   at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 263
+03/11/2018 11:29: Product-Upload-Excel-System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt64(String value, NumberStyles options, NumberFormatInfo numfmt)
+   at System.Int64.Parse(String s)
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 263
+03/11/2018 11:35: Product-Upload-Excel-System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt64(String value, NumberStyles options, NumberFormatInfo numfmt)
+   at System.Int64.Parse(String s)
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 263
+03/11/2018 11:36: Product-Upload-Excel-System.FormatException: Input string was not in a correct format.
+   at System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   at System.Double.Parse(String s)
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 263
+03/11/2018 12:28: Product-Upload-Excel-System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt64(String value, NumberStyles options, NumberFormatInfo numfmt)
+   at System.Int64.Parse(String s)
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 263
+03/11/2018 12:30: Product-Upload-Excel-System.Data.Entity.Validation.DbEntityValidationException: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 275
+03/11/2018 12:31: Product-Upload-Excel-System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt64(String value, NumberStyles options, NumberFormatInfo numfmt)
+   at System.Int64.Parse(String s)
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 263
+03/11/2018 12:34: Product-Upload-Excel-System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt64(String value, NumberStyles options, NumberFormatInfo numfmt)
+   at System.Int64.Parse(String s)
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 263
+03/11/2018 12:34: Product-Upload-Excel-System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt64(String value, NumberStyles options, NumberFormatInfo numfmt)
+   at System.Int64.Parse(String s)
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 263
+03/11/2018 12:35: Product-Upload-Excel-System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt64(String value, NumberStyles options, NumberFormatInfo numfmt)
+   at System.Int64.Parse(String s)
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 263
+03/11/2018 12:36: Product-Upload-Excel-System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt64(String value, NumberStyles options, NumberFormatInfo numfmt)
+   at System.Int64.Parse(String s)
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 263
+03/11/2018 12:37: Product-Upload-Excel-System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt64(String value, NumberStyles options, NumberFormatInfo numfmt)
+   at System.Int64.Parse(String s)
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 263
+03/11/2018 12:58: Product-Upload-Excel-System.Data.Entity.Validation.DbEntityValidationException: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 275
+03/11/2018 13:04: Product-Upload-Excel-System.Data.Entity.Validation.DbEntityValidationException: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 282
+03/11/2018 13:05: Product-Upload-Excel-System.Data.Entity.Validation.DbEntityValidationException: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 282
+03/11/2018 13:20: Product-Upload-Excel-System.Data.Entity.Validation.DbEntityValidationException: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 282
+04/11/2018 14:07: AgencyActive-update-serial--message-
+04/11/2018 14:07: AgencyActive-update-serial--message-
+04/11/2018 14:12: AgencyActive-update-serial--message-
+04/11/2018 14:13: AgencyActive-update-serial--message-
+04/11/2018 14:14: AgencyActive-update-serial--message-
+04/11/2018 14:14: AgencyActive-update-serial--message-
+04/11/2018 14:16: AgencyActive-update-serial--message-
+04/11/2018 14:23: CustomerActive-Active-serial--message-
+04/11/2018 14:23: AgencyActive-update-serial--message-
+04/11/2018 14:25: AgencyActive-update-serial--message-
+04/11/2018 14:26: AgencyActive-update-serial--message-
+04/11/2018 14:27: AgencyActive-update-serial--message-
+04/11/2018 14:27: AgencyActive-update-serial--message-
+04/11/2018 14:29: AgencyActive-update-serial--message-
+04/11/2018 14:31: AgencyActive-update-serial--message-
+04/11/2018 14:32: AgencyActive-update-serial--message-
+04/11/2018 14:33: AgencyActive-update-serial--message-
+04/11/2018 14:34: AgencyActive-update-serial--message-
+04/11/2018 14:36: AgencyActive-update-serial--message-
+04/11/2018 14:38: AgencyActive-update-serial--message-
+06/11/2018 16:39: AgencyActive-update-serial--message-
+06/11/2018 16:39: AgencyActive-Active-serial-MD184L01150-message-Kích hoạt sản phẩm thành công.
+06/11/2018 16:39: AgencyActive-Active-sendMT-84965433459
+09/11/2018 10:16: AgencyActive-update-serial--message-
+09/11/2018 10:40: CustomerActive-Active-serial--message-
+09/11/2018 10:42: CustomerActive-Active-serial--message-
+09/11/2018 10:42: CustomerActive-Active-serial--message-
+14/11/2018 10:07: Error-Active-serial--message-
+14/11/2018 10:16: CustomerActive-Active-serial--message-
+23/11/2018 09:21: CustomerActive-Active-serial--message-
+23/11/2018 09:28: CustomerActive-Active-serial--message-
+23/11/2018 09:45: AgencyActive-update-serial--message-
+24/11/2018 10:01: AgencyActive-update-serial--message-
+01/12/2018 08:12: Product-Upload-Excel-System.NullReferenceException: Object reference not set to an instance of an object.
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 263
+01/12/2018 08:16: Product-Upload-Excel-System.NullReferenceException: Object reference not set to an instance of an object.
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 263
+01/12/2018 08:18: Product-Upload-Excel-System.NullReferenceException: Object reference not set to an instance of an object.
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 263
+01/12/2018 08:18: Product-Upload-Excel-System.NullReferenceException: Object reference not set to an instance of an object.
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 263
+01/12/2018 08:20: Product-Upload-Excel-have-814-save completed
+04/12/2018 11:23: AgencyActive-Active-serial-MD184L01163-message-Kích hoạt sản phẩm thành công.
+04/12/2018 11:23: AgencyActive-Active-sendMT-965433459
+04/12/2018 11:26: AgencyActive-Active-serial-MD184L01163-message-Kích hoạt sản phẩm thành công.
+04/12/2018 11:26: AgencyActive-Active-sendMT-0965433459
+04/12/2018 11:28: AgencyActive-Active-serial-MD184L01163-message-Kích hoạt sản phẩm thành công.
+04/12/2018 11:28: AgencyActive-Active-sendMT-965433459
+04/12/2018 11:34: AgencyActive-Active-serial-MD184L01163-message-Kích hoạt sản phẩm thành công.
+04/12/2018 11:34: AgencyActive-Active-sendMT-965433459
+04/12/2018 11:36: AgencyActive-Active-serial-MD184L01163-message-Kích hoạt sản phẩm thành công.
+04/12/2018 11:36: AgencyActive-Active-sendMT-965433459
+04/12/2018 11:36: AgencyActive-Active-serial-MD184L01163-message-Kích hoạt sản phẩm thành công.
+04/12/2018 11:36: AgencyActive-Active-sendMT-965433459
+04/12/2018 11:37: AgencyActive-Active-serial-MD184L01163-message-Kích hoạt sản phẩm thành công.
+04/12/2018 11:37: AgencyActive-Active-sendMT-965433459
+04/12/2018 11:37: AgencyActive-Active-serial-MD184L01135-message-Kích hoạt sản phẩm thành công.
+04/12/2018 11:37: AgencyActive-Active-sendMT-965433459
+04/12/2018 15:58: AgencyActive-update-serial-MD184L01150-message-Serial sản phẩm đã hết hạn bảo hành.
+04/12/2018 15:58: AgencyActive-update-serial-MD184L01150-message-Cập nhật sản phẩm thành công.
+04/12/2018 16:07: AgencyActive-update-serial-MD184L01150-message-Serial sản phẩm đã hết hạn bảo hành.
+04/12/2018 16:07: AgencyActive-update-serial-MD184L01150-message-Cập nhật sản phẩm thành công.
+04/12/2018 16:51: CustomerActive-Active-serial--message-
+04/12/2018 16:52: CustomerActive-Active-serial--message-
+04/12/2018 16:53: CustomerActive-Active-serial-MD184L01165-message-Kích hoạt sản phẩm thành công.
+04/12/2018 16:53: CustomerActive-Active-sendMT-965433459
+04/12/2018 17:02: CustomerActive-Active-serial-MD184L01101-message-Kích hoạt sản phẩm thành công.
+04/12/2018 17:02: CustomerActive-Active-sendMT-965433459
+04/12/2018 17:06: CustomerActive-Active-serial-MD184L01163-message-Kích hoạt sản phẩm thành công.
+04/12/2018 17:06: CustomerActive-Active-sendMT-84965433459
+04/12/2018 17:24: CustomerActive-Active-serial-MD184L01135-message-Kích hoạt sản phẩm thành công.
+04/12/2018 17:24: CustomerActive-Active-sendMT-0965433459
+04/12/2018 17:26: CustomerActive-Active-serial-MD184L01173-message-Kích hoạt sản phẩm thành công.
+04/12/2018 17:26: CustomerActive-Active-sendMT-0965433459
+05/12/2018 09:21: AgencyActive-Active-serial-MD184L01124-message-Kích hoạt sản phẩm thành công.
+05/12/2018 09:21: AgencyActive-Active-sendMT-84965433459
+05/12/2018 09:30: AgencyActive-Active-serial-TZ185710242-message-Kích hoạt sản phẩm thành công.
+05/12/2018 09:30: AgencyActive-Active-sendMT-84965433459
+05/12/2018 09:33: AgencyActive-Active-serial-PX157A00029-message-Kích hoạt sản phẩm thành công.
+05/12/2018 09:33: AgencyActive-Active-sendMT-841234567890
+05/12/2018 09:36: AgencyActive-Active-serial-PX157A00030-message-Kích hoạt sản phẩm thành công.
+05/12/2018 09:36: AgencyActive-Active-sendMT-841234569878
+05/12/2018 09:39: AgencyActive-Active-serial-SC184201765-message-Kích hoạt sản phẩm thành công.
+05/12/2018 09:39: AgencyActive-Active-sendMT-841236541236
+10/12/2018 23:05: Customer-Active-Excel- System.NullReferenceException: Object reference not set to an instance of an object.
+   at TEKA.Areas.Admin.Controllers.CustomerController.ActiveDS(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\CustomerController.cs:line 295
+10/12/2018 23:08: Customer-Active-Excel- System.NullReferenceException: Object reference not set to an instance of an object.
+   at TEKA.Areas.Admin.Controllers.CustomerController.ActiveDS(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\CustomerController.cs:line 295
+10/12/2018 23:12: Customer-Active-Excel- System.NullReferenceException: Object reference not set to an instance of an object.
+   at TEKA.Areas.Admin.Controllers.CustomerController.ActiveDS(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\CustomerController.cs:line 305
+10/12/2018 23:13: Customer-Active-Excel- System.NullReferenceException: Object reference not set to an instance of an object.
+   at TEKA.Areas.Admin.Controllers.CustomerController.ActiveDS(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\CustomerController.cs:line 305
+10/12/2018 23:14: Customer-Active-Excel- System.NullReferenceException: Object reference not set to an instance of an object.
+   at TEKA.Areas.Admin.Controllers.CustomerController.ActiveDS(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\CustomerController.cs:line 356
+10/12/2018 23:20: Customer-Active-Excel- System.NullReferenceException: Object reference not set to an instance of an object.
+   at TEKA.Areas.Admin.Controllers.CustomerController.ActiveDS(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\CustomerController.cs:line 269
+05/03/2019 11:10: Product-Upload-Excel-have-56107-save completed
+05/03/2019 11:19: CustomerActive-Active-serial-SC156T46777-message-Kích hoạt sản phẩm thành công.
+05/03/2019 11:19: CustomerActive-Active-sendMT-84965433459
+05/03/2019 11:44: CustomerActive-Active-serial-SC157P64351-message-Kích hoạt sản phẩm thành công.
+05/03/2019 11:44: CustomerActive-Active-sendMT-84965433459
+13/11/2019 14:54: gửi mã dự thưởng TK438034 cho số điện thoại 0965433459 thời gian 13/11/2019 14:54:15
+13/11/2019 14:54: CustomerActive-Active-sendMT-Unable to connect to the remote server
+13/11/2019 14:54: Send Code QuayThuong error   0965433459  TK885554
+03/03/2020 11:31: Product-Upload-Excel-have-1-save completed
+03/03/2020 11:41: Product-Upload-Excel-have-175-save completed
+03/03/2020 11:48: Product-Upload-Excel-have-1-save completed
+03/03/2020 11:49: Product-Upload-Excel-have-1-save completed
+03/03/2020 14:43: Product-Upload-Excel-have-175-save completed
+03/03/2020 14:44: Product-Upload-Excel-have-175-save completed
+03/03/2020 14:44: Product-Upload-Excel-have-175-save completed
+03/03/2020 14:50: Product-Upload-Excel-have-175-save completed
+03/03/2020 14:53: Product-Upload-Excel-have-175-save completed
+03/03/2020 15:00: Product-Upload-Excel-have-175-save completed
+03/03/2020 15:01: Product-Upload-Excel-have-175-save completed
+03/03/2020 15:01: Product-Upload-Excel-have-175-save completed
+03/03/2020 15:02: Product-Upload-Excel-have-175-save completed
+03/03/2020 15:06: Product-Upload-Excel-have-0-save completed
+03/03/2020 15:09: Product-Upload-Excel-have-0-save completed
+03/03/2020 16:29: Product-Upload-Excel-System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Int32.Parse(String s)
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 356
+03/03/2020 16:29: Product-Upload-Excel-System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Int32.Parse(String s)
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 356
+03/03/2020 16:29: Product-Upload-Excel-System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Int32.Parse(String s)
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 356
+03/03/2020 16:29: Product-Upload-Excel-System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Int32.Parse(String s)
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection) in E:\bluesea.net\teka\TEKA\TEKA\Areas\Admin\Controllers\ProductController.cs:line 356
+03/03/2020 16:41: Product-Upload-Excel-have-0-save completed
+03/03/2020 16:44: Product-Upload-Excel-have-5382-save completed
+03/03/2020 16:58: Product-Upload-Excel-have-58250-save completed
+03/03/2020 16:59: Product-Upload-Excel-have-142848-save completed
+03/03/2020 17:00: Product-Upload-Excel-have-142848-save completed
+03/03/2020 17:04: Product-Upload-Excel-have-142848-save completed
+04/03/2020 09:39: Product-Upload-Excel-System.NullReferenceException: Object reference not set to an instance of an object.
+   at TEKA.Areas.Admin.Controllers.ProductController.UploadProduct(FormCollection formCollection)
+04/03/2020 09:45: Product-Upload-Excel-have-0-save completed
+04/03/2020 09:52: Product-Upload-Excel-have-0-save completed
+04/03/2020 10:15: Product-Upload-Excel-have-0-save completed
+04/03/2020 10:16: Product-Upload-Excel-have-0-save completed
+04/03/2020 10:21: Product-Upload-Excel-have-1-save completed
+03/04/2020 09:46: Error-Active-serial--message-
+03/04/2020 09:47: Error-Active-serial--message-
+03/04/2020 09:49: Error-Active-serial--message-
+03/04/2020 09:49: Error-Active-serial-AR174600782-message-Báo lỗi thành công.
+07/04/2020 11:33: cms-Active 387536 07/04/2020 00:00:00 0965433459 test test test@gmail.com 20/12/2020 00:00:00
+07/04/2020 11:37: cms-Active 387536 07/04/2020 00:00:00 84965433459 test àdfadf  
+07/04/2020 11:41: cms-Active 387547 07/04/2020 00:00:00 84965433459 test àdfadf  
+07/04/2020 11:42: cms-Active-sendMT-84965433459

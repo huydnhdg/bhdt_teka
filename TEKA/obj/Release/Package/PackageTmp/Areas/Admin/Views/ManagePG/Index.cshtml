@@ -1,0 +1,97 @@
+﻿@model PagedList.IPagedList<TEKA.Models.AspNetUser>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Manage";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12 stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <form class="forms-sample">
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">@Resources.Resources.cus_name</label>
+                        <div class="col-sm-9">
+                            <div class="form-group">
+                                <div class='input-group date' id="serial">
+                                    @Html.TextBox("s1", ViewBag.c1 as string, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <label for="" class="col-sm-3 col-form-label">@Resources.Resources.cus_phone</label>
+                        <div class="col-sm-9">
+                            <div class="form-group">
+                                <div class='input-group date' id="phone">
+                                    @Html.TextBox("s2", ViewBag.c2 as string, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <label for="" class="col-sm-3 col-form-label">Email</label>
+                        <div class="col-sm-9">
+                            <div class="form-group">
+                                <div class='input-group date' id="phone">
+                                    @Html.TextBox("s3", ViewBag.c3 as string, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <label for="" class="col-sm-3 col-form-label">@Resources.Resources.account</label>
+                        <div class="col-sm-9">
+                            <div class="form-group">
+                                <div class='input-group date' id="phone">
+                                    @Html.TextBox("s4", ViewBag.c4 as string, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-primary btn-fw">
+                        <i class="mdi mdi-magnify"></i>@Resources.Resources.search
+                    </button>
+                    <a class="btn btn-outline-primary btn-fw" href="/Admin/Account/RegisterPG"><i class="mdi mdi-account-plus"></i>@Resources.Resources.create_new</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table" id="mytable">
+                        <thead>
+                            <tr>
+                                <th>@Resources.Resources.cus_name</th>
+                                <th>@Resources.Resources.cus_phone</th>
+                                <th>Email</th>
+                                <th>@Resources.Resources.account</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.FullName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.UserName)</td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                                        <br />
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                        <br />
+                                        @Html.ActionLink("List", "ListActivePG", new { pg = item.UserName })
+                                        <br />
+                                        <a href="/Admin/Account/ResetPassword?Code=@item.Id">Reset password</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+                                       new { page, c1 = ViewBag.c1, c2 = ViewBag.c2, c3 = ViewBag.c3, c4 = ViewBag.c4, c5 = ViewBag.c5, c6 = ViewBag.c6 }))

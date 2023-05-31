@@ -1,0 +1,211 @@
+﻿@model List<TEKA.Utils.PACallAPI.DataModel>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "History";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    var index = 0;
+}
+<style>
+    .form-group {
+        margin-bottom: 3px;
+    }
+    tbody{
+        display:block;
+        height:500px;
+
+        overflow:auto;
+    }
+    thead,tbody tr{
+        display:table;
+        width:100%;
+        table-layout:fixed;
+    }
+</style>
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('#tungay').datetimepicker({
+                format: 'DD/MM/YYYY',
+                allowInputToggle: true,
+                useCurrent: false
+            }).on('dp.change', function (e) {
+                var minNew = e.date;
+                var maxNew = e.date.clone().add(30, 'days');
+                var pickEnd = $('#denngay');
+                var minOld = pickEnd.data('DateTimePicker').minDate();
+                var maxOld = pickEnd.data('DateTimePicker').maxDate();
+                if (minOld && minOld.isAfter(maxNew)) {
+                    pickEnd.data('DateTimePicker').minDate(minNew);
+                    pickEnd.data('DateTimePicker').maxDate(maxNew);
+                } else {
+                    pickEnd.data('DateTimePicker').maxDate(maxNew);
+                    pickEnd.data('DateTimePicker').minDate(minNew);
+                }
+            });
+            $('#denngay').datetimepicker({
+                format: 'DD/MM/YYYY',
+                allowInputToggle: true,
+                useCurrent: true
+            });
+        });
+
+        var x = document.getElementById("myAudio");
+        $("#mytable .rec").click(function () {
+            var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["TOKEN_PA"]';
+            var Id = $(this).closest("tr").find("td").eq(0).html();
+            var url = "https://crm.pavietnam.vn/api/playRecording.php?api_key=" + apiUrl + "&recording_file=" + Id;
+            console.log(url);
+            $('#myModal').modal('show');
+
+            x.setAttribute('src', url);
+        });
+        function stop() {
+            x.setAttribute('src', "");
+        }
+
+    </script>
+
+}
+<div class="row">
+    <div class="col-lg-12 stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <form class="forms-sample">
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">@Resources.Resources.from_number</label>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <div class='input-group date' id="name">
+                                    @Html.TextBox("source", ViewBag.source as string, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">@Resources.Resources.to_number</label>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <div class='input-group date' id="name">
+                                    @Html.TextBox("destination", ViewBag.destination as string, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">@Resources.Resources.status</label>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <div class='input-group date' id="status">
+                                    @Html.DropDownList("status",
+                     new List<SelectListItem>
+                       {
+                         new SelectListItem { Value = "" , Text = Resources.Resources.all },
+                       new SelectListItem { Value = "answered" , Text = Resources.Resources.answered },
+                       new SelectListItem { Value = "not_answer" , Text = Resources.Resources.not_answer },
+                       new SelectListItem { Value = "busy" , Text = Resources.Resources.busy },
+                       },
+                       new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">@Resources.Resources.call_date</label>
+                        <div class="col-sm-9">
+                            <div class="col-sm-5 row">
+                                <div class="form-group">
+                                    <div class='input-group date' id="tungay">
+                                        @Html.TextBox("from_date", ViewBag.from_date as string, new { @class = "form-control" })
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-5 row">
+                                <div class="form-group">
+                                    <div class='input-group date' id="denngay">
+                                        @Html.TextBox("to_date", ViewBag.to_date as string, new { @class = "form-control" })
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-primary btn-fw">
+                        <i class="mdi mdi-magnify"></i> @Resources.Resources.search
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped" id="mytable">
+                        <thead style="background-color:aqua">
+                            <tr>
+                                <th>#</th>
+                                <th>@Resources.Resources.call_date</th>
+                                <th>@Resources.Resources.from_number</th>
+                                <th>@Resources.Resources.to_number</th>
+                                <th>@Resources.Resources.call_time</th>
+                                <th>@Resources.Resources.pay_time</th>
+                                <th>@Resources.Resources.call_key</th>
+                                <th>@Resources.Resources.rec</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                index++;
+                                <tr>
+                                    <td style="display:none">@item.recording</td>
+                                    <td>@index</td>
+                                    <td>@item.date_create</td>
+                                    <td>@item.from</td>
+                                    <td>@item.to</td>
+                                    <td>@item.duration</td>
+                                    <td>@item.bill</td>
+                                    <td>@item.outbound</td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(item.recording))
+                                        {
+                                            <a href="#" class="alert-danger rec" style="font-size:21px;"><i class="mdi mdi-record-rec"></i></a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button onclick="stop()" type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body text-center">
+                <figure>
+                    <figcaption>@Resources.Resources.play_rec:</figcaption>
+                    <audio id="myAudio" controls src="">
+                        Your browser does not support the
+                        <code>audio</code> element.
+                    </audio>
+                </figure>
+            </div>
+        </div>
+
+    </div>
+</div>

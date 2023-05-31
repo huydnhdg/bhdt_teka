@@ -1,0 +1,406 @@
+﻿@model TEKA.Models.Customer
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<TEKA.Models.Province> province = ViewBag.province;
+    string message = ViewBag.message;
+
+    var Product = ViewBag.Product;
+}
+@section scripts{
+    <script>
+        function getCityList() {
+            var name = $("#city").val();
+            $.ajax
+                ({
+                    url: '/MultiActive/GetCityList',
+                    type: 'POST',
+                    datatype: 'application/json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        name: name
+                    }),
+                    success: function (result) {
+                        $("#county").html("");
+                        $.each($.parseJSON(result), function (i, city) {
+                            $("#county").append
+                                ($('<option></option>').val(city.Name).html(city.Name))
+                        })
+                    },
+                    error: function () {
+                        alert("Whooaaa! Something went wrong..")
+                    },
+                });
+        }
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $('#birthday').datetimepicker({
+                format: 'DD/MM/YYYY',
+                allowInputToggle: true,
+                useCurrent: false
+            }).on('dp.change', function (e) {
+                var minNew = e.date;
+                var maxNew = e.date.clone().add(9, 'days');
+                var pickEnd = $('#denngay');
+                var minOld = pickEnd.data('DateTimePicker').minDate();
+                var maxOld = pickEnd.data('DateTimePicker').maxDate();
+                if (minOld && minOld.isAfter(maxNew)) {
+                    pickEnd.data('DateTimePicker').minDate(minNew);
+                    pickEnd.data('DateTimePicker').maxDate(maxNew);
+                } else {
+                    pickEnd.data('DateTimePicker').maxDate(maxNew);
+                    pickEnd.data('DateTimePicker').minDate(minNew);
+                }
+            });
+            $('#denngay').datetimepicker({
+                format: 'DD/MM/YYYY',
+                allowInputToggle: true,
+                useCurrent: true
+            });
+
+        });
+    </script>
+
+    <script>
+        function checkSerial(form) {
+            var serial = $("#serial").val();
+            $.ajax
+                ({
+                    url: '/MultiActive/CheckSerial',
+                    type: 'POST',
+                    datatype: 'application/json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        serial: serial
+                    }),
+                    success: function (mess) {
+                        $('#txtmess').css('display', 'block');
+                        $("#txtmess").text(mess);
+
+                    },
+                    error: function () {
+                        alert("Whooaaa! Something went wrong..")
+                    },
+                });
+            $.ajax
+                ({
+                    url: '/MultiActive/GetListProduct',
+                    type: 'POST',
+                    datatype: 'application/json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        serial: serial
+                    }),
+                    success: function (result) {
+                        $("#namesp").html("");
+                        $.each($.parseJSON(result), function (i, name) {
+                            $("#namesp").append
+                                ($('<option></option>').val(name).html(name))
+                        })
+                    },
+                    error: function () {
+                        alert("Whooaaa! Something went wrong..")
+                    },
+                });
+        }
+    </script>
+    <script>
+        var contact = {
+            init: function () {
+                contact.registerEvent();
+            },
+            registerEvent: function () {
+                $('#btn').off('click').on('click', function () {
+                    var serial = $('#serial').val();
+                    var namesp = $('#namesp').val();
+                    var namekh = $('#namekh').val();
+                    var city = $('#city').val();
+                    var county = $('#county').val();
+                    var address = $('#address').val();
+                    var phone = $('#phone').val();
+                    var email = $('#email').val();
+                    var birthday = $('#birthday').val();
+                    $.ajax({
+                        url: '/MultiActive/MultiActive',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {
+                            serial: serial,
+                            namesp: namesp,
+                            namekh: namekh,
+                            city: city,
+                            county: county,
+                            address: address,
+                            phone: phone,
+                            email: email,
+                            birthday: birthday
+                        },
+                        success: function (result) {
+                            if ($.parseJSON(result).customer != null) {
+                                alert($.parseJSON(result).message + "\n- Tên sản phẩm: " + $.parseJSON(result).customer.Name + "\n- Serial: " + $.parseJSON(result).customer.Serial + "\n- Ngày kích hoạt: " + dateFormat(new Date(parseInt(($.parseJSON(result).customer.ActiveDate).match(/\d+/)[0]))) + "\n- Thời hạn bảo hành: " + dateFormat(new Date(parseInt(($.parseJSON(result).customer.EndDate).match(/\d+/)[0]))));
+                            }
+                            else {
+                                alert($.parseJSON(result).message);
+                            }
+                            contact.resetForm();
+                        },
+                        error: function () {
+                            alert("Whooaaa! Something went wrong..")
+                        },
+                    });
+                });
+                $('#update').off('click').on('click', function () {
+                    var serial = $('#serial').val();
+                    var namesp = $('#namesp').val();
+                    var namekh = $('#namekh').val();
+                    var city = $('#city').val();
+                    var county = $('#county').val();
+                    var address = $('#address').val();
+                    var phone = $('#phone').val();
+                    var email = $('#email').val();
+                    var birthday = $('#birthday').val();
+                    $.ajax({
+                        url: '/MultiActive/MultiUpdate',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {
+                            serial: serial,
+                            namesp: namesp,
+                            namekh: namekh,
+                            city: city,
+                            county: county,
+                            address: address,
+                            phone: phone,
+                            email: email,
+                            birthday: birthday
+                        },
+                        success: function (result) {
+                            if ($.parseJSON(result).customer != null) {
+                                alert($.parseJSON(result).message + "\n- Tên sản phẩm: " + $.parseJSON(result).customer.Name + "\n- Serial: " + $.parseJSON(result).customer.Serial + "\n- Ngày kích hoạt: " + dateFormat(new Date(parseInt(($.parseJSON(result).customer.ActiveDate).match(/\d+/)[0]))) + "\n- Thời hạn bảo hành: " + dateFormat(new Date(parseInt(($.parseJSON(result).customer.EndDate).match(/\d+/)[0]))));
+                            }
+                            else {
+                                alert($.parseJSON(result).message);
+                            }
+                            contact.resetForm();
+                        },
+                        error: function () {
+                            alert("Whooaaa! Something went wrong..")
+                        },
+                    });
+                });
+            },
+            resetForm: function () {
+                $('#serial').val("");
+                $('#namesp').val("");
+            }
+        }
+        contact.init();
+        function dateFormat(d) {
+            console.log(d);
+            return ((d.getMonth() + 1) + "").padStart(2, "0")
+                + "/" + (d.getDate() + "").padStart(2, "0")
+                + "/" + d.getFullYear();
+        }
+    </script>
+    <script>
+        function checkPhone(form) {
+            var phone = $("#phone").val();
+            $.ajax
+                ({
+                    url: '/MultiActive/CheckPhone',
+                    type: 'POST',
+                    datatype: 'application/json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        phone: phone
+                    }),
+                    success: function (cus) {
+                        var ob = $.parseJSON(cus);
+                        $('#namekh').val(ob.Name);
+                        $('#city').val(ob.City);
+                        $("#county").html("");
+                        $("#county").append
+                            ($('<option></option>').val(ob.County).html(ob.County))
+                        $('#address').val(ob.Address);
+                        $('#email').val(ob.Email);
+                        $('#birthday').val(dateFormat(new Date(parseInt((ob.Birthday).match(/\d+/)[0]))));
+                    },
+                    error: function () {
+                        alert("Whooaaa! Something went wrong..")
+                    },
+                });
+        }
+        function dateFormat(d) {
+            console.log(d);
+            return ((d.getMonth() + 1) + "").padStart(2, "0")
+                + "/" + (d.getDate() + "").padStart(2, "0")
+                + "/" + d.getFullYear();
+        }
+    </script>
+}
+
+<section id="multiactive">
+    <div>
+        <h1>@Resources.Resources.menu_active</h1>
+        <p class="text-justify">@Resources.Resources.active_description</p>
+        <p class="p-red">@Resources.Resources.required</p>
+        <div style="text-align:center;margin: 15px 0;"><img src="~/Image/teka3_03.png" alt="" class="img-responsive" /></div>
+    </div>
+    <form class="forms-sample" id="form">
+        <table>
+            <tr>
+                <td><label class="">*@Resources.Resources.prod_serial</label></td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" onblur="checkSerial(this);" id="serial" type="text" required name="serial" placeholder="" value="@Product.Serial" />
+                    </div>
+                    @*<p id="txtmess" style="font-size: 13px; color: #bb2418; font-style: italic;display:none">(*)</p>*@
+
+                </td>
+            </tr>
+            <tr>
+                <td><label class="">*@Resources.Resources.prod_name</label></td>
+                <td>
+                    <div class="form-group">
+                        <select class="form-control form-control-sm" id="namesp" required>
+
+                            <option value="@Product.Name">@Product.Name</option>
+
+                            <option value="">@Resources.Resources.prod_name</option>
+                        </select>
+                    </div>
+
+                </td>
+            </tr>
+            <tr>
+                <td><label class="">@Resources.Resources.buydate</label></td>
+                <td>
+                    <div class="form-group">
+                        <div id="buydate">
+                            <input class="form-control datepicker" type="text" value="" name="buydate" placeholder="dd/mm/yyyy" />
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label class="">@Resources.Resources.installdate</label></td>
+                <td>
+                    <div class="form-group">
+                        <div id="installdate">
+                            <input class="form-control datepicker" type="text" value="" name="installdate" placeholder="dd/mm/yyyy" />
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label class="">*@Resources.Resources.cus_name</label></td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="text" required id="namekh" placeholder="@Resources.Resources.place_teka_good" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label class="">*@Resources.Resources.cus_province</label></td>
+                <td>
+                    <div class="form-group">
+                        <select class="form-control form-control-sm" name="city" required id="city" onchange="getCityList()">
+                            <option value="">@Resources.Resources.cus_province</option>
+                            @foreach (var item in province)
+                            {
+                                <option value="@item.Name">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label class="">*@Resources.Resources.cus_district</label></td>
+                <td>
+                    <div class="form-group">
+                        <select class="form-control form-control-sm" name="county" required id="county">
+                            <option value="">@Resources.Resources.cus_district</option>
+                        </select>
+                    </div>
+
+                </td>
+            </tr>
+            <tr>
+                <td><label class="">*@Resources.Resources.cus_address</label></td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="text" required id="address" placeholder="" />
+                    </div>
+
+                </td>
+            </tr>
+            <tr>
+                <td><label class="">*@Resources.Resources.cus_phone</label></td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="number" required id="phone" placeholder="" onblur="checkPhone(this);" />
+                    </div>
+
+                </td>
+            </tr>
+            <tr>
+                <td><label class="">Email</label></td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="email" id="email" placeholder="" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label class="">@Resources.Resources.birthday</label></td>
+                <td>
+                    <div class="form-group">
+                        <div class='input-group date'>
+                            <input type='text' class="form-control" id="birthday" name="birthday" placeholder="" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td></td>
+                <td style="text-align:center;">
+                    <button class="btn" id="btn" value="save" type="button">@Resources.Resources.active</button>
+                    @if (User.IsInRole("Agency,PG"))
+                    {
+                        <button class="btn" name="btn" id="update" value="update" type="button" style="margin-left:15px;"><u>Resources.Resources.update</u></button>
+                    }
+
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    @if (message.Length != 0)
+                    {
+                        <div class="box" style="border:1px solid #bb2418;border-radius:4px;width:480px;margin:0 auto;padding:5px;color:#bb2418;">
+                            <p>@message</p>
+                            @if (Model != null)
+                            {
+                                <p>@Resources.Resources.info_prod</p>
+                                <p>@Resources.Resources.prod_name: @ViewBag.product</p>
+                                <p>@Resources.Resources.prod_serial: @Model.Serial</p>
+                                <p>@Resources.Resources.active_date: @Model.ActiveDate</p>
+                                <p>@Resources.Resources.end_date: @Model.EndDate</p>
+                            }
+
+                        </div>
+                    }
+
+                </td>
+            </tr>
+        </table>
+    </form>
+    <div style="text-align:center;margin: 15px 0;"><img src="~/Image/teka3_03.png" alt="" class="img-responsive" /></div>
+</section>
+

@@ -1,0 +1,223 @@
+﻿@{
+    ViewBag.Title = "Trang chủ";
+    var userId = ViewBag.userId;
+}
+@section scripts{
+    <script src="~/Scripts/dateformat.js"></script>
+    <script>
+        $('#send').click(function () {
+            var serial = $('#se').val();
+            $('#dloader').css('display', 'inline-block');
+
+            $.ajax({
+                url: '/Home/GetProduct',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    serial: serial
+                },
+                success: function (response) {
+                    $("#result").css("display", "block");
+                    if (response.success == true) {
+                        if (response.status == true && response.author == true) {
+
+                            if (response.data.ActiveDate == null) {
+                                
+                                var exportdate = new Date(parseInt(response.data.ExportDate.substr(6)));
+                                $("#result").html("Sản phẩm này chưa được kích hoạt bảo hành !</br> THÔNG TIN SẢN PHẨM</br>- Tên sản phẩm: "
+                                    + response.data.Name + "</br>- Serial: "
+                                    + response.data.Serial +
+                                    "<br/>- Ngày xuất kho: " + exportdate.format("dd/mm/yyyy"));
+                            } else {
+                                var activedate = new Date(parseInt(response.data.ActiveDate.substr(6)));
+                                var enddate = new Date(parseInt(response.data.EndDate.substr(6)));
+                                var exportdate = new Date(parseInt(response.data.ExportDate.substr(6)));
+                                $("#result").html("THÔNG TIN SẢN PHẨM</br>- Tên sản phẩm: "
+                                    + response.data.Name + "</br>- Serial: "
+                                    + response.data.Serial +
+                                    "<br/>- Ngày xuất kho: " + exportdate.format("dd/mm/yyyy") +
+                                    "</br>- Ngày kích hoạt: "
+                                    + activedate.format("dd/mm/yyyy") + "</br>- Ngày hết hạn: "
+                                    + enddate.format("dd/mm/yyyy"));
+                            }
+                        } else if (response.status == true && response.author == false) {
+                            if (response.data.ActiveDate == null) {
+                                $("#result").html("Serial này chưa được kích hoạt");
+                                //var exportdate = new Date(parseInt(response.data.ExportDate.substr(6)));
+                                //$("#result").html("Sản phẩm này chưa được kích hoạt bảo hành !</br> THÔNG TIN SẢN PHẨM</br>- Tên sản phẩm: "
+                                //    + response.data.Name + "</br>- Serial: "
+                                //    + response.data.Serial +
+                                //    "<br/>- Ngày xuất kho: " + exportdate.format("dd/mm/yyyy"));
+                            } else {
+                                var activedate = new Date(parseInt(response.data.ActiveDate.substr(6)));
+                                var enddate = new Date(parseInt(response.data.EndDate.substr(6)));
+                                var exportdate = new Date(parseInt(response.data.ExportDate.substr(6)));
+                                //$("#result").html("THÔNG TIN SẢN PHẨM</br>- Tên sản phẩm: "
+                                //    + response.data.Name + "</br>- Serial: "
+                                //    + response.data.Serial +
+                                //    "<br/>- Ngày xuất kho: " + exportdate.format("dd/mm/yyyy") +
+                                //    "</br>- Ngày kích hoạt: "
+                                //    + activedate.format("dd/mm/yyyy") + "</br>- Ngày hết hạn: "
+                                //    + enddate.format("dd/mm/yyyy"));
+
+                                $("#result").html("THÔNG TIN SẢN PHẨM</br>- Tên sản phẩm: "
+                                    + response.data.Name + "</br>- Serial: "
+                                    + response.data.Serial +
+                                    "</br>- Ngày kích hoạt: "
+                                    + activedate.format("dd/mm/yyyy") + "</br>- Ngày hết hạn: "
+                                    + enddate.format("dd/mm/yyyy"));
+                            }
+                        }
+                        else {
+                            $("#result").html("Serial này không tồn tại trong hệ thống. Vui lòng kiểm tra lại.");
+                        }
+                    } else {
+                        $("#result").html("Nhập serial để tra cứu.");
+                    }
+                    $('#dloader').css('display', 'none');
+                }
+            });
+        });
+    </script>
+}
+
+<section id="home">
+    @*<div>
+        <h1>BẢO HÀNH TEKA</h1>
+        <p class="text-justify">@Html.Raw(ViewBag.des)</p>
+        <div style="text-align:center;margin: 15px 0;"><img src="~/Image/teka3_03.png" alt="" class="img-responsive" /></div>
+    </div>*@
+    <div class="row">
+        <div class="col-lg-4">
+            <h2 style="text-align:center;">@Resources.Resources.menu_active</h2>
+            <input style="width:300px;visibility:hidden" class="form-control" type="text" id="serial" required placeholder="@Resources.Resources.input_serial" />
+            @*@if (User.Identity.IsAuthenticated)
+        {
+            <div class="btn-active" style="margin:0 auto;margin-top:15px;text-align:center"><a href="/daily-kich-hoat-bao-hanh" title="">@Resources.Resources.active</a></div>
+        }
+        else
+        {
+            <div class="btn-active" style="margin:0 auto;margin-top:15px;text-align:center"><a href="/kich-hoat-bao-hanh" title="">@Resources.Resources.active</a></div>
+        }*@
+            <div class="btn-active" style="margin:0 auto;margin-top:15px;text-align:center;text-transform:uppercase"><a href="/kich-hoat" title="">@Resources.Resources.active</a></div>
+        </div>
+        <div class="col-lg-4">
+            <div class="text-center">
+                <h2>@Resources.Resources.menu_warranti</h2>
+                <input style="width:300px;visibility:hidden" class="form-control" type="text" id="serial" required placeholder="@Resources.Resources.input_serial" />
+                <div class="btn-active" style="margin:0 auto;margin-top:15px"><a href="/bao-loi-san-pham" title="">@Resources.Resources.menu_warranti</a></div>
+            </div>
+        </div>
+        <div class="col-lg-4 ">
+            <div class="text-center">
+                <h2 style="text-align:center;">@Resources.Resources.search_active_product</h2>
+                <input style="width:300px;visibility:hidden" class="form-control" type="text" id="serial" required placeholder="@Resources.Resources.input_serial" />
+                <div class="btn-active" style="margin:0 auto;margin-top:15px"><a href="/tra-cuu-kich-hoat" title="">@Resources.Resources.search_active</a></div>
+            </div>
+            @*<h2 style="text-align:center;">TRA CỨU SERIAL SẢN PHẨM</h2>
+            <div>
+            <form>
+                <input style="width:300px;margin:0 auto" class="form-control" type="text" id="se" required placeholder="Nhập serial sản phẩm" />
+                <div class="" style="margin-top:15px; text-align: center;">
+                    <button type="button" class="btn" id="send" style="margin:0 auto;color:#ffffff;border-radius:unset;">TRA CỨU</button>
+                </div>
+
+                <div class="text-center">
+                    <img src="~/image/ajax-loader.gif" class="loader" id="dloader" style="display:none" />
+                </div>
+                <p style="padding: 50px 10px;color: #e65251;background-color: transparent;background-image: none;border-color: #e65251;border: 1px solid;border-radius: 4px;margin: 50px 0;display:none;" id="result"></p>
+            </form>
+        </div>*@
+        </div>
+    </div>
+
+    @*<div style="text-align:center;margin: 50px 0;"><img src="~/Image/teka3_03.png" alt="" class="img-responsive" /></div>
+        <div style="width:480px;margin:0 auto;">
+            <img src="~/Image/teka_15.png" alt="" style="float:left;margin-right:15px;" /> <p>KIỂM TRA THỜI HẠN BẢO HÀNH</p>
+            <div>
+                <p style="color:#000000;font-weight:bold;">TEKA BH gửi 8077 (1000đ/sms)</p>
+                <p style="font-size:13px;color:#3f3e3e;">Trong đó:<br /> TEKA: Mã tin nhắn<br />Serial_sanpham: là mã được dán trên thân máy và phiếu bảo hành.</p>
+            </div>
+        </div>*@
+
+    <div style="text-align:center;margin: 15px 0;"><img src="~/Image/teka3_03.png" alt="" class="img-responsive" /></div>
+    <div class="text-center" style="margin:0 auto;padding-top:15px; padding-bottom:15px;font-weight:bold">
+        <h3 style="font-size:16px;font-weight:bold">@Resources.Resources.home_note</h3>
+        <div class="active-right" style="margin:0 auto;width:280px;padding-top:15px; padding-bottom:15px;">
+            <img src="~/Image/teka_11.png" alt="" style="margin:0 auto;margin-right:15px" />
+            <p style="text-align:left">@Resources.Resources.home_hotline: <strong style="font-size:18px; color:red;">@ViewBag.setup</strong></p>
+        </div>
+    </div>
+    @*<div class="col-lg-4">
+                <h2>KÍCH HOẠT BẢO HÀNH TRỰC TUYẾN</h2>
+                <div class="btn-active"><a href="/kich-hoat-bao-hanh" title="">KÍCH HOẠT BẢO HÀNH</a></div>
+            </div>
+            <div class="col-lg-4 active-center">
+                <div><a href="/bai-viet/chinh-sach-bao-hanh" title="">Chính sách bảo hành</a></div>
+                <div>
+                    <a href="/bai-viet/huong-dan-kich-hoat-bao-hanh" title="">Hướng dẫn kích hoạt bảo hành</a>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <h2>KÍCH HOẠT BẢO HÀNH QUA TỔNG ĐÀI</h2>
+                <div class="active-right">
+                    <img src="~/Image/teka_11.png" alt="" />
+                    <p>Liên hệ tổng đài: 19007227</p>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div style="text-align:center;margin: 15px 0;"><img src="~/Image/teka3_03.png" alt="" /></div>
+            <div class="kt-active">
+                <img src="~/Image/teka_15.png" alt="" /> <p>KIỂM TRA THỜI HẠN BẢO HÀNH</p>
+                <div>
+                    <p style="color:#000000;font-weight:bold;">TEKA Serial_sanpham gửi 8077 (1000đ/sms)</p>
+                    <p style="font-size:13px;color:#3f3e3e;">Trong đó:<br /> TEKA: Mã tin nhắn<br />Serial_sanpham: là mã được dán trên thân máy và phiếu bảo hành.</p>
+                </div>
+            </div>
+            <div style="text-align:center;margin: 15px 0;"><img src="~/Image/teka3_03.png" alt="" /></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <h2>BÁO LỖI SẢN PHẨM TRỰC TUYẾN</h2>
+                <div class="btn-active"><a href="/bao-loi-san-pham" title="">BÁO LỖI SẢN PHẨM</a></div>
+            </div>
+            <div class="col-lg-4 active-center">
+
+            </div>
+            <div class="col-lg-4">
+                <h2>BÁO LỖI SẢN PHẨM QUA TỔNG ĐÀI</h2>
+                <div class="active-right">
+                    <img src="~/Image/teka_11.png" alt="" />
+                    <p>Liên hệ tổng đài: 19007227</p>
+                </div>
+            </div>
+            <div style="text-align:center;margin: 15px 0;"><img src="~/Image/teka3_03.png" alt="" /></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+            </div>
+            <div class="col-lg-6">
+                <h2 style="text-align:center; color:#ff0000;margin-bottom:15px;">TRA CỨU SERIAL SẢN PHẨM</h2>
+                <div>
+                    <form>
+                        <label style="float:left;margin-right:15px;">Nhập serial sản phẩm</label>
+                        <input style="width:300px;" class="form-control" type="text" id="serial" required placeholder="Nhập serial sản phẩm" />
+                        <div class="" style="text-align:center;margin-top:15px;">
+                            <button type="button" class="btn" id="send" style="margin:0 auto;color:#ffffff;border-radius:unset;">TRA CỨU</button>
+                        </div>
+                        <p style="padding: 50px 10px;
+        color: #e65251;
+        background-color: transparent;
+        background-image: none;
+        border-color: #e65251;
+        border: 1px solid;
+        border-radius: 4px;
+        margin: 50px 0;display:none;" id="result"></p>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-3">
+            </div>
+        </div>*@
+</section>

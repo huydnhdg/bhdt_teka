@@ -1,0 +1,18 @@
+﻿@model IEnumerable<TEKA.Models.Product>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<p>All item serial have space: @Model.Count()</p>
+<table>
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>@item.Name</td>
+        <td>@item.Serial</td>
+        <td>@item.CreateDate</td>
+    </tr>
+    }
+</table>
+
+

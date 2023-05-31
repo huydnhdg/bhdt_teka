@@ -1,0 +1,342 @@
+﻿@model TEKA.Areas.Admin.Models.CreateWithProduct
+@{
+    ViewBag.Title = "Warranti";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    List<TEKA.Models.Province> lprovince = (List<TEKA.Models.Province>)TempData["province"];
+    List<TEKA.Models.AspNetUser> lagent = (List<TEKA.Models.AspNetUser>)TempData["agent"];
+    List<string> lcate = (List<string>)TempData["cate"];
+}
+
+
+<style>
+    .control-label {
+        font-size: 11px !important;
+    }
+
+    .table td {
+        font-size: 11px;
+        padding: 0 !important;
+    }
+    .table tr td input {
+        width: 100%;
+    }
+    .table tr td select {
+        width: 100%;
+    }
+    .table tr td:last-child input{
+        width:50px;
+    }
+    select.form-control:not([size]):not([multiple]){
+        height:34px;
+    }
+</style>
+@using (Html.BeginForm("Create2Prod", "Error"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Tạo mới thông tin bảo hành</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="panel panel-info">
+            <div class="panel-heading">Sản phẩm</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <table class="table">
+                        <tr>
+                            <th>Serial</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Nhóm sản phẩm</th>
+                            <th>Model</th>
+                            <th>Ngày mua hàng</th>
+                            <th>Đại lý</th>
+                            <th>Ngày kích hoạt</th>
+                            <th>Hạn</th>
+                        </tr>
+                        <tbody id="tbBills">
+                            <tr id="trBook0">
+                                <td style="display:none">
+                                    <input class="form-control" id="Products_0__Id" name="Products[0].Id" type="text" />
+                                </td>
+                                <td>
+                                    <input class="form-control" id="Products_0__Serial" name="Products[0].Serial" type="text" onchange="getproductitem(this.id)" />
+                                </td>
+                                <td>
+                                    <input class="form-control" id="Products_0__Name" name="Products[0].Name" type="text" />
+                                </td>
+                                <td>
+                                    <select class="form-control" id="Products_0__ProductCate" name="Products[0].ProductCate" type="text" onchange="getproductcateitem(this.id)">
+                                        @foreach (var item in lcate)
+                                        {
+                                            <option value="@item">@item</option>
+                                        }
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control" id="Products_0__Model" name="Products[0].Model" type="text"><option>Bổ sung sau</option></select>
+                                </td>
+                                <td>
+                                    <input class="form-control" id="Products_0__Buydate" name="Products[0].Buydate" type="text" placeholder="dd/mm/yyyy" class="datepicker" />
+                                </td>
+                                <td>
+                                    <select class="form-control" id="Products_0__Agent" name="Products[0].Agent" type="text">
+                                        <option>Bổ sung sau</option>
+                                        @foreach (var item in lagent)
+                                        {
+                                            <option value="@item.UserName">@item.UserName</option>
+                                        }
+                                    </select>
+                                </td>
+                                <td>
+                                    <input class="form-control" id="Products_0__Activedate" name="Products[0].Activedate" type="text" class="datepicker" placeholder="dd/mm/yyyy"/>
+                                </td>
+                                <td>
+                                    <input class="form-control" id="Products_0__Limited" name="Products[0].Limited" type="number" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="#" id="addProds" class="text-warning" onclick="addRow();"><i class="mdi mdi-plus" data-name="mdi-plus"></i> </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-info">
+            <div class="panel-heading">Khách hàng</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    @Html.HiddenFor(model => model.Cus.Id)
+
+                    @Html.Label("Sđt kích hoạt", htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        <input type="text" class="form-control"  id="Cus.Phone" name="Cus.Phone" onchange="getcustomer()" oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
+                        @*@Html.EditorFor(model => model.Cus.Phone, new { htmlAttributes = new { @class = "form-control", @onchange = "getcustomer()", @type = "number" } })*@
+                    </div>
+                    @Html.Label("Họ tên", htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => model.Cus.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    @Html.Label("Sđt liên hệ", htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => model.Cus.Phone2, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Tỉnh/ Thành phố", htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(model => model.Cus.Province, new SelectList(lprovince, "Name", "Name"), "--Thành phố--",
+                    new { onchange = "getDistrict()", @class = "form-control" })
+                    </div>
+                    @Html.Label("Huyện/ Quận", htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(model => model.Cus.District, new SelectList(Enumerable.Empty<SelectListItem>(), "Name", "Name"), "--Quận--",
+                    new { @class = "form-control" })
+                    </div>
+
+                    @Html.Label("Đại chỉ", htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.Cus.Address, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="panel panel-info">
+            <div class="panel-heading">Bảo hành</div>
+            <div class="panel-body">
+                <div class="form-group">
+
+                    @Html.Label("Phân loại", htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(model => model.War.Category,
+                      new List<SelectListItem>
+                        {
+                        new SelectListItem { Value = "Bảo hành" , Text = "Bảo hành" },
+                        new SelectListItem { Value = "Lắp đặt" , Text = "Lắp đặt" },
+                        new SelectListItem { Value = "Tính phí" , Text = "Tính phí" },
+                        },
+                        new { @class = "form-control" })
+                    </div>
+                    @Html.Label("Kênh", htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => model.War.Chanel, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Mô tả", htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.War.Note, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Ghi chú", htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-6">
+                        @Html.TextAreaFor(model => model.War.Extra, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="text-center">
+                <input type="submit" value="Lưu thông tin" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@section scripts{
+    <script>
+        
+        function getcustomer() {
+            var phone = $("#Cus_Phone").val();
+            phone = phone.replace(/\s+/g, '');
+            if (phone.length < 10 && phone.length > 11) {
+                alert("Số điện thoại không đúng");
+            }
+            $.ajax({
+                url: '/Admin/Error/GetCustomer',
+                type: 'POST',
+                datatype: 'application/json',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    phone: phone
+                }),
+                success: function (result) {
+                    var ob = $.parseJSON(result);
+                    if (ob.Id == 0) {
+                        $("#Cus_Name").val();
+                        $("#Cus_Phone").val(phone);
+                        $("#Cus_Address").val();
+                        $('#Cus_Province').append(new Option("--Thành phố--", "", true, true));
+                        $('#Cus_District').append(new Option("--Quận--", "", true, true));
+                        $("#Cus_PhoneWarr").val();
+                    } else {
+                        $("#Cus_Name").val(ob.Name);
+                        $("#Cus_Phone").val(phone);
+                        $("#Cus_Address").val(ob.Address);
+                        $('#Cus_Province').append(new Option(ob.City, ob.City, true, true));
+                        $('#Cus_District').append(new Option(ob.County, ob.County, true, true));
+                        $("#Cus_PhoneWarr").val(ob.Phone);
+                    }
+
+
+
+                },
+                error: function () {
+                },
+            });
+        }
+        function getDistrict() {
+            var City = $('#Cus_Province').val();
+            $.ajax({
+                url: '/Admin/Error/GetCity',
+                type: "GET",
+                dataType: "JSON",
+                data: { City: City },
+                success: function (result) {
+                    $("#Cus_District").html("");
+                    $.each($.parseJSON(result), function (i, city) {
+                        $("#Cus_District").append
+                            ($('<option></option>').val(city).html(city))
+                    })
+                }
+            });
+        }
+        function getproductcateitem(id) {
+            var cate = $('#' + id).val();
+            var index = id.split('_')[1];
+            $.ajax({
+                url: '/Admin/Error/GetProductCate',
+                type: "GET",
+                dataType: "JSON",
+                data: { cate: cate },
+                success: function (result) {
+                    $("#Products_" + index + "__Model").html("");
+                    $("#Products_" + index + "__Model").append
+                        ($('<option></option>').val("").html("Bổ sung sau"))
+                    $.each($.parseJSON(result), function (i, data) {
+                        $("#Products_" + index + "__Model").append
+                            ($('<option></option>').val(data.Model1).html(data.Model1))
+                    })
+                }
+            });
+        }
+
+        function addRow() {
+
+            var index = $("#tbBills").children("tr").length;
+            var id = '<td style="display:none"><input class="form-control" id = "Products_' + index + '__Id" name = "Products[' + index + '].Id" type = "text" /></td >';
+            var seri = '<td><input class="form-control" id = "Products_' + index + '__Serial" name = "Products[' + index + '].Serial" type = "text" onchange="getproductitem(this.id)"/></td >';
+            var name = '<td><input class="form-control" id="Products_' + index + '__Name" name="Products[' + index + '].Name" type="text" /></td >';
+            var cate = '<td><select class="form-control" id="Products_' + index + '__ProductCate" name="Products[' + index + '].ProductCate" type="text" onchange="getproductcateitem(this.id)"><option>Bổ sung sau</option></select></td >';
+            var model = '<td><select class="form-control" id="Products_' + index + '__Model" name="Products[' + index + '].Model" type="text"><option>Bổ sung sau</option></select></td >';
+            var buydate = '<td><input class="form-control" id="Products_' + index + '__Buydate" name="Products[' + index + '].Buydate" type="date" /></td >';
+            var agent = '<td><select class="form-control" id="Products_' + index + '__Agent" name="Products[' + index + '].Agent" type="text"><option>Bổ sung sau</option></select></td >';
+            var active = '<td><input class="form-control" id="Products_' + index + '__Activedate" name="Products[' + index + '].Activedate" type="date" /></td >';
+            var limited = '<td><input class="form-control" id="Products_' + index + '__Limited" name="Products[' + index + '].Limited" type="number" /></td >';
+
+
+            var newRow = "<tr id='trBook" + index + "'>" + id + seri + name + cate + model + buydate + agent + active + limited + "</tr>";
+            $("#tbBills").append(newRow);
+
+
+
+            var x = document.getElementById("Products_" + index + "__ProductCate");
+            $.post('/Admin/Error/GetCate', function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    var option = document.createElement("option");
+                    option.value = result[i];
+                    option.text = result[i];
+                    x.add(option);
+                }
+            });
+
+            var y = document.getElementById("Products_" + index + "__Agent");
+            $.post('/Admin/Error/GetAgent', function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    var option = document.createElement("option");
+                    option.value = result[i];
+                    option.text = result[i];
+                    y.add(option);
+                }
+            });
+
+        }
+        function getproductitem(id) {
+            var serial = $("#" + id).val();
+            var index = id.split('_')[1];
+            $.ajax({
+                url: '/Admin/Error/getidproduct',
+                type: 'POST',
+                datatype: 'application/json',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    serial: serial
+                }),
+                success: function (result) {
+                    var ob = $.parseJSON(result);
+                    if (ob == null) {
+                    } else {
+                        $("#Products_" + index + "__Id").val(ob.Id);
+                        $("#Products_" + index + "__Name").val(ob.Name);
+                        $("#Products_" + index + "__Buydate").val(ob.buydate);
+                        $("#Products_" + index + "__Activedate").val(ob.activedate);
+                        $("#Products_" + index + "__Limited").val(ob.Limited);
+
+                    }
+
+                },
+                error: function () {
+                },
+            });
+        }
+    </script>
+}
+

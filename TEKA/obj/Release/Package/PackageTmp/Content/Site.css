@@ -1,0 +1,407 @@
+﻿body {
+    /*padding-top: 50px;
+    padding-bottom: 20px;*/
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    /*padding-left: 15px;
+    padding-right: 15px;*/
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    /*white-space: normal;*/
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    width: 280px;
+}
+
+ul {
+    list-style: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+label {
+    padding: 0 !important;
+}
+
+.input-group {
+    width: 280px;
+}
+
+select {
+    border-radius: 4px !important;
+}
+
+th {
+    font-weight: normal;
+    text-align: center;
+}
+
+header {
+    background-color: #f1f0f0;
+}
+
+nav {
+    width: 100% !important;
+}
+
+.navbar-default {
+    background-color: transparent;
+    border-radius: unset;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+    .navbar-default .navbar-collapse, .navbar-default .navbar-form {
+        padding: 0;
+    }
+
+    .navbar-default .navbar-nav > li > a {
+        padding: 0 0 0 0;
+        margin-right: 20px;
+        color: #434343;
+        font-size: 13px;
+    }
+
+    .navbar-default .navbar-nav > li:hover > a {
+        color: #434343;
+        border-bottom: 2px solid #bb2418;
+    }
+
+.navbar {
+    min-height: 25px;
+}
+
+h1 {
+    color: #bb2418;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    font-size: 18px;
+}
+
+h2 {
+    font-size: 16px;
+}
+
+img {
+    margin: 0 auto;
+}
+
+.slide {
+    margin-top: 10px;
+}
+
+
+.body-content {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.btn-active {
+    background-color: #bb2418;
+    padding: 5px 0;
+    width: 200px;
+    text-align: center;
+}
+
+.btn {
+    background-color: #bb2418;
+    padding: 5px 0;
+    width: 200px;
+    text-align: center;
+    border-radius: unset;
+    color: #ffffff;
+}
+
+    .btn:hover {
+        color: #ffffff;
+    }
+
+.btn-active a {
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.active-right img {
+    float: left;
+    margin-right: 25px;
+}
+
+.active-right p {
+    padding-top: 5px;
+}
+
+.active-center {
+    padding-top: 50px;
+}
+
+    .active-center a {
+        text-decoration: solid;
+        color: #bb2418;
+        font-size: 14px;
+        border-bottom: 1px solid;
+    }
+
+.kt-active {
+    width: 480px;
+    margin: 0 auto;
+}
+
+    .kt-active img {
+        float: left;
+        margin-right: 15px;
+    }
+
+    .kt-active p {
+        color: #bb2418;
+    }
+
+footer {
+    background-color: #f1f0f0;
+    padding-bottom: 50px;
+    padding-top: 50px;
+    margin-top: 2px;
+}
+
+.line-foot {
+    background-color: #f1f0f0;
+    height: 3px;
+}
+
+footer h4 {
+    color: #bb2418;
+}
+
+footer h5 {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-weight: bold;
+    color: #3f3e3e;
+    font-size: 13px;
+}
+
+section {
+    margin-bottom: 50px;
+}
+
+.foot-icon img {
+    margin-right: 15px;
+}
+
+.p-red {
+    color: #bb2418;
+}
+
+form table {
+    margin: 0 auto;
+}
+
+    form table td {
+        padding: 5px 5px;
+    }
+
+table .form-group {
+    margin: 0 !important;
+}
+
+    /*.form-group input {
+        min-width: 280px;
+    }*/
+
+label {
+    font-weight: normal;
+}
+
+.logo a img {
+    position: absolute;
+    top: 65px;
+    left: 5%;
+    z-index: 1;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
+    background-color: transparent;
+}
+
+.dropdown-menu {
+    background-color: #f1f0f0;
+    padding: 5px;
+}
+
+    .dropdown-menu a {
+        color: #434343;
+    }
+
+
+@media (max-width:768px) {
+    .navbar-nav {
+        text-align: right;
+        margin: 0;
+    }
+
+    .nav > li {
+        padding: 5px 0;
+    }
+
+    /*.right img {
+        width: 20px !important;
+    }
+
+    .left img {
+        width: 20px !important;
+    }*/
+    .btn-next{
+        width:30px;
+    }
+    .navbar-nav .open .dropdown-menu {
+        text-align: right;
+        margin-right: 15px;
+    }
+
+        .navbar-nav .open .dropdown-menu a div {
+            padding: 5px 0;
+        }
+
+    .mobile {
+        display: block !important;
+    }
+
+    .pc {
+        display: none !important;
+    }
+}
+
+@media (min-width:768px)and (max-width:992px) {
+    .navbar-default .navbar-nav > li > a {
+        font-size: 10px;
+    }
+}
+@media(min-width:992px){
+    .form-group input {
+        min-width: 280px;
+    }
+    form table td {
+        padding: 10px 15px;
+    }
+}
+.dropbtn {
+    border: none;
+    background-color: transparent;
+    vertical-align: top;
+    /*margin-top: -2px;*/
+    font-size: 13px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 250px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    border-bottom: 2px solid #bb2418;
+}
+
+
+@-webkit-keyframes my {
+    0% {
+        color: #F8CD0A;
+    }
+
+    50% {
+        color: #fff;
+    }
+
+    100% {
+        color: #F8CD0A;
+    }
+}
+
+@-moz-keyframes my {
+    0% {
+        color: red;
+    }
+
+    50% {
+        color: #000;
+    }
+
+    100% {
+        color: red;
+    }
+}
+
+@-o-keyframes my {
+    0% {
+        color: red;
+    }
+
+    50% {
+        color: #000;
+    }
+
+    100% {
+        color: red;
+    }
+}
+
+@keyframes my {
+    0% {
+        color: red;
+    }
+
+    50% {
+        color: #000;
+    }
+
+    100% {
+        color: red;
+    }
+}
+
+.test {
+    /*background: #3d3d3d;*/
+    font-size: 28px;
+    font-weight: bold;
+    -webkit-animation: my 700ms infinite;
+    -moz-animation: my 700ms infinite;
+    -o-animation: my 700ms infinite;
+    animation: my 700ms infinite;
+}

@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace TEKA.API.Model
+{
+    public class ActiveListRes : Result
+    {
+        public List<ActiveListModel> Data { get; set; }
+    }
+    public class ActiveListModel
+    {
+        public long Id { get; set; }
+        public string CusName { get; set; }
+        public string Phone { get; set; }
+        public string Address { get; set; }
+        public string Serial { get; set; }
+        public DateTime? Activedate { get; set; }
+        public DateTime? Buydate { get; set; }
+        public int? Amount { get; set; }
+        public DateTime? Thanhtoan { get; set; }
+        public string AgentId { get; set; }
+    }
+}

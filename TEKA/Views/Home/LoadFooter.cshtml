@@ -1,0 +1,47 @@
+﻿@model List<TEKA.Models.Setup>
+@{
+    var address = Model.FirstOrDefault(a => a.Cate == "ComAddress");
+    var _address = (Culture.Contains("vi") ? address.Title : address.Title_en);
+    var hotline = Model.FirstOrDefault(a => a.Cate == "Hotline");
+    var _hotline = hotline.Title;
+    var email = Model.FirstOrDefault(a => a.Cate == "Email");
+    var _email = email.Title;
+
+    var policy = Model.FirstOrDefault(a => a.Cate == "Policy");
+    var _policy = (Culture.Contains("vi") ? policy.Title : policy.Title_en);
+
+    var policy1 = Model.FirstOrDefault(a => a.Cate == "Rule");
+    var _policy1 = (Culture.Contains("vi") ? policy1.Title : policy1.Title_en);
+
+    var policy2 = Model.FirstOrDefault(a => a.Cate == "Help");
+    var _policy2 = (Culture.Contains("vi") ? policy2.Title : policy2.Title_en);
+
+    var face = Model.FirstOrDefault(a => a.Cate == "Facebook");
+    var gplus = Model.FirstOrDefault(a => a.Cate == "Gplus");
+    var logo = Model.FirstOrDefault(a => a.Cate == "Logo");
+}
+
+<div class="col-lg-2 col-md-2">
+    <a href="~/"><img src="@logo.Url" alt="home" /></a>
+</div>
+
+<div class="col-lg-4 col-md-4">
+    <h4>@Resources.Resources.center_warranti</h4>
+    <p>- @_address</p>
+    <p>- Toll-free : @_hotline</p>
+    <p>- Email : @_email</p>
+</div>
+<div class="col-lg-3 col-md-3" style="visibility:hidden">
+    <h4>@Resources.Resources.contact</h4>
+</div>
+<div class="col-lg-3 col-md-3">
+    <h4>@Resources.Resources.info_help</h4>
+    <a href="@policy.Url" title="@_policy"><h5>@_policy</h5></a>
+    <a href="@policy1.Url" title="@_policy1"><h5>@_policy1</h5></a>
+    <a href="@policy2.Url" title="@_policy2"><h5>@_policy2</h5></a>
+    <div class="foot-icon">
+        <a target="_blank" href="@face.Url" title="@face.Url"><img src="~/Image/teka_22.png" alt="" /></a>
+        <a target="_blank" href="@gplus.Url" title="@gplus.Url"><img src="~/Image/teka_24.png" alt="" /></a>
+        <a target="_blank" href="tel:@_hotline" title="tel:@_hotline"><img src="~/Image/teka_11.png" alt="" /></a>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Customer";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm("ActiveDS", "Customer", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div style="margin:100px 100px;line-height:30px;">
+        <div class="form-group">
+            <input class="form-control" type="file" name="UploadedFile" placeholder="" />
+        </div>
+        <div class="form-group">
+            <input type="submit" name="Submit" value="Upload" class="btn btn-outline-info btn-fw" />
+            <a class="btn btn-danger" href="~/Areas/Admin/Data/template_active_product.xlsx" download="/template_active_product"><i class="fa fa-file-excel-o"></i> Template</a>
+        </div>
+        
+    </div>
+    <p>Chek to line @ViewBag.item</p>
+    <p>
+        @if (ViewBag.textss != null)
+        {
+            @ViewBag.textss
+        }
+    </p>
+    <p>@ViewBag.text</p>
+
+}
+

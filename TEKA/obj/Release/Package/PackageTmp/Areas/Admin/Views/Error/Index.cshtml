@@ -1,0 +1,949 @@
+﻿@model List<TEKA.Areas.Admin.Models.WarrantiModel>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Warranti";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    int index = 0;
+    TEKA.Models.AddKey addKey;
+    int _status = ViewBag.status != null ? ViewBag.status : -1;
+}
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('#tungay').datetimepicker({
+                format: 'DD/MM/YYYY',
+                allowInputToggle: true,
+                useCurrent: false
+            }).on('dp.change', function (e) {
+                var minNew = e.date;
+                var maxNew = e.date.clone().add(9, 'days');
+                var pickEnd = $('#denngay');
+                var minOld = pickEnd.data('DateTimePicker').minDate();
+                var maxOld = pickEnd.data('DateTimePicker').maxDate();
+                if (minOld && minOld.isAfter(maxNew)) {
+                    pickEnd.data('DateTimePicker').minDate(minNew);
+                    pickEnd.data('DateTimePicker').maxDate(maxNew);
+                } else {
+                    pickEnd.data('DateTimePicker').maxDate(maxNew);
+                    pickEnd.data('DateTimePicker').minDate(minNew);
+                }
+            });
+            $('#denngay').datetimepicker({
+                format: 'DD/MM/YYYY',
+                allowInputToggle: true,
+                useCurrent: true
+            });
+
+        });
+    </script>
+
+    <script type="text/javascript">
+        function exportexcel() {
+            $("#mytable").table2excel({
+                name: "Table2Excel",
+                filename: "ds-khachhang-baoloi",
+                fileext: ".xls"
+            });
+        }
+    </script>
+
+    <script>
+        var user = {
+            init: function () {
+                user.registerEvents();
+            },
+            registerEvents: function () {
+                $('.btn-active').off('click').on('click', function (e) {
+                    e.preventDefault();
+                    var btn = $(this);
+                    var id = btn.data('id');
+                    $.ajax({
+                        url: "/Admin/Error/ChangeStatus",
+                        data: { id: id },
+                        dataType: "json",
+                        type: "POST",
+                        success: function (response) {
+                            console.log(response);
+                            if (response.status == 1) {
+                                btn.last().addClass("mdi")
+                                btn.last().addClass("mdi-checkbox-blank-outline")
+                            }
+                            else {
+                                btn.last().addClass("mdi")
+                                btn.last().addClass("mdi-checkbox-marked-outline")
+                            }
+                        }
+                    });
+                });
+                $('.btn-delete').off('click').on('click', function (e) {
+                    e.preventDefault();
+                    var btn = $(this);
+                    var id = btn.data('id');
+                    var result = confirm("Want to delete?");
+                    if (result) {
+                        $.ajax({
+                            url: "/Admin/Error/Remove",
+                            data: { id: id },
+                            dataType: "json",
+                            type: "POST",
+                            success: function (response) {
+                                console.log(response);
+                                if (response.status == 2) {
+                                    btn.fadeOut(500, function () {
+                                        btn.closest('tr').remove()
+                                    });
+                                }
+                            }
+                        });
+                    }
+
+                });
+                $("#mytable .returns").click(function () {
+                    //get student id of row clicked
+                    var id = $(this).closest("tr").find("td").eq(1).html();
+                    var result = confirm("Thu hồi phiếu?");
+                    if (result) {
+                        $.ajax({
+                            type: "POST", //Method type
+                            url: "/Admin/Error/ReturnKey", //url to load partial view
+                            data: '{id: "' + id + '" }', //send student id
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "html",
+                            success: function (response) {
+                                alert("Đã thu hồi phiếu.");
+                                location.reload();
+                            },
+                            failure: function (response) {
+                                alert(response.responseText);
+                            },
+                            error: function (response) {
+                                alert(response.responseText);
+                            }
+                        });
+                    }
+
+                });
+
+                $("#mytable .sends").click(function () {
+                    //get student id of row clicked
+                    var id = $(this).closest("tr").find("td").eq(1).html();
+                    $.ajax({
+                        type: "POST", //Method type
+                        url: "/Admin/Error/AddKey", //url to load partial view
+                        data: '{id: "' + id + '" }', //send student id
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "html",
+                        success: function (response) {
+                            $('#ModalBody').html(response);
+                            $('#myModal').modal('show');
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                });
+
+                $("#mytable .status").click(function () {
+                    //get student id of row clicked
+                    var id = $(this).closest("tr").find("td").eq(1).html();
+                    $.ajax({
+                        type: "POST", //Method type
+                        url: "/Admin/Error/ChangeStatus", //url to load partial view
+                        data: '{id: "' + id + '" }', //send student id
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "html",
+                        success: function (response) {
+                            $('#ModalBody').html(response);
+                            $('#myModal').modal('show');
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                });
+                $("#mytable .notes").click(function () {
+                    //get student id of row clicked
+                    var id = $(this).closest("tr").find("td").eq(2).html();
+                    $.ajax({
+                        type: "POST", //Method type
+                        url: "/Admin/Error/Notes", //url to load partial view
+                        data: '{id: "' + id + '" }', //send student id
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "html",
+                        success: function (response) {
+                            $('#ModalBody').html(response);
+                            $('#myModal').modal('show');
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                });
+                $("#mytable .details").click(function () {
+                    //get student id of row clicked
+                    var id = $(this).closest("tr").find("td").eq(1).html();
+                    $.ajax({
+                        type: "POST", //Method type
+                        url: "/Admin/Error/Details", //url to load partial view
+                        data: '{id: "' + id + '" }', //send student id
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "html",
+                        success: function (response) {
+                            $('#ModalBody').html(response);
+                            $('#myModal').modal('show');
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                });
+
+                $("#mytable .images").click(function () {
+                    //get student id of row clicked
+                    var id = $(this).closest("tr").find("td").eq(2).html();
+                    $.ajax({
+                        type: "POST", //Method type
+                        url: "/Admin/Error/DisplayImage", //url to load partial view
+                        data: '{IdAddkey: "' + id + '" }', //send student id
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "html",
+                        success: function (response) {
+                            $('#ImageContent').html(response);
+                            $('#ImageModal').modal('show');
+                        }
+                    });
+                });
+
+                $("#mytable .img1").click(function () {
+                    //get student id of row clicked
+                    var id = $(this).closest("tr").find("td").eq(2).html();
+                    $.ajax({
+                        type: "POST", //Method type
+                        url: "/Admin/Error/ShowImage", //url to load partial view
+                        data: '{id: "' + id + '" }', //send student id
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "html",
+                        success: function (response) {
+                            $('#ModalBody').html(response);
+                            $('#myModal').modal('show');
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                });
+                $("#mytable .img2").click(function () {
+                    //get student id of row clicked
+                    var id = $(this).closest("tr").find("td").eq(2).html();
+                    $.ajax({
+                        type: "POST", //Method type
+                        url: "/Admin/Error/ShowImage", //url to load partial view
+                        data: JSON.stringify({ id: id, type: 'img2' }), //send student id
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "html",
+                        success: function (response) {
+                            $('#ModalBody').html(response);
+                            $('#myModal').modal('show');
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                });
+                $("#mytable .img3").click(function () {
+                    //get student id of row clicked
+                    var id = $(this).closest("tr").find("td").eq(2).html();
+                    $.ajax({
+                        type: "POST", //Method type
+                        url: "/Admin/Error/ShowImage", //url to load partial view
+                        data: JSON.stringify({ id: id, type: 'img3' }), //send student id
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "html",
+                        success: function (response) {
+                            $('#ModalBody').html(response);
+                            $('#myModal').modal('show');
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                });
+                $("#mytable .img4").click(function () {
+                    //get student id of row clicked
+                    var id = $(this).closest("tr").find("td").eq(2).html();
+                    $.ajax({
+                        type: "POST", //Method type
+                        url: "/Admin/Error/ShowImage", //url to load partial view
+                        data: JSON.stringify({ id: id, type: 'img4' }), //send student id
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "html",
+                        success: function (response) {
+                            $('#ModalBody').html(response);
+                            $('#myModal').modal('show');
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                });
+                $("#mytable .img5").click(function () {
+                    //get student id of row clicked
+                    var id = $(this).closest("tr").find("td").eq(2).html();
+                    $.ajax({
+                        type: "POST", //Method type
+                        url: "/Admin/Error/ShowImage", //url to load partial view
+                        data: JSON.stringify({ id: id, type: 'img5' }), //send student id
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "html",
+                        success: function (response) {
+                            $('#ModalBody').html(response);
+                            $('#myModal').modal('show');
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                });
+                $("#mytable .img6").click(function () {
+                    //get student id of row clicked
+                    var id = $(this).closest("tr").find("td").eq(2).html();
+                    $.ajax({
+                        type: "POST", //Method type
+                        url: "/Admin/Error/ShowImage", //url to load partial view
+                        data: JSON.stringify({ id: id, type: 'img6' }), //send student id
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "html",
+                        success: function (response) {
+                            $('#ModalBody').html(response);
+                            $('#myModal').modal('show');
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                });
+
+                $("#mytable .img6").click(function () {
+                    //get student id of row clicked
+                    var id = $(this).closest("tr").find("td").eq(2).html();
+                    $.ajax({
+                        type: "POST", //Method type
+                        url: "/Admin/Error/ShowImage", //url to load partial view
+                        data: JSON.stringify({ id: id, type: 'img6' }), //send student id
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "html",
+                        success: function (response) {
+                            $('#ModalBody').html(response);
+                            $('#myModal').modal('show');
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                });
+            }
+        }
+        user.init();
+    </script>
+
+}
+<style>
+    input, select {
+        max-width: 280px;
+    }
+
+    .card-body table th, td {
+        font-size: 11px !important;
+    }
+
+    tr td:last-child a {
+        font-size: 16px;
+    }
+
+    td p {
+        margin: 0;
+        text-align: center;
+    }
+
+
+
+    .modal-dialog {
+        margin: 10% auto;
+    }
+
+    .table thead {
+        background-color: aquamarine;
+    }
+
+    td div {
+        text-align: center;
+    }
+
+        td div a {
+            color: white;
+        }
+
+    .btn-black {
+        background-color: dimgrey;
+        border-color: dimgrey;
+        color: white;
+    }
+
+    .status-list a {
+        font-size: 9px;
+        padding: 5px 5px;
+    }
+
+    tbody {
+        display: block;
+        height: 500px;
+        overflow: auto;
+    }
+
+        thead, tbody tr {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+        }
+
+            thead tr th:last-child {
+                width: 50px;
+            }
+
+            tbody tr td:last-child {
+                width: 50px;
+            }
+
+    .form-group {
+        margin-bottom: 5px;
+    }
+
+        .form-group label {
+            font-size: 10px;
+        }
+
+    .btn-pink {
+        background-color: rgba(255, 0, 0, 0.2);
+        color: #555555;
+        border-color: #555555;
+    }
+
+    .btn-green {
+        background-color: rgba(0, 255, 50, 0.5);
+        color: #555555;
+        border-color: #555555;
+    }
+
+    .active-line {
+        border-color: rgba(255, 249, 0, 0.5);
+        border: 3px solid rgba(255, 249, 0, 0.5);
+    }
+</style>
+
+<div class="row">
+    <div class="col-lg-12 stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <form class="forms-sample">
+                    <div class="form-group row">
+                        <label for="" class="col-sm-1 col-form-label">@Resources.Resources.search</label>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <div class='input-group' id="name">
+                                    @Html.TextBox("textString", ViewBag.textString as string, new { @class = "form-control", @placeholder = @Resources.Resources.warranti })
+                                    @Html.TextBox("status", ViewBag.status as string, new { @class = "hidden" })
+                                </div>
+                            </div>
+                        </div>
+                        <label for="" class="col-sm-1 col-form-label">@Resources.Resources.search</label>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <div class='input-group' id="name">
+                                    @Html.TextBox("textString1", ViewBag.textString1 as string, new { @class = "form-control", @placeholder = @Resources.Resources.customer })
+
+                                </div>
+                            </div>
+                        </div>
+                        <label for="" class="col-sm-1 col-form-label">@Resources.Resources.search</label>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <div class='input-group' id="name">
+                                    @Html.TextBox("textString2", ViewBag.textString2 as string, new { @class = "form-control", @placeholder = @Resources.Resources.product })
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-1 col-form-label">@Resources.Resources.cate_service</label>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <div class='input-group' id="service">
+                                    @Html.DropDownList("channel",
+                      new List<SelectListItem>
+                        {
+                          new SelectListItem { Value = "" , Text = Resources.Resources.all },
+                        new SelectListItem { Value = "Bảo hành" , Text = Resources.Resources.warranti },
+                        new SelectListItem { Value = "Lắp đặt" , Text = Resources.Resources.install },
+                        new SelectListItem { Value = "Tính phí" , Text = Resources.Resources.payment },
+                        },
+                        new { @class = "form-control" })
+
+                                </div>
+                            </div>
+                        </div>
+                        <label for="" class="col-sm-1 col-form-label">@Resources.Resources.duration</label>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <div class='input-group' id="name">
+                                    @Html.TextBox("outdate", ViewBag.outdate as string, new { @class = "form-control", @placeholder = @Resources.Resources.duration })
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        @if (ViewBag.status == 10)
+                        {
+                            <label for="" class="col-sm-1 col-form-label">@Resources.Resources.status</label>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <div class='input-group' id="service">
+                                        @Html.DropDownList("cr_date",
+                          new List<SelectListItem>
+                            {
+                              new SelectListItem { Value = "" , Text = Resources.Resources.all },
+                            new SelectListItem { Value = "2" , Text = Resources.Resources.change_station },
+                            new SelectListItem { Value = "3" , Text = Resources.Resources.refuse_station },
+                            new SelectListItem { Value = "5" , Text = Resources.Resources.processing },
+                            new SelectListItem { Value = "6" , Text = Resources.Resources.bringback },
+                            new SelectListItem { Value = "7" , Text = Resources.Resources.wait_access },
+                            new SelectListItem { Value = "8" , Text = Resources.Resources.wait_response },
+                            new SelectListItem { Value = "9" , Text = Resources.Resources.cancel },
+                            },
+                            new { @class = "form-control" })
+
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-1 col-form-label">@Resources.Resources.createdate</label>
+                        <div class="col-sm-9">
+                            <div class="col-sm-3 row">
+                                <div class="form-group">
+                                    @Html.TextBox("start_date", ViewBag.start_date as string, new { @class = "form-control", @type = "date" })
+                                </div>
+                            </div>
+                            <div class="col-sm-3 row">
+                                <div class="form-group">
+                                    @Html.TextBox("end_date", ViewBag.end_date as string, new { @class = "form-control", @type = "date" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-primary btn-fw">
+                        <i class="mdi mdi-magnify"></i>@Resources.Resources.search
+                    </button>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a href="/Admin/error/createnew" class="btn btn-outline-info btn-fw">
+                            <i class="mdi mdi-plus"></i>@Resources.Resources.create_new
+                        </a>
+                        <a href="/Admin/error/create2prod" class="btn btn-outline-info btn-fw">
+                            <i class="mdi mdi-plus"></i> @Resources.Resources.warranti_multi_prod
+                        </a>
+                        <a href="/Admin/Error/DatlichExport?status=@ViewBag.status&textString=@ViewBag.textString&channel=@ViewBag.channel&cr_date=@ViewBag.cr_date&start_date=@ViewBag.start_date&end_date=@ViewBag.end_date" class="btn btn-outline-info btn-fw">
+                            <i class="mdi mdi-export"></i>Export file
+                        </a>
+                        <a href="/Admin/error/UploadModel" class="btn btn-outline-warning btn-fw">
+                            <i class="mdi mdi-plus"></i> BS Model
+                        </a>
+                    }
+                </form>
+                <div class="status-list text-right">
+                    <a href="/admin/error/index" class="btn btn-pink @(_status == -1 ? "active-line" : "")">@Resources.Resources.all (@ViewBag.all)</a>
+                    <a href="/admin/error/index?status=0" class="btn btn-green @(_status == 0 ? "active-line" : "")">@Resources.Resources.news (@ViewBag.moi)</a>
+                    <a href="/admin/error/index?status=2" class="btn btn-pink @(_status == 2 ? "active-line" : "")">@Resources.Resources.change_station (@ViewBag.chuyen)</a>
+                    <a href="/admin/error/index?status=3" class="btn btn-pink @(_status == 3 ? "active-line" : "")">@Resources.Resources.refuse_station (@ViewBag.tuchoi)</a>
+                    <a href="/admin/error/index?status=5" class="btn btn-pink @(_status == 5 ? "active-line" : "")">@Resources.Resources.processing (@ViewBag.xuly)</a>
+                    <a href="/admin/error/index?status=6" class="btn btn-pink @(_status == 6 ? "active-line" : "")">@Resources.Resources.bringback (@ViewBag.demve)</a>
+                    <a href="/admin/error/index?status=7" class="btn btn-pink @(_status == 7 ? "active-line" : "")">@Resources.Resources.wait_access (@ViewBag.doilinhkien)</a>
+                    <a href="/admin/error/index?status=8" class="btn btn-pink @(_status == 8 ? "active-line" : "")">@Resources.Resources.wait_response (@ViewBag.chophanhoi)</a>
+                    <a href="/admin/error/index?status=1" class="btn btn-pink @(_status == 1 ? "active-line" : "")">@Resources.Resources.success (@ViewBag.hoanthanh)</a>
+                    <a href="/admin/error/index?status=9" class="btn btn-pink @(_status == 9 ? "active-line" : "")">@Resources.Resources.cancel (@ViewBag.huybo)</a>
+                    @if (ViewBag.quahan > 0)
+                    {
+                        <a href="/admin/error/index?status=10" class="btn btn-danger active-warranti @(_status == 10 ? "active-line" : "")">@Resources.Resources.outdate (@ViewBag.quahan)</a>
+                    }
+                    else
+                    {
+                        <a href="/admin/error/index?status=10" class="btn btn-danger">@Resources.Resources.outdate (@ViewBag.quahan)</a>
+                    }
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-lg-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover" id="mytable">
+                        <thead>
+                            <tr>
+                                <th>@Resources.Resources.code_warranti</th>
+                                <th>@Resources.Resources.customer</th>
+                                <th>@Resources.Resources.product</th>
+                                <th>@Resources.Resources.station</th>
+                                <th>@Resources.Resources.sum_money</th>
+                                <th>@Resources.Resources.result</th>
+                                <th>@Resources.Resources.war_note</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                ++index;
+                                <tr>
+                                    <td>
+                                        <a href="javascript:void(0)" class="details">@item.CodeWarr</a><br />
+                                        <span class="alert-primary">@item.Category</span><br />
+                                        @if (item.Createby == null)
+                                        {
+                                            <span>@Resources.Resources.customer</span><br />
+                                        }
+                                        else
+                                        {
+                                            <span>@item.Createby</span><br />
+                                        }
+                                        @if (item.Createdate != null)
+                                        {
+                                            @item.Createdate.Value.ToString("dd/MM/yyyy HH:mm")<br />
+                                        }
+
+                                        @item.Note<br />
+                                        @item.Chanel<br />
+                                        @if (item.Status == 0)
+                                        {
+                                            <div class="btn-danger">
+                                                <a href="#" class="">
+                                                    @Resources.Resources.news
+                                                </a>
+                                            </div>
+                                        }
+                                        else if (item.Status == 9)
+                                        {
+                                            <div class="btn-black">
+                                                <a href="#" class="">
+                                                    @Resources.Resources.cancel
+                                                </a>
+                                            </div>
+                                        }
+                                        else if (item.Status == 1)
+                                        {
+                                            <div class="btn-success">
+                                                <a href="#" class="">@Resources.Resources.success</a>
+                                            </div>
+                                        }
+                                        else if (item.Status == 2)
+                                        {
+                                            <div class="btn-primary">
+                                                <a href="#" class="">@Resources.Resources.change_station</a>
+                                            </div>
+                                        }
+                                        else if (item.Status == 3)
+                                        {
+                                            <div class="btn-black">
+                                                <a href="#" class="">@Resources.Resources.refuse_station</a>
+                                            </div>
+                                        }
+                                        else if (item.Status == 5)
+                                        {
+                                            <div class="btn-primary">
+                                                <a href="#" class="">@Resources.Resources.processing</a>
+                                            </div>
+                                        }
+                                        else if (item.Status == 6)
+                                        {
+                                            <div class="btn-primary">
+                                                <a href="#" class="">@Resources.Resources.bringback</a>
+                                            </div>
+                                        }
+                                        else if (item.Status == 7)
+                                        {
+                                            <div class="btn-primary">
+                                                <a href="#" class="">@Resources.Resources.wait_access</a>
+                                            </div>
+                                        }
+                                        else if (item.Status == 8)
+                                        {
+                                            <div class="btn-primary">
+                                                <a href="#" class="">@Resources.Resources.wait_response</a>
+                                            </div>
+                                        }
+                                        @if (item.Outdate == true)
+                                        {
+                                            <div class="btn-danger">
+                                                <a href="#" class="">@Resources.Resources.outdate</a>
+                                            </div>
+                                        }
+                                    </td>
+                                    <td class="hidden">@item.Id</td>
+                                    <td class="hidden">@item.IdKey</td>
+
+                                    <td>
+                                        @item.Name<br />
+                                        @item.Phone @item.PhoneWarr<br />
+                                        @item.Address @item.District @item.Province
+                                    </td>
+                                    <td>
+                                        @item.ProductCate<br />
+                                        @if (item.Buydate != null)
+                                        {
+                                            <span>@item.Buydate.Value.ToString("dd/MM/yyyy")</span><br />
+                                        }
+                                        @item.Serial<br />
+                                        @if (item.Model != null)
+                                        {
+                                            <span>@item.Model</span><br />
+                                        }
+                                        else
+                                        {
+                                            <span>@Resources.Resources.add_late</span><br />
+                                        }
+                                        @if (item.Activedate != null)
+                                        {
+                                            <span>@item.Activedate.Value.ToString("dd/MM/yyyy") - @item.Activedate.Value.AddMonths(item.Limited ?? 0).ToString("dd/MM/yyyy")</span><br />
+                                        }
+                                        @item.Agent<br />
+
+                                    </td>
+                                    <td>
+                                        @if (item.Key != null)
+                                        {
+                                            if (item.Createdate != null)
+                                            {
+                                                @item.Createdate.Value.ToString("dd/MM/yyyy")<br />
+                                            }
+                                            if (item.Deadline != null)
+                                            {
+                                                <span class="text-danger">@item.Deadline.Value.ToString("dd/MM/yyyy")</span><br />
+                                            }
+                                            @item.Key<br />
+                                            <div class="btn-info">
+                                                <a href="javascript:void(0)" class="returns"> @Resources.Resources.recall</a>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            if (item.Status == 0)
+                                            {
+                                                <div class="btn-warning">
+                                                    <a href="javascript:void(0)" class="sends"> @Resources.Resources.change_station</a>
+                                                </div>
+                                            }
+
+                                        }
+                                        <br />
+                                        @item.KTV<br />
+                                        <span class="alert-success">@item.KTVNote</span>
+                                    </td>
+                                    <td>
+                                        @item.Amount
+                                        @if (item.Status == 1)
+                                        {
+                                            <div class="btn-success">
+                                                <a href="#" class="">Đã kiểm tra</a>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="btn-danger">
+                                                <a href="#" class="">Chưa kiểm tra</a>
+                                            </div>
+                                        }
+
+                                    </td>
+                                    <td>
+                                        @if (item.Successdate != null && item.Comback == null)
+                                        {
+                                            <span class="alert-success">
+                                                @item.Successdate.Value.ToString("dd/MM/yyyy")
+                                            </span>
+                                            <br />
+
+                                        }
+                                        <span class="alert-danger">@item.Comback</span><br />
+
+
+
+                                    </td>
+                                    <td>
+                                        @item.Extra
+
+                                    </td>
+                                    <td>
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            if (item.IdKey != null)
+                                            {
+                                                <br />
+
+                                                <a href="/admin/error/success/@item.IdKey" class="text-primary" title="hoàn thành">
+                                                    <i class="mdi mdi-table-edit"></i>
+                                                </a>
+                                                if (item.Image.Count() > 0)
+                                                {
+                                                    <a onclick="" class="images" title="hình ảnh">
+                                                        <i class="mdi mdi-camera"></i>
+                                                    </a>
+                                                }
+
+                                            }
+                                            <br />
+                                            <a href="/admin/error/editnew/@item.Id" class="text-primary" title="chỉnh sửa thông tin phiếu">
+                                                <i class="mdi  mdi-pencil-box"></i>
+                                            </a>
+
+                                            <a href="/admin/error/delete/@item.Id" class="text-danger" title="xóa phiếu" onclick="return confirm('Xóa phiếu này?')">
+                                                <i class="mdi mdi-delete"></i>
+                                            </a>
+
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card-footer">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+
+            @{
+                int position;
+                int pageCurrent = ViewBag.pageCurrent;
+                string txtSearch = ViewBag.txtSearch;
+                float numSize = ViewBag.numSize;
+                if (pageCurrent > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "Error", new {status = ViewBag.status,
+                                           textString = ViewBag.textString,
+                                           textString1 = ViewBag.textString1,
+                                           textString2 = ViewBag.textString2,
+                                           channel = ViewBag.channel,
+                                           cr_date = ViewBag.cr_date,
+                                           start_date = ViewBag.start_date,
+                                           end_date = ViewBag.end_date, page = pageCurrent-1 })" tabindex="-1">Previous</a>
+                    </li>
+                }
+
+                for (position = 1; position <= numSize; position++)
+                {
+
+                    if (position == pageCurrent)
+                    {
+                        <li class="page-item active">
+                            <a class="page-link" href="@Url.Action("Index", "Error", new { status = ViewBag.status,
+                                           textString = ViewBag.textString,
+                                           textString1 = ViewBag.textString1,
+                                           textString2 = ViewBag.textString2,
+                                           channel = ViewBag.channel,
+                                           cr_date = ViewBag.cr_date,
+                                           start_date = ViewBag.start_date,
+                                           end_date = ViewBag.end_date, page = position })">@position</a>
+                                    </li>
+                                }
+
+                                else
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" href="@Url.Action("Index", "Error", new {status = ViewBag.status,
+                                           textString = ViewBag.textString,
+                                           textString1 = ViewBag.textString1,
+                                           textString2 = ViewBag.textString2,
+                                           channel = ViewBag.channel,
+                                           cr_date = ViewBag.cr_date,
+                                           start_date = ViewBag.start_date,
+                                           end_date = ViewBag.end_date, page = position })">@position</a>
+                                    </li>
+                                }
+
+                            }
+                            if (pageCurrent > 0 && pageCurrent < numSize)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@Url.Action("Index", "Error", new {status = ViewBag.status,
+                                           textString = ViewBag.textString,
+                                           textString1 = ViewBag.textString1,
+                                           textString2 = ViewBag.textString2,
+                                           channel = ViewBag.channel,
+                                           cr_date = ViewBag.cr_date,
+                                           start_date = ViewBag.start_date,
+                                           end_date = ViewBag.end_date, page = pageCurrent+1 })" tabindex="-1">Next</a>
+                                </li>
+                            }
+
+            }
+
+        </ul>
+    </nav>
+</div>
+<!--Bootstrap Pop Up modal-->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-body" id="ModalBody">
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--End of Bootstrap Pop-Up modal-->

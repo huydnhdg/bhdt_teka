@@ -1,0 +1,86 @@
+﻿@model IEnumerable<TEKA.Models.Article>
+@{
+    ViewBag.Title = "Config";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    int index = 0;
+}
+
+<div class="row">
+    <div class="col-lg-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                @if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink(Resources.Resources.create_new, "Create")
+                }
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>@Resources.Resources.index</th>
+                                    <th>@Resources.Resources.cate</th>
+                                    <th>@Resources.Resources.title</th>
+                                    <th>@Resources.Resources.photo</th>
+                                    <th>Link</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    index++;
+                                    <tr>
+                                        <td>
+                                            @if (User.IsInRole("Admin"))
+                                            {
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                                                <span>|</span>
+                                                <a href="/admin/article/delete/@item.Id" onclick="return confirm('Xóa dòng này?')" title="xóa">
+                                                    Delete
+                                                </a>
+                                            }
+                                        </td>
+                                        <td>@index</td>
+                                        <td>
+                                            @if (item.Type == 0)
+                                            {
+                                                <p>policy</p>
+                                            }
+                                            else if (item.Type == 1)
+                                            {
+                                                <p>help</p>
+                                            }
+                                            else if (item.Type == 2)
+                                            {
+                                                <p>question</p>
+                                            }
+                                            else if (item.Type == 3)
+                                            {
+                                                <p>slide</p>
+                                            }
+                                            else if (item.Type == 4)
+                                            {
+                                                <p>description</p>
+                                            }
+                                            else
+                                            {
+                                                <p>link</p>
+                                            }
+                                        </td>
+                                        <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                                        <td><img style="width:150px;height:50px; border-radius: unset;" src="@(item.Image == null ? "" : item.Image)" alt="" /></td>
+                                        <td>@Html.DisplayFor(modelItem => item.Url)</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+<ul class="pagination">
+    @Html.Raw((String)ViewBag.PagingHtml)
+</ul>
+

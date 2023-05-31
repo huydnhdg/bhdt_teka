@@ -1,0 +1,253 @@
+﻿@model TEKA.Areas.Admin.Models.NoteModel
+@{
+    List<TEKA.Models.MoveFee> km = (List<TEKA.Models.MoveFee>)TempData["km"];
+    List<TEKA.Models.Device> device = (List<TEKA.Models.Device>)TempData["device"];
+}
+<style>
+    .modal-dialog {
+        max-width: 768px;
+    }
+
+    .modal.fade .modal-dialog {
+        transform: none;
+    }
+
+    .modal-dialog {
+        margin: 0 auto;
+    }
+
+    textarea.form-control {
+        height: 100px;
+    }
+</style>
+
+@using (Html.BeginForm("EditNotes", "Error", FormMethod.Post, new { enctype = "multipart/form-data", id = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4 class="text-center">Bổ sung thông tin phiếu bảo hành: @ViewBag.code</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group hidden">
+            @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group hidden">
+            @Html.LabelFor(model => model.IdWarranti, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.IdWarranti, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IdWarranti, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group hidden">
+            @Html.LabelFor(model => model.IdKey, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.IdKey, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IdKey, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group hidden">
+            @Html.LabelFor(model => model.Createdate, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.Createdate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Createdate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Trạng thái", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.DropDownListFor(model => model.status,
+                          new List<SelectListItem>
+                            {
+                            new SelectListItem { Value = "9" , Text = "Hủy bỏ" },
+                            new SelectListItem { Value = "0" , Text = "Mới tiếp nhận" },
+                            new SelectListItem { Value = "1" , Text = "Hoàn thành" },
+                            new SelectListItem { Value = "2" , Text = "Chuyển trạm" },
+                            new SelectListItem { Value = "3" , Text = "Trạm từ chối" },
+                            new SelectListItem { Value = "5" , Text = "Đang xử lý" },
+                            new SelectListItem { Value = "6" , Text = "Đem sản phẩm về trạm" },
+                            new SelectListItem { Value = "7" , Text = "Đợi linh kiện" },
+                            new SelectListItem { Value = "8" , Text = "Chờ phản hồi" },
+                            },
+                            new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Ngày hoàn thành", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(m => m.Successdate, "{0:yyyy-MM-dd}", new { @type = "date", @class = "form-control", })
+                @Html.ValidationMessageFor(model => model.Successdate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Nhóm lỗi", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.DropDownListFor(model => model.CateError,
+                          new List<SelectListItem>
+                            {
+                              new SelectListItem { Value = "" , Text = "Nhóm lỗi" },
+                            new SelectListItem { Value = "Lỗi lắp đặt" , Text = "Lỗi lắp đặt" },
+                            new SelectListItem { Value = "Lỗi sử dụng" , Text = "Lỗi sử dụng" },
+                            new SelectListItem { Value = "Lỗi sản phẩm" , Text = "Lỗi sản phẩm" },
+                            },
+                            new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CateError, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Ghi chú", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.Note, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.Label("Ngày dự kiến", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(m => m.Deadline, "{0:yyyy-MM-dd}", new { @type = "date", @class = "form-control", })
+                @Html.ValidationMessageFor(model => model.Deadline, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Phí di chuyển", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9 row">
+                <div class="col-md-7">
+                    @Html.DropDownListFor(model => model.KM, new SelectList(km, "Cate", "Cate"), "Chọn", new { @class = "form-control", @onchange = "kmchange()" })
+                </div>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.MoveFee, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Phí phụ tùng", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9 row">
+                @for (var i = 0; i < 1; i++)
+                {
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" id="ListPhutung_0__Name" name="ListPhutung[0].Name" onchange="devicechange(this.id)" />
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="ListPhutung_0__Price" name="ListPhutung[0].Price" />
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="form-group">
+            <a id="adddevice" href="#" title="" class="col-md-1 col-lg-offset-3" onclick="addRow();">
+                <i class="mdi mdi-plus"></i>
+            </a>
+        </div>
+        <div class="form-group">
+            @Html.Label("Phí BH", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @onchange = "pricechange()" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Tổng tiền", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Ảnh checkin", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                <input type="file" multiple id="checkin" name="checkin" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Ảnh checkout", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                <input type="file" multiple id="checkout" name="checkout" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Kết quả", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextAreaFor(model => model.Comeback, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Comeback, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group hidden">
+            @Html.LabelFor(model => model.IdKTV, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.IdKTV, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IdKTV, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="text-center">
+                <button type="submit" class="btn btn-warning"><i class="glyphicon glyphicon-ok"></i> Lưu</button>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    function kmchange() {
+        var km = $("#KM").val();
+        $.ajax({
+            url: '/Admin/Error/GetKMPrice',
+            type: 'POST',
+            datatype: 'application/json',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                km: km
+            }),
+            success: function (result) {
+                $("#MoveFee").val(result);
+
+                var move = $("#MoveFee").val();
+                var price = $("#Price").val();
+                var amount = Number(move) + Number(price);
+                $("#Amount").val(amount);
+            },
+            error: function () {
+            },
+        });
+    }
+    function pricechange() {
+        var move = $("#MoveFee").val();
+        var price = $("#Price").val();
+        var amount = Number(move) + Number(price);
+        $("#Amount").val(amount);
+    }
+    function devicechange(id) {
+        var cate = $('#' + id).val();
+        var index = id.split('_')[1];
+        $.ajax({
+            url: '/Admin/Error/GetDevicePrice',
+            type: 'POST',
+            datatype: 'application/json',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                cate: cate
+            }),
+            success: function (result) {
+                $("#ListPhutung_" + index + "__Price").val(result);
+
+            },
+            error: function () {
+            },
+        });
+    }
+</script>

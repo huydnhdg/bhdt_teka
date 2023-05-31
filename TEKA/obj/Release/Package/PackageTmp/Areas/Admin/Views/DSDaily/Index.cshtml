@@ -1,0 +1,319 @@
+﻿@model TEKA.Models.KhachhangDaily
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    int index = 0;
+    List<TEKA.Models.Province> province = ViewBag.province;
+    List<TEKA.Models.AspNetUser> agency = ViewBag.agency;
+}
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('#tungay').datetimepicker({
+                format: 'DD/MM/YYYY',
+                allowInputToggle: true,
+                useCurrent: false
+            }).on('dp.change', function (e) {
+                var minNew = e.date;
+                var maxNew = e.date.clone().add(9, 'days');
+                var pickEnd = $('#denngay');
+                var minOld = pickEnd.data('DateTimePicker').minDate();
+                var maxOld = pickEnd.data('DateTimePicker').maxDate();
+                if (minOld && minOld.isAfter(maxNew)) {
+                    pickEnd.data('DateTimePicker').minDate(minNew);
+                    pickEnd.data('DateTimePicker').maxDate(maxNew);
+                } else {
+                    pickEnd.data('DateTimePicker').maxDate(maxNew);
+                    pickEnd.data('DateTimePicker').minDate(minNew);
+                }
+            });
+            $('#denngay').datetimepicker({
+                format: 'DD/MM/YYYY',
+                allowInputToggle: true,
+                useCurrent: true
+            });
+
+        });
+    </script>
+    <script>
+        function getCityList() {
+            var name = $("#select").val();
+            $.ajax
+                ({
+                    url: '/DSDaily/GetCityList',
+                    type: 'POST',
+                    datatype: 'application/json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        name: name
+                    }),
+                    success: function (result) {
+                        $("#select2").html("");
+                        $.each($.parseJSON(result), function (i, city) {
+                            $("#select2").append
+                                ($('<option></option>').val(city.Name).html(city.Name))
+                        })
+                    },
+                    error: function () {
+                        alert("Whooaaa! Something went wrong..")
+                    },
+                });
+        }
+    </script>
+
+    <script type="text/javascript">
+        function exportexcel() {
+            $("#mytable").table2excel({
+                name: "Table2Excel",
+                filename: "ds-daily-sp",
+                fileext: ".xls"
+            });
+        }
+    </script>
+}
+<div class="row">
+    <div class="col-lg-12 stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <form class="forms-sample">
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">Đại lý</label>
+                        <div class="col-sm-9">
+                            <div class="form-group">
+                                <div class='input-group date' id="name">
+                                    <select class="form-control form-control-sm" name="name" id="select3">
+                                        @if (string.IsNullOrEmpty(Model.name))
+                                        {
+                                            <option value="">Tất cả</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@Model.name">@Model.name</option>
+                                            <option value="">Tất cả</option>
+                                        }
+
+                                        @foreach (var item in agency)
+                                        {
+                                            <option value="@item.NameAgency">@item.NameAgency</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <label for="" class="col-sm-3 col-form-label">Thành Phố/Tỉnh</label>
+                        <div class="col-sm-9">
+                            <div class="form-group">
+                                <div class='input-group date' id="city">
+                                    <select class="form-control form-control-sm" name="city" id="select" onchange="getCityList()">
+                                        @if (string.IsNullOrEmpty(Model.city))
+                                        {
+                                            <option value="">Tỉnh/ Thành phố</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@Model.city">@Model.city</option>
+                                            <option value="">Tỉnh/ Thành phố</option>
+                                        }
+                                        @foreach (var item in province)
+                                        {
+                                            <option value="@item.Name">@item.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <label for="" class="col-sm-3 col-form-label">Quận/Huyện</label>
+                        <div class="col-sm-9">
+                            <div class="form-group">
+                                <div class='input-group date' id="county">
+                                    <select class="form-control form-control-sm" name="county" id="select2">
+                                        @if (string.IsNullOrEmpty(Model.county))
+                                        {
+                                            <option value="">Quận/ Huyện</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@Model.county">@Model.county</option>
+                                            <option value="">Quận/ Huyện</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <label for="" class="col-sm-3 col-form-label">Serial</label>
+                        <div class="col-sm-9">
+                            <div class="form-group">
+                                <div class='input-group date' id="serial">
+                                    <input type="text" class="form-control" name="serial" placeholder="" value="@Model.serial">
+                                </div>
+                            </div>
+                        </div>
+                        <label for="" class="col-sm-3 col-form-label">Thanh toán</label>
+                        <div class="col-sm-9">
+                            <div class="form-group">
+                                <div class='input-group date' id="thanhtoan">
+                                    <select class="form-control form-control-sm" name="thanhtoan">
+                                        @if (Model.thanhtoan == "0")
+                                        {
+                                            <option value="0">Đã thanh toán</option>
+                                            <option value="">Tất cả</option>
+                                            <option value="1">Khách hàng kích hoạt</option>
+                                            <option value="2">Chưa thanh toán</option>
+                                        }
+                                        else if (Model.thanhtoan == "1")
+                                        {
+                                            <option value="1">Khách hàng kích hoạt</option>
+                                            <option value="">Tất cả</option>
+                                            <option value="0">Đã thanh toán</option>
+                                            <option value="2">Chưa thanh toán</option>
+                                        }
+                                        else if (Model.thanhtoan == "2")
+                                        {
+                                            <option value="2">Chưa thanh toán</option>
+                                            <option value="">Tất cả</option>
+                                            <option value="0">Đã thanh toán</option>
+                                            <option value="1">Khách hàng kích hoạt</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="">Tất cả</option>
+                                            <option value="0">Đã thanh toán</option>
+                                            <option value="1">Khách hàng kích hoạt</option>
+                                            <option value="2">Chưa thanh toán</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <label for="" class="col-sm-3 col-form-label">Trạng thái</label>
+                        <div class="col-sm-9">
+                            <div class="form-group">
+                                <div class='input-group date' id="status">
+                                    <select class="form-control form-control-sm" name="status">
+                                        @if (Model.status == "0")
+                                        {
+                                            <option value="0">Not set (Chưa kích hoạt)</option>
+                                            <option value="">All (Tất cả)</option>
+                                            <option value="1">True (Kích hoạt)</option>
+                                            <option value="2">False (Hết hạn)</option>
+                                        }
+                                        else if (Model.status == "1")
+                                        {
+                                            <option value="1">True (Kích hoạt)</option>
+                                            <option value="">All (Tất cả)</option>
+                                            <option value="0">Not set (Chưa kích hoạt)</option>
+                                            <option value="2">False (Hết hạn)</option>
+                                        }
+                                        else if (Model.status == "2")
+                                        {
+                                            <option value="2">False (Hết hạn)</option>
+                                            <option value="">All (Tất cả)</option>
+                                            <option value="0">Not set (Chưa kích hoạt)</option>
+                                            <option value="1">True (Kích hoạt)</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="">All (Tất cả)</option>
+                                            <option value="0">Not set (Chưa kích hoạt)</option>
+                                            <option value="1">True (Kích hoạt)</option>
+                                            <option value="2">False (Hết hạn)</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <label for="" class="col-sm-3 col-form-label">Ngày kích hoạt</label>
+                        <div class="col-sm-9">
+                            <div class="col-sm-6 row">
+                                <div class="form-group">
+                                    <div class='input-group date' id="tungay">
+                                        <input type='text' class="form-control" name="tungay" placeholder="Từ ngày" value="@Model.tungay" />
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 row">
+                                <div class="form-group">
+                                    <div class='input-group date' id="denngay">
+                                        <input type='text' class="form-control" name="denngay" placeholder="Đến ngày" value="@Model.denngay" />
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-primary btn-fw">
+                        <i class="mdi mdi-magnify"></i>Tra cứu
+                    </button>
+                    <button onclick="exportexcel()" class="btn btn-outline-success btn-fw">
+                        <i class="mdi mdi-download"></i>Xuất Excel
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="mytable">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Serial</th>
+                                <th>Mã SP</th>
+                                <th>Họ tên</th>
+                                <th>SĐT</th>
+                                <th>Địa chỉ</th>
+                                <th>Ngày kích hoạt</th>
+                                <th>Trạng thái</th>
+                                <th>Thanh toán</th>
+                                <th>Ngày hết hạn</th>
+                                <th>Đại lý</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.KhachhangDailys)
+                            {
+                                index++;
+                                <tr>
+                                    <td>@index</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Serial)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.ProductCode)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Phone)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.ActiveDate)</td>
+                                    <td>
+                                        @if (item.Status == 1)
+                                        {
+                                            <p>đã kích hoạt</p>
+                                        }
+                                        else if (item.Status == 2)
+                                        { <p>hết hạn</p> }
+                                        else
+                                        { <p>chưa kích hoạt</p>}
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.ThanhToan)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.AgencyName)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ul class="pagination">
+    @Html.Raw((String)ViewBag.PagingHtml)
+</ul>
+

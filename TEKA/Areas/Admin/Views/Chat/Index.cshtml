@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Chat</h2>
+<div class="container" id="divLogin">
+    <input type="text" id="txtName" placeholder="Nhập tên" />
+    <button class="btn btn-success" id="btnLogin">Login</button>
+    <input type="hidden" id="hName" />
+</div>
+<div class="container" id="divChat">
+    <h2 id="welcome"></h2>
+    <input type="text" id="txtMessage" />
+    <button class="btn btn-success" id="btnSend">Send</button>
+</div>
+<div class="container">
+    <ul id="contentMsg">
+    </ul>
+</div>
+@section scripts
+{
+    
+}
+

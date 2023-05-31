@@ -1,0 +1,264 @@
+﻿@model PagedList.IPagedList<TEKA.Models.ActiveSearch>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Active";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    .ui-widget {
+        font-size: 14px;
+    }
+</style>
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('#tungay').datetimepicker({
+                format: 'DD/MM/YYYY',
+                allowInputToggle: true,
+                useCurrent: false
+            }).on('dp.change', function (e) {
+                var minNew = e.date;
+                var maxNew = e.date.clone().add(30, 'days');
+                var pickEnd = $('#denngay');
+                var minOld = pickEnd.data('DateTimePicker').minDate();
+                var maxOld = pickEnd.data('DateTimePicker').maxDate();
+                if (minOld && minOld.isAfter(maxNew)) {
+                    pickEnd.data('DateTimePicker').minDate(minNew);
+                    pickEnd.data('DateTimePicker').maxDate(maxNew);
+                } else {
+                    pickEnd.data('DateTimePicker').maxDate(maxNew);
+                    pickEnd.data('DateTimePicker').minDate(minNew);
+                }
+            });
+            $('#denngay').datetimepicker({
+                format: 'DD/MM/YYYY',
+                allowInputToggle: true,
+                useCurrent: true
+            });
+
+        });
+    </script>
+    <script>
+        var user = {
+            init: function () {
+                user.registerEvents();
+            },
+            registerEvents: function () {
+                $('.btn-active').off('click').on('click', function (e) {
+                    e.preventDefault();
+                    var btn = $(this);
+                    var id = btn.data('id');
+                    $.ajax({
+                        url: "/Admin/Active/ChangeStatus",
+                        data: { id: id },
+                        dataType: "json",
+                        type: "POST",
+                        success: function (response) {
+                            console.log(response);
+                            if (response.status == 11) {
+                                btn.last().addClass("mdi")
+                                btn.last().addClass("mdi-checkbox-blank-outline")
+                            }
+                            else {
+                                btn.last().addClass("mdi")
+                                btn.last().addClass("mdi-checkbox-marked-outline")
+
+                            }
+                        }
+                    });
+                });
+            }
+        }
+        user.init();
+    </script>
+    <script>
+        $('.btn-active').click(function (e) {
+            $(this).fadeOut(500, function () {
+                $(this).closest('tr').remove()
+            });
+        });
+    </script>
+    <script>
+        $("#s6").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Admin/Kichhoat/GetListAgent",
+                    type: "POST",
+                    dataType: "json",
+                    data: { text: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            var name_agent = (item.NameAgency != null) ? item.NameAgency : "..."
+                            return { label: name_agent, value: name_agent };
+                        }))
+
+                    }
+                })
+            }
+        });
+    </script>
+}
+
+<div class="row">
+    <div class="col-lg-12 stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <form class="forms-sample">
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">@Resources.Resources.status</label>
+                        <div class="col-sm-9">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    @Html.DropDownList("s1", new List<SelectListItem>{
+                                 new SelectListItem { Value = "" , Text = "--chọn--" },
+                                 new SelectListItem { Value = "1" , Text = @Resources.Resources.customer_active },
+                                 new SelectListItem { Value = "111" , Text = @Resources.Resources.sms_active },
+                                 new SelectListItem { Value = "11" , Text = @Resources.Resources.pay_check },
+                           }, new { @class = "form-control" })                                   
+                                </div>
+                            </div>
+                        </div>
+                        <label for="" class="col-sm-3 col-form-label">Serial</label>
+                        <div class="col-sm-9">
+                            <div class="form-group">
+                                <div class='input-group date' id="serial">
+                                    @Html.TextBox("s2", ViewBag.c2 as string, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <label for="" class="col-sm-3 col-form-label">@Resources.Resources.cus_phone</label>
+                        <div class="col-sm-9">
+                            <div class="form-group">
+                                <div class='input-group date' id="phone">
+                                    @Html.TextBox("s3", ViewBag.c3 as string, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <label for="" class="col-sm-3 col-form-label">@Resources.Resources.active_date</label>
+                        <div class="col-sm-9">
+                            <div class="col-sm-6 row">
+                                <div class="form-group">
+                                    <div class='input-group date' id="tungay">
+                                        @Html.TextBox("s4", ViewBag.c4 as string, new { @class = "form-control" })
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 row">
+                                <div class="form-group">
+                                    <div class='input-group date' id="denngay">
+                                        @Html.TextBox("s5", ViewBag.c5 as string, new { @class = "form-control" })
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <label for="" class="col-sm-3 col-form-label">@Resources.Resources.agent</label>
+                        <div class="col-sm-9">
+                            <div class="form-group">
+                                <div class='input-group' id="agency">
+                                    @Html.TextBox("s6", ViewBag.c6 as string, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-primary btn-fw">
+                        <i class="mdi mdi-magnify"></i>@Resources.Resources.search
+                    </button>
+                    @*<button onclick="exportexcel()" class="btn btn-outline-success btn-fw">
+                            <i class="mdi mdi-download"></i>Xuất Excel
+                        </button>*@
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover" id="mytable">
+                        <thead>
+                            <tr>
+                                <th>@Resources.Resources.cus_name</th>
+                                <th>@Resources.Resources.cus_phone</th>
+                                <th>@Resources.Resources.cus_address</th>
+                                <th>@Resources.Resources.birthday</th>
+                                <th>@Resources.Resources.prod_code</th>
+                                <th>@Resources.Resources.prod_name</th>
+                                <th>Model</th>
+                                <th>Serial</th>
+                                <th>@Resources.Resources.active_date</th>
+                                <th>@Resources.Resources.end_date</th>
+                                <th>@Resources.Resources.agent</th>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <th>@Resources.Resources.status</th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Phone)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Address) @item.County @item.City</td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(item.Birthday.ToString()))
+                                        {<span>@item.Birthday.Value.ToString("dd/MM/yyyy")</span>}
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.CodeProduct)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Product)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Model)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Serial)</td>
+                                    <td>
+                                        @if (item.ActiveDate != null)
+                                        {<span>@item.ActiveDate.Value.ToString("dd/MM/yyyy")</span>}
+                                    </td>
+                                    <td>
+                                        @if (item.EndDate != null)
+                                        {<span>@item.EndDate.Value.ToString("dd/MM/yyyy")</span>}
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.NameAgency)</td>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <td style="text-align:center">
+                                            @if (item.Status == 1)
+                                            {
+                                                <p>@Resources.Resources.warranti_check</p>
+                                                <a href="#" class="btn-active mdi mdi-checkbox-blank-outline" data-id="@item.Id">@Html.Raw("")</a>
+                                            }
+                                            else if (item.Status == 11)
+                                            {
+                                                <p>@Resources.Resources.pay_check</p>
+                                                <a href="#" class="btn-active mdi mdi-checkbox-blank-outline" data-id="@item.Id">@Html.Raw("")</a>
+                                            }
+                                            else if (item.Status == 111)
+                                            {
+                                                <p>@Resources.Resources.warranti_check</p>
+                                                <a href="#" class="btn-active mdi mdi-checkbox-blank-outline" data-id="@item.Id">@Html.Raw("")</a>
+                                            }
+                                        </td>
+                                    }
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("ExportToExcel", "Kichhoat", FormMethod.Post))
+{
+    <input type="submit" value="Export to Excel" class="button btn" />
+}
+<br />
+@Html.PagedListPager(Model, page => Url.Action("Index",
+                                       new { page, c1 = ViewBag.c1, c2 = ViewBag.c2, c3 = ViewBag.c3, c4 = ViewBag.c4, c5 = ViewBag.c5, c6 = ViewBag.c6 }))

@@ -1,0 +1,495 @@
+﻿@model PagedList.IPagedList<TEKA.Areas.Admin.Models.WarrantiModel>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int index = 0;
+}
+@section scripts{
+    <script>
+        $("#mytable .updates").click(function () {
+            //get student id of row clicked
+            var id = $(this).closest("tr").find("td").eq(2).html();
+            $.ajax({
+                type: "POST", //Method type
+                url: "/Warranti/Notes", //url to load partial view
+                data: '{id: "' + id + '" }', //send student id
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                success: function (response) {
+                    $('#ModalBody').html(response);
+                    $('#myModal').modal('show');
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        });
+        $("#mytable .addktvs").click(function () {
+            //get student id of row clicked
+            var id = $(this).closest("tr").find("td").eq(2).html();
+            $.ajax({
+                type: "POST", //Method type
+                url: "/Warranti/AddKTV", //url to load partial view
+                data: '{id: "' + id + '" }', //send student id
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                success: function (response) {
+                    $('#ModalBody').html(response);
+                    $('#myModal').modal('show');
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        });
+
+        $("#mytable .products").click(function () {
+            //get student id of row clicked
+            var id = $(this).closest("tr").find("td").eq(1).html();
+            $.ajax({
+                type: "POST", //Method type
+                url: "/Warranti/Product", //url to load partial view
+                data: '{id: "' + id + '" }', //send student id
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                success: function (response) {
+                    $('#ModalBody').html(response);
+                    $('#myModal').modal('show');
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        });
+
+        $("#mytable .details").click(function () {
+            //get student id of row clicked
+            var id = $(this).closest("tr").find("td").eq(1).html();
+            $.ajax({
+                type: "POST", //Method type
+                url: "/Warranti/Details", //url to load partial view
+                data: '{id: "' + id + '" }', //send student id
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                success: function (response) {
+                    $('#ModalBody').html(response);
+                    $('#myModal').modal('show');
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        });
+        $("#mytable .images").click(function () {
+            //get student id of row clicked
+            var id = $(this).closest("tr").find("td").eq(2).html();
+            $.ajax({
+                type: "POST", //Method type
+                url: "/Warranti/DisplayImage", //url to load partial view
+                data: '{IdAddkey: "' + id + '" }', //send student id
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                success: function (response) {
+                    $('#ImageContent').html(response);
+                    $('#ImageModal').modal('show');
+                }
+            });
+        });
+    </script>
+}
+<style>
+    td p {
+        text-align: center;
+    }
+
+    td .btn {
+        width: 100px;
+    }
+
+    .table thead {
+        background-color: aquamarine;
+    }
+
+    .table {
+        font-size: 13px;
+    }
+
+    td div {
+        text-align: center;
+    }
+
+        td div a {
+            color: white;
+        }
+
+    .btn-black {
+        background-color: dimgrey;
+        border-color: dimgrey;
+        color: white;
+    }
+
+    .status-list a {
+        font-size: 11px;
+        padding: 5px;
+    }
+</style>
+<section id="agency">
+    <div>
+        <h2 class="p-red" style="text-align:center;text-transform:uppercase">@Resources.Resources.warranti</h2>
+        <div style="text-align:center;margin: 15px 0;"><img src="~/Image/teka3_03.png" alt="" class="img-responsive" /></div>
+    </div>
+    @using (Html.BeginForm("", "Warranti", FormMethod.Get))
+    {
+        <table class="table table-condensed">
+            <tr>
+                <td>
+                    <label>Tìm kiếm</label>
+                    @Html.TextBox("textString", ViewBag.textString as string, new { @class = "form-control", @placeholder = @Resources.Resources.warranti })
+                </td>
+                <td>
+                    <label>Tìm kiếm theo ngày tạo: </label>
+
+                    @Html.TextBox("start_date", ViewBag.start_date as string, new { @class = "form-control", @type = "date", @placeholder = "Ngày bắt đầu" })
+
+                </td>
+                <td>
+                    <label>đến ngày</label>
+                    @Html.TextBox("end_date", ViewBag.end_date as string, new { @class = "form-control", @type = "date", @placeholder = "Ngày kết thúc" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Tìm kiếm</label>
+
+                    @Html.TextBox("textString1", ViewBag.textString2 as string, new { @class = "form-control", @placeholder = @Resources.Resources.customer })
+                </td>
+                <td>
+                    <label>Tìm kiếm theo ngày mua:</label>
+
+                    @Html.TextBox("sdate", ViewBag.sdate as string, new { @class = "form-control", @type = "date", @placeholder = "Ngày bắt đầu" })
+
+                </td>
+                <td>
+                    <label>đến ngày</label>
+                    @Html.TextBox("sdate", ViewBag.edate as string, new { @class = "form-control", @type = "date", @placeholder = "Ngày kết thúc" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Tìm kiếm</label>
+                    @Html.TextBox("textString2", ViewBag.textString1 as string, new { @class = "form-control", @placeholder = @Resources.Resources.product })
+                    @Html.TextBox("status", ViewBag.status as string, new { @class = "hidden" })
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <button class="btn">@Resources.Resources.menu_search</button>
+                    @if (User.IsInRole("Key"))
+                    {
+                        @*<a href="/account/registerktv" class="btn"> TẠO MỚI</a>*@
+                        <a href="/Warranti/DatlichExport?status=@ViewBag.status&textString=@ViewBag.textString&channel=@ViewBag.channel&cr_date=@ViewBag.cr_date&start_date=@ViewBag.start_date&end_date=@ViewBag.end_date" class="btn btn-outline-info btn-fw">
+                            <i class="mdi mdi-export"></i>  Export file
+                        </a>
+                    }
+
+
+                </td>
+            </tr>
+        </table>
+    }
+    <div>
+        <a href="/Warranti/Index/" class=" btn-info">@Resources.Resources.all (@ViewBag.all)</a>
+        <a href="/Warranti/Index/?status=0" class=" btn-danger">@Resources.Resources.news (@ViewBag.moi)</a>
+        <a href="/Warranti/Index/?status=2" class=" btn-warning">@Resources.Resources.change_station (@ViewBag.chuyen)</a>
+        <a href="/Warranti/Index/?status=3" class=" btn-black">@Resources.Resources.refuse_station (@ViewBag.tuchoi)</a>
+        <a href="/Warranti/Index/?status=5" class=" btn-warning">@Resources.Resources.processing (@ViewBag.xuly)</a>
+        <a href="/Warranti/Index/?status=6" class=" btn-warning">@Resources.Resources.bringback (@ViewBag.demve)</a>
+        <a href="/Warranti/Index/?status=7" class=" btn-warning">@Resources.Resources.wait_access (@ViewBag.doilinhkien)</a>
+        <a href="/Warranti/Index/?status=8" class=" btn-primary">@Resources.Resources.wait_response (@ViewBag.chophanhoi)</a>
+        <a href="/Warranti/Index/?status=1" class=" btn-success">@Resources.Resources.success (@ViewBag.hoanthanh)</a>
+        <a href="/Warranti/Index/?status=10" class=" btn-danger">@Resources.Resources.outdate (@ViewBag.quahan)</a>
+        <a href="/Warranti/Index/?status=9" class=" btn-black">@Resources.Resources.cancel (@ViewBag.huybo)</a>
+    </div>
+    <table class="table table-hover" id="mytable">
+        <thead>
+            <tr>
+                <th>@Resources.Resources.code_warranti</th>
+                <th>@Resources.Resources.customer</th>
+                <th>@Resources.Resources.product</th>
+                <th>@Resources.Resources.station</th>
+                <th>@Resources.Resources.sum_money</th>
+                <th>@Resources.Resources.result</th>
+                <th>@Resources.Resources.technicians</th>
+                <th>@Resources.Resources.accessary</th>
+                <th>@Resources.Resources.war_note</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                index++;
+                <tr>
+                    <td>
+                        <a href="javascript:void(0)" class="details">@item.CodeWarr</a><br />
+                        <span class="alert-primary">@item.Category</span><br />
+                        @if (item.Createby == null)
+                        {
+                            <span>@Resources.Resources.customer</span><br />
+                        }
+                        else
+                        {
+                            <span>@item.Createby</span><br />
+                        }
+                        @item.Createdate<br />
+                        @item.Note<br />
+                        @item.Chanel<br />
+                        @if (item.Status == 0)
+                        {
+                            <div class="btn-danger">
+                                <a href="#" class="">
+                                    @Resources.Resources.news
+                                </a>
+                            </div>
+                        }
+                        else if (item.Status == 9)
+                        {
+                            <div class="btn-black">
+                                <a href="#" class="">
+                                    @Resources.Resources.cancel
+                                </a>
+                            </div>
+                        }
+                        else if (item.Status == 1)
+                        {
+                            <div class="btn-success">
+                                <a href="#" class="">@Resources.Resources.success</a>
+                            </div>
+                        }
+                        else if (item.Status == 2)
+                        {
+                            <div class="btn-primary">
+                                <a href="#" class="">@Resources.Resources.change_station</a>
+                            </div>
+                        }
+                        else if (item.Status == 3)
+                        {
+                            <div class="btn-black">
+                                <a href="#" class="">@Resources.Resources.refuse_station</a>
+                            </div>
+                        }
+                        else if (item.Status == 5)
+                        {
+                            <div class="btn-primary">
+                                <a href="#" class="">@Resources.Resources.processing</a>
+                            </div>
+                        }
+                        else if (item.Status == 6)
+                        {
+                            <div class="btn-primary">
+                                <a href="#" class="">@Resources.Resources.bringback</a>
+                            </div>
+                        }
+                        else if (item.Status == 7)
+                        {
+                            <div class="btn-primary">
+                                <a href="#" class="">@Resources.Resources.wait_access</a>
+                            </div>
+                        }
+                        else if (item.Status == 8)
+                        {
+                            <div class="btn-primary">
+                                <a href="#" class="">@Resources.Resources.wait_response</a>
+                            </div>
+                        }
+
+                    </td>
+                    <td class="hidden">@item.Id</td>
+                    <td class="hidden">@item.IdKey</td>
+
+                    <td>
+                        @item.Name<br />
+                        @item.Phone @item.PhoneWarr<br />
+                        @item.Address @item.District @item.Province
+                    </td>
+                    <td>
+                        @item.ProductCate<br />
+
+                        @if (item.Buydate != null)
+                        {
+                            <span>@item.Buydate.Value.ToString("dd/MM/yyyy")</span><br />
+                        }
+                        @item.Serial<br />
+                        @item.Model<br />
+                        @item.Agent<br />
+
+                        @if (item.Exportdate != null)
+                        {
+                            <span>@item.Exportdate.Value.ToString("dd/MM/yyyy")</span><br />
+                        }
+                        @if (item.Activedate != null)
+                        {
+                            <span class="text-danger">
+                                @Convert.ToDateTime(item.Activedate.Value.AddMonths(item.Limited ?? default(int))).ToString("dd/MM/yyyy")
+                            </span>
+                        }
+                    </td>
+                    <td>
+                        @if (item.Key != null)
+                        {
+                            @item.Createdate<br />
+                            if (item.Deadline != null)
+                            {
+                                <span>@item.Deadline.Value.ToString("dd/MM/yyyy")</span><br />
+                            }
+                            @item.Key<br />
+                            @*if (item.KTV == null)
+                {
+                    <div class="btn-info">
+                        <a href="javascript:void(0)" class="returns"> thu hồi</a>
+                    </div>
+                }*@
+
+                        }
+                    </td>
+                    <td>
+                        @if (item.Successdate != null && item.Comback == null)
+                        {
+                            <span class="alert-success">
+                                @item.Successdate.Value.ToString("dd/MM/yyyy")
+                            </span>
+                            <br />
+
+                        }
+                        <span class="alert-danger">@item.Comback</span><br />
+
+
+
+                    </td>
+                    <td>
+                        @item.Amount
+
+                    </td>
+                    <td>
+                        @if (User.IsInRole("Agency") || User.IsInRole("KTV"))
+                        {
+                            <span>@item.KTV</span>
+                            <br />
+                            <span class="alert-success">@item.KTVNote</span>
+                        }
+                        else
+                        {
+                            if (item.Status == 2 && item.KTV == null)
+                            {
+                                <div class="btn-warning">
+                                    @*<a href="javascript:void(0)" class="addktvs"> chuyển thợ</a>*@
+                                    <a href="/warranti/addktv_newtab/@item.IdKey">chuyển thợ</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <a href="/warranti/addktv_newtab/@item.IdKey">@item.KTV</a>
+                                @*<a href="javascript:void(0)" class="addktvs">
+                        @item.KTV
+                    </a>*@
+                                <br />
+                                <span class="alert-success">@item.KTVNote</span>
+
+                            }
+                        }
+
+
+                    </td>
+
+                    <td>
+                        @foreach (var i in item.Devices)
+                        {
+                            <span>@i.Name @i.Price</span><br />
+                        }
+
+                    </td>
+                    <td>
+                        @item.Extra
+
+                    </td>
+
+                    <td>
+                        @if (item.IdKey != null)
+                        {
+                            <a href="/warranti/success/@item.IdKey" class="text-primary" title="hoàn thành phiếu">
+                                <i class="mdi mdi-table-edit"></i>
+                            </a>
+                            <a href="/warranti/editnew/@item.Id" class="text-primary" title="chỉnh sửa  phiếu">
+                                <i class="mdi  mdi-pencil-box"></i>
+                            </a>
+                            if (item.Image.Count() > 0)
+                            {
+                                <a onclick="openModal();currentSlide(1)" onclick="" class="images" title="hình ảnh">
+                                    <i class="mdi mdi-camera"></i>
+                                </a>
+
+                                @*<a href="/warranti/viewimage_newtab/@item.IdKey">
+                        <i class="mdi mdi-camera"></i>
+                    </a>*@
+                            }
+
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+                                           new
+                                               {
+                                                   page,
+                                               status = ViewBag.status,
+                                               textString = ViewBag.textString,
+                                               textString1 = ViewBag.textString1,
+                                               textString2 = ViewBag.textString2,
+                                               channel = ViewBag.channel,
+                                               cr_date = ViewBag.cr_date,
+                                               start_date = ViewBag.start_date,
+                                               end_date = ViewBag.end_date,
+                                               sdate = ViewBag.sdate,
+                                               edate = ViewBag.edate
+
+                                           }))
+</section>
+
+
+
+<!--Bootstrap Pop Up modal-->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-body" id="ModalBody">
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--End of Bootstrap Pop-Up modal-->

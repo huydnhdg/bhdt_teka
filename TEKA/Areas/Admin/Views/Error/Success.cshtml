@@ -1,0 +1,577 @@
+﻿@model TEKA.Areas.Admin.Models.NoteModel
+
+@{
+    ViewBag.Title = "Warranti";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+
+    List<TEKA.Models.MoveFee> km = (List<TEKA.Models.MoveFee>)TempData["km"];
+    List<TEKA.Models.Device> device = (List<TEKA.Models.Device>)TempData["device"];
+
+    string lat = Model.Lat.ToString().Replace(',', '.');
+    string lng = Model.Long.ToString().Replace(',', '.');
+
+
+
+}
+<style>
+    .modal.fade .modal-dialog {
+        transform: translate(0,0);
+    }
+
+    .ui-autocomplete {
+        width: 280px;
+        background-color: gainsboro;
+    }
+
+    .ui-autocomplete-loading {
+        background: none;
+    }
+
+    textarea.form-control {
+        height: 100px;
+    }
+
+    .image-area {
+        position: relative;
+        width: 50px;
+        background: #333;
+    }
+
+        .image-area img {
+            height: auto;
+        }
+
+    .remove-image {
+        display: none;
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        border-radius: 10em;
+        padding: 1px 3px 1px;
+        text-decoration: none;
+        font: 700 16px/15px sans-serif;
+        background: #555;
+        border: 1px solid #fff;
+        color: #FFF;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 2px 4px rgba(0,0,0,0.3);
+        text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        -webkit-transition: background 0.5s;
+        transition: background 0.5s;
+    }
+
+        .remove-image:hover {
+            background: #E54E4E;
+            padding: 3px 7px 5px;
+            top: -11px;
+            right: -11px;
+        }
+
+        .remove-image:active {
+            background: #E54E4E;
+            top: -10px;
+            right: -11px;
+        }
+</style>
+@using (Html.BeginForm("Success", "Error", FormMethod.Post, new { enctype = "multipart/form-data", id = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4 class="text-center">@Resources.Resources.warranti_success</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+    <div class="col-md-6">
+
+        <div class="form-group">
+            @Html.Label("Loại dịch vụ", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.DropDownListFor(model => model.Category,
+              new List<SelectListItem>
+                {
+                new SelectListItem { Value = "Bảo hành" , Text = Resources.Resources.warranti },
+            
+                new SelectListItem { Value = "Tính phí" , Text = Resources.Resources.charge },
+                },
+                new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label(Resources.Resources.status, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.DropDownListFor(model => model.status,
+           new List<SelectListItem>
+                            {
+                            new SelectListItem { Value = "9" , Text = Resources.Resources.cancel },
+                            new SelectListItem { Value = "0" , Text = Resources.Resources.news },
+                            new SelectListItem { Value = "1" , Text = Resources.Resources.success },
+                            new SelectListItem { Value = "2" , Text = Resources.Resources.change_station },
+                            new SelectListItem { Value = "3" , Text = Resources.Resources.refuse_station },
+                            new SelectListItem { Value = "5" , Text = Resources.Resources.processing },
+                            new SelectListItem { Value = "6" , Text = Resources.Resources.bringback},
+                            new SelectListItem { Value = "7" , Text = Resources.Resources.wait_access },
+                            new SelectListItem { Value = "8" , Text = Resources.Resources.wait_response },
+                            },
+             new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label(Resources.Resources.deadline, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(m => m.Deadline, "{0:dd/MM/yyyy}", new { @type = "text", @class = "form-control datepicker", @placeholder = "dd/mm/yyyy" })
+                @Html.ValidationMessageFor(model => model.Deadline, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label(Resources.Resources.succ_date, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(m => m.Successdate, "{0:dd/MM/yyyy}", new { @type = "text", @class = "form-control datepicker", @placeholder = "dd/mm/yyyy" })
+                @Html.ValidationMessageFor(model => model.Successdate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Phân loại", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.DropDownListFor(model => model.CateError,
+           new List<SelectListItem>
+                            {
+                              new SelectListItem { Value = "" , Text = Resources.Resources.cate_service },
+                            new SelectListItem { Value = "Lắp đặt" , Text = "Lắp đặt" },
+                            new SelectListItem { Value = "Tháo sản phẩm cũ để lắp sản phẩm mới" , Text = "Tháo sản phẩm cũ để lắp sản phẩm mới" },
+                            new SelectListItem { Value = "Vệ sinh Sản phẩm" , Text = "Vệ sinh Sản phẩm" },
+                          
+                            new SelectListItem { Value = "Tháo sản phẩm về trạm sửa chữa" , Text = "Tháo sản phẩm về trạm sửa chữa" },
+                              new SelectListItem { Value = "Sửa chữa" , Text = "Sửa chữa" },
+                            },
+             new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CateError, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label(Resources.Resources.war_note, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.Note, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label(Resources.Resources.photo, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                <input type="file" multiple id="checkin" name="checkin" class="form-control" />
+
+                <div>
+                    @if (Model.Checkin != null && Model.Checkin.Count() > 0)
+                    {
+                        for (var i = 0; i < Model.Checkin.Count(); i++)
+                        {
+                            <div class="image-area" style="float:left; margin: 0 5px;">
+                                <img src="@Model.Checkin[i].Image" alt="Preview" width="50">
+                                <a class="remove-image" onclick="return confirm('Xóa ảnh này?')" style="display: inline;" href="/admin/error/deleteimage/@Model.Checkin[i].ID">&#215;</a>
+                            </div>
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label(Resources.Resources.photo, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                <input type="file" multiple id="checkout" name="checkout" class="form-control" />
+
+                <div>
+                    @if (Model.Checkout != null && Model.Checkout.Count() > 0)
+                    {
+                        for (var i = 0; i < Model.Checkout.Count(); i++)
+                        {
+                            <div class="image-area" style="float:left; margin: 0 5px;">
+                                <img src="@Model.Checkout[i].Image" alt="Preview" width="50">
+                                <a class="remove-image" onclick="return confirm('Xóa ảnh này?')" style="display: inline;" href="/admin/error/deleteimage/@Model.Checkout[i].ID">&#215;</a>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label(Resources.Resources.result, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextAreaFor(model => model.Comeback, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Comeback, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <div class="col-md-12">
+                @if (Model.Lat != null && Model.Lat != 0)
+                {
+                    <iframe style="width: 100%; height: 300px;" src="https://maps.google.com/maps?q=@lat,@lng&hl=es;z=14&amp;output=embed"></iframe>
+                }
+
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label(Resources.Resources.fee_move, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9 row">
+                <div class="col-md-7">
+                    @Html.DropDownListFor(model => model.KM, new SelectList(km, "Cate", "Cate"), "Chọn", new { @class = "form-control", @onchange = "kmchange()" })
+                </div>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.MoveFee, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Phí di chuyển dưới 50km", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                <table class="row">
+                    <tr>
+                        <td class="col-md-9">@Html.EditorFor(model => model.Distance, new { htmlAttributes = new { @class = "form-control", @placeholder = "Số km", @onchange = "Distancechange()" } })</td>
+                        <td>@Html.EditorFor(model => model.DistanceFee, new { htmlAttributes = new { @class = "form-control", @placeholder = "" } })</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label(Resources.Resources.accessary, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                <table class="row">
+                    <tbody id="tbBills">
+                        @for (var i = 0; i < Model.ListPhutung.Count(); i++)
+                        {
+                            <tr>
+                                <td class="col-md-9">@Html.EditorFor(model => model.ListPhutung[i].Name, new { htmlAttributes = new { @class = "form-control" } })</td>
+                                <td>@Html.EditorFor(model => model.ListPhutung[i].Price, new { htmlAttributes = new { @class = "form-control" ,@onchange = "getprice(this.id)" } })</td>
+                            </tr>
+                        }
+                        @*<tr id="trBook0">
+                            <td class="col-md-9"><input class="form-control" id="ListPhutung_0__Name" name="ListPhutung[0].Name" onchange="getprice(this.id)" /></td>
+                            <td><input class="form-control" id="ListPhutung_0__Price" name="ListPhutung[0].Price" /></td>
+                        </tr>*@
+                    </tbody>
+                </table>
+                <a href="#" id="addProds" class="text-warning" onclick="addRow();"><i class="mdi mdi-plus" data-name="mdi-plus"></i> </a>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label(Resources.Resources.fee_access, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.Cost, new { htmlAttributes = new { @class = "form-control", @onchange = "pricechange()", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Cost, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Phí phụ tùng bổ sung", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.AccessaryFee, new { htmlAttributes = new { @class = "form-control", @onchange = "pricechange()" } })
+                @Html.ValidationMessageFor(model => model.AccessaryFee, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Phí sửa bo", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @onchange = "pricechange()" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Phí vận chuyển", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.TravelFee, new { htmlAttributes = new { @class = "form-control", @onchange = "pricechange()" } })
+                @Html.ValidationMessageFor(model => model.TravelFee, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @if (Model.Category == "Bảo hành")
+        {
+            <div class="form-group">
+                @Html.Label("Phí bảo hành", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    <table class="row">
+                        <tr>
+                            <td class="col-md-9">@Html.EditorFor(model => model.Name_price, new { htmlAttributes = new { @class = "form-control", @placeholder = "Tên dịch vụ" } })</td>
+                            <td>@Html.EditorFor(model => model.Service_price, new { htmlAttributes = new { @class = "form-control", @placeholder = "Giá bảo hành" } })</td>
+                            <td> @Html.EditorFor(model => model.CharFee, new { htmlAttributes = new { @class = "form-control", @placeholder = "Giá tính phí" , @hidden = "hidden" } })</td>
+                               
+                       
+                            <td>@Html.EditorFor(model => model.PubFee, new { htmlAttributes = new { @class = "form-control", @placeholder = "Giá công bố", @hidden = "hidden" } })</td>
+                         
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="form-group">
+                @Html.Label("Phí tính phí,lắp đặt", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9 row">
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.Name_price, new { htmlAttributes = new { @class = "form-control", @placeholder = "Tên dịch vụ" } })
+                    </div>
+                    <div class="">
+                        @Html.EditorFor(model => model.Service_price, new { htmlAttributes = new { @class = "form-control", @placeholder = "Giá bảo hành", @hidden = "hidden" } })
+                    </div>
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.CharFee, new { htmlAttributes = new { @class = "form-control", @placeholder = "Giá tính phí" } })
+                    </div>
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.PubFee, new { htmlAttributes = new { @class = "form-control", @placeholder = "Giá công bố" } })
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="form-group">
+            @Html.Label(Resources.Resources.sum_money, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="text-center">
+                <input type="submit" value="@Resources.Resources.warranti_success" class="btn btn-warning" />
+            </div>
+        </div>
+
+    </div>
+    </div>
+}
+
+<!--Bootstrap Pop Up modal-->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-body" id="ModalBody">
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--End of Bootstrap Pop-Up modal-->
+@section scripts{
+
+    <script>
+        $('#form').submit(function () {
+            var status = $('#status').val();
+            var deadline = $('#Deadline').val();
+            if (deadline == "") {
+                alert("Nhập ngày dự kiến hoàn thành công việc.");
+                return false;
+            }
+            var a = deadline.split('/');
+            var today = new Date();
+            var todate = new Date(a[2], a[1], a[0]);
+            if (todate < today && (status == 2 || status == 5 || status == 6 || status == 7 || status == 8)) {
+
+                alert("Nhập ngày dự kiến hoàn thành công việc.");
+                return false;
+
+            }
+            var textstatus = $('#status option:selected').html();
+            var r = confirm("Trạng thái phiếu " + textstatus + " dự kiến đến " + deadline);
+            if (r == true) {
+                txt = "OK";
+                return true;
+            } else {
+                txt = "Cancel";
+                return false;
+            }
+        });
+        function changecost() {
+
+        }
+        $("#ListPhutung_0__Name").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Admin/Error/AutoCompleteCountry",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.Name, value: item.Name };
+                        }))
+                    }
+                })
+            },
+
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+        $("#Name_price").autocomplete({
+            source: function (request, response) {
+                var cateer = $("#CateError").val();
+
+                $.ajax({
+                    url: "/Admin/Error/AutoCompleteSerFee",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term, cateer: cateer },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.Name, value: item.Name, label1: item.Warfee, label2: item.Charfee, label3: item.Pubfee };
+                        }))
+                    }
+                })
+            },
+            select: function (event, ui) {
+                var cate = $("#Category").val();
+
+                if (cate == "Bảo hành") {
+
+                    $("#Service_price").val(ui.item.label1);
+                    $("#CharFee").val(0);
+                  $("#PubFee").val(0);
+                }
+                else
+                { 
+                    $("#Service_price").val(0);
+                    $("#CharFee").val(ui.item.label2);
+                    $("#PubFee").val(ui.item.label3);
+     
+                }
+                pricechange();
+            },
+            
+        });
+        function kmchange() {
+            var km = $("#KM").val();
+            $.ajax({
+                url: '/Admin/Error/GetKMPrice',
+                type: 'POST',
+                datatype: 'application/json',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    km: km
+                }),
+                success: function (result) {
+                    $("#MoveFee").val(result);
+
+                    var move = $("#MoveFee").val();
+                    var price = $("#Price").val();
+                    var cost = $("#Cost").val();
+                    var amount = Number(move) + Number(price) + Number(cost);
+                    $("#Amount").val(amount);
+                },
+                error: function () {
+                },
+            });
+        }
+        function Distancechange() {
+            var distance = $("#Distance").val();
+            $.ajax({
+                url: '/Admin/Error/DistancePrice',
+                type: 'POST',
+                datatype: 'application/json',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    distance: distance
+                }),
+                success: function (result) {
+                    $("#DistanceFee").val(result);
+
+                    //var move = $("#MoveFee").val();
+                    //var price = $("#Price").val();
+                    //var cost = $("#Cost").val();
+                    //var amount = Number(move) + Number(price) + Number(cost);
+                    //$("#Amount").val(amount);
+                    var move = $("#MoveFee").val();
+                    var price = $("#Price").val();
+                    var cost = $("#Cost").val();
+
+                    var service = $("#Service_price").val();
+                    var travel = $("#TravelFee").val();
+                    var access = $("#AccessaryFee").val();
+                    var distance = $("#DistanceFee").val();
+                    var amount = Number(move) + Number(price) + Number(cost) + Number(service)  +Number(travel) + Number(access) + Number(distance);
+                    $("#Amount").val(amount)
+                },
+                error: function () {
+                },
+            });
+        }
+
+        function pricechange() {
+            var move = $("#MoveFee").val();
+            var price = $("#Price").val();
+            var cost = $("#Cost").val();
+            var service = $("#Service_price").val();
+            var travel = $("#TravelFee").val();
+            var access = $("#AccessaryFee").val();
+            var distance = $("#DistanceFee").val();
+            var charfee = $("#CharFee").val();
+            var pubfee = $("#PubFee").val();
+
+    
+            var amount = Number(move) + Number(price) + Number(cost) + Number(service) + Number(travel) + Number(access) + Number(distance) + Number(charfee) + Number(pubfee);
+
+            $("#Amount").val(amount);
+        }
+
+
+        function getprice(id) {
+            var cate = $('#' + id).val();
+            var index = id.split('_')[1];
+            $.ajax({
+                url: '/Admin/Error/GetPrice',
+                type: "POST",
+                dataType: "JSON",
+                data: { cate: cate },
+                success: function (result) {
+                    $("#ListPhutung_" + index + "__Price").html("");
+                    $("#ListPhutung_" + index + "__Price").val(result);
+
+                    var cost = $("#Cost").val();
+                    var amount = Number(cost) + Number(result);
+                    $("#Cost").val(amount);
+
+                    var move = $("#MoveFee").val();
+                    var price = $("#Price").val();
+                    var cost = $("#Cost").val();
+                    var amount = Number(move) + Number(price) + Number(cost);
+                    $("#Amount").val(amount);
+
+                }
+            });
+        }
+        function addRow() {
+            var index = $("#tbBills").children("tr").length;
+
+            var name = '<td class="col-md-9"><input class="form-control" id="ListPhutung_' + index + '__Name" name="ListPhutung[' + index + '].Name" type="text" onchange="getprice(this.id)"/></td >';
+            var price = '<td><input class="form-control" id="ListPhutung_' + index + '__Price" name="ListPhutung[' + index + '].Price" type="text" /></td >';
+
+            var newRow = "<tr id='trBook" + index + "'>" + name + price + "</tr>";
+            $("#tbBills").append(newRow);
+            $("#ListPhutung_" + index + "__Name").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Admin/Error/AutoCompleteCountry",
+                        type: "POST",
+                        dataType: "json",
+                        data: { term: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.Name, value: item.Name };
+                            }))
+                        }
+                    })
+                },
+                messages: {
+                    noResults: "", results: ""
+                }
+            });
+        }
+    </script>
+
+}
+

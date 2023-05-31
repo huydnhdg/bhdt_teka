@@ -1,0 +1,19 @@
+﻿@model IEnumerable<TEKA.Models.LogWaranti>
+@{
+
+}
+<style>
+    ol li{
+        color:gray;
+        font-style:italic;
+        font-family:'Times New Roman';
+    }
+</style>
+<h5 class="text-center">Quá trình tạo phiếu bảo hành</h5>
+<hr />
+<ol>
+    @foreach (var item in Model)
+    {
+        <li>@item.Createdate | @item.Detail</li>
+    }
+</ol>

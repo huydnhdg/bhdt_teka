@@ -1,0 +1,7 @@
+﻿@model List<TEKA.Models.Setup>
+@{
+    var logo = Model.FirstOrDefault(a => a.Cate == "Logo");
+}
+<a title="" href="~/">
+    <img src="@logo.Url" alt="home" />
+</a>

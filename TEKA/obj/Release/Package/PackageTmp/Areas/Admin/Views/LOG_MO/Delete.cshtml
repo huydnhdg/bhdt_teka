@@ -1,0 +1,81 @@
+﻿@model TEKA.Models.LOG_MO
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>LOG_MO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.User_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Service_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Service_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Request_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Request_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Message)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Message)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Createdate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Createdate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Response)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Response)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,630 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="accessary" xml:space="preserve">
+    <value>Phụ tùng</value>
+  </data>
+  <data name="access_code" xml:space="preserve">
+    <value>Mã phụ tùng</value>
+  </data>
+  <data name="access_name" xml:space="preserve">
+    <value>Tên phụ tùng</value>
+  </data>
+  <data name="account" xml:space="preserve">
+    <value>Tài khoản đăng nhập</value>
+  </data>
+  <data name="active" xml:space="preserve">
+    <value>Kích hoạt</value>
+  </data>
+  <data name="active_date" xml:space="preserve">
+    <value>Ngày kích hoạt</value>
+  </data>
+  <data name="active_description" xml:space="preserve">
+    <value>Chào mừng thành viên của TEKA, để kích hoạt sản phẩm vui lòng điền đầy đủ thông tin dưới đây.</value>
+  </data>
+  <data name="active_list" xml:space="preserve">
+    <value>Kích hoạt</value>
+  </data>
+  <data name="add_late" xml:space="preserve">
+    <value>Bổ sung sau</value>
+  </data>
+  <data name="agent" xml:space="preserve">
+    <value>Đại lý</value>
+  </data>
+  <data name="agent_info" xml:space="preserve">
+    <value>THÔNG TIN ĐẠI LÝ</value>
+  </data>
+  <data name="agent_store" xml:space="preserve">
+    <value>Tên điểm bán hàng</value>
+  </data>
+  <data name="all" xml:space="preserve">
+    <value>Tất cả</value>
+  </data>
+  <data name="answered" xml:space="preserve">
+    <value>Đã trả lời</value>
+  </data>
+  <data name="article" xml:space="preserve">
+    <value>Bài viết</value>
+  </data>
+  <data name="birthday" xml:space="preserve">
+    <value>Ngày sinh</value>
+  </data>
+  <data name="bringback" xml:space="preserve">
+    <value>Đem về trạm</value>
+  </data>
+  <data name="busy" xml:space="preserve">
+    <value>Bận</value>
+  </data>
+  <data name="buydate" xml:space="preserve">
+    <value>Ngày mua hàng</value>
+  </data>
+  <data name="calling" xml:space="preserve">
+    <value>Đang gọi</value>
+  </data>
+  <data name="call_center" xml:space="preserve">
+    <value>Tổng đài</value>
+  </data>
+  <data name="call_date" xml:space="preserve">
+    <value>Ngày gọi</value>
+  </data>
+  <data name="call_key" xml:space="preserve">
+    <value>Đầu số gọi ra</value>
+  </data>
+  <data name="call_now" xml:space="preserve">
+    <value>Gọi ngay</value>
+  </data>
+  <data name="call_time" xml:space="preserve">
+    <value>TG gọi</value>
+  </data>
+  <data name="call_to" xml:space="preserve">
+    <value>Gọi đến</value>
+  </data>
+  <data name="cancel" xml:space="preserve">
+    <value>Hủy bỏ</value>
+  </data>
+  <data name="cate" xml:space="preserve">
+    <value>Phân loại</value>
+  </data>
+  <data name="cate_service" xml:space="preserve">
+    <value>Loại dịch vụ</value>
+  </data>
+  <data name="center_warranti" xml:space="preserve">
+    <value>TRUNG TÂM CHĂM SÓC KHÁCH HÀNG</value>
+  </data>
+  <data name="chanel" xml:space="preserve">
+    <value>Kênh</value>
+  </data>
+  <data name="change_pass" xml:space="preserve">
+    <value>Đổi mật khẩu</value>
+  </data>
+  <data name="change_pass_des" xml:space="preserve">
+    <value>Để thay đổi mật khẩu, vui lòng điền đầy đủ thông tin form dưới đây.</value>
+  </data>
+  <data name="change_station" xml:space="preserve">
+    <value>Chuyển trạm</value>
+  </data>
+  <data name="charge" xml:space="preserve">
+    <value>Tính phí</value>
+  </data>
+  <data name="choose_ktv" xml:space="preserve">
+    <value>Chỉ định thợ</value>
+  </data>
+  <data name="code_notvalid" xml:space="preserve">
+    <value>Mã phiếu không đúng</value>
+  </data>
+  <data name="code_warranti" xml:space="preserve">
+    <value>Mã phiếu BH</value>
+  </data>
+  <data name="comfirm" xml:space="preserve">
+    <value>Bạn đồng ý thực hiện thao tác này?</value>
+  </data>
+  <data name="contact" xml:space="preserve">
+    <value>LIÊN HỆ</value>
+  </data>
+  <data name="content" xml:space="preserve">
+    <value>Nội dung</value>
+  </data>
+  <data name="count" xml:space="preserve">
+    <value>Số lượng</value>
+  </data>
+  <data name="count_warranti" xml:space="preserve">
+    <value>Số yêu cầu nhận</value>
+  </data>
+  <data name="createdate" xml:space="preserve">
+    <value>Ngày tạo</value>
+  </data>
+  <data name="create_new" xml:space="preserve">
+    <value>TẠO MỚI</value>
+  </data>
+  <data name="create_warranti" xml:space="preserve">
+    <value>Đặt lịch</value>
+  </data>
+  <data name="customer" xml:space="preserve">
+    <value>Khách hàng</value>
+  </data>
+  <data name="customer_active" xml:space="preserve">
+    <value>Khách hàng kích hoạt</value>
+  </data>
+  <data name="cus_address" xml:space="preserve">
+    <value>Địa chỉ</value>
+  </data>
+  <data name="cus_district" xml:space="preserve">
+    <value>Quận/Huyện</value>
+  </data>
+  <data name="cus_name" xml:space="preserve">
+    <value>Họ và tên</value>
+  </data>
+  <data name="cus_phone" xml:space="preserve">
+    <value>Số điện thoại</value>
+  </data>
+  <data name="cus_province" xml:space="preserve">
+    <value>Tỉnh/Thành phố</value>
+  </data>
+  <data name="date" xml:space="preserve">
+    <value>Hạn BH(Tháng)</value>
+  </data>
+  <data name="deadline" xml:space="preserve">
+    <value>Ngày dự kiến</value>
+  </data>
+  <data name="description" xml:space="preserve">
+    <value>Mô tả</value>
+  </data>
+  <data name="des_for_home" xml:space="preserve">
+    <value>Mô tả trang chủ</value>
+  </data>
+  <data name="duration" xml:space="preserve">
+    <value>Thời gian (ngày)</value>
+  </data>
+  <data name="end_date" xml:space="preserve">
+    <value>Hạn bảo hành</value>
+  </data>
+  <data name="err_install" xml:space="preserve">
+    <value>Lỗi lắp đặt</value>
+  </data>
+  <data name="err_product" xml:space="preserve">
+    <value>Lỗi sản phẩm</value>
+  </data>
+  <data name="err_use" xml:space="preserve">
+    <value>Lỗi sử dụng</value>
+  </data>
+  <data name="export" xml:space="preserve">
+    <value>Xuất kho</value>
+  </data>
+  <data name="exportdate" xml:space="preserve">
+    <value>Ngày xuất kho</value>
+  </data>
+  <data name="export_file" xml:space="preserve">
+    <value>Xuất file</value>
+  </data>
+  <data name="fee" xml:space="preserve">
+    <value>Chi phí</value>
+  </data>
+  <data name="fee_access" xml:space="preserve">
+    <value>Phí phụ tùng</value>
+  </data>
+  <data name="fee_move" xml:space="preserve">
+    <value>Phí di chuyển</value>
+  </data>
+  <data name="fee_warranti" xml:space="preserve">
+    <value>Phí bảo hành</value>
+  </data>
+  <data name="for_station" xml:space="preserve">
+    <value>Theo trạm</value>
+  </data>
+  <data name="from_number" xml:space="preserve">
+    <value>Từ số</value>
+  </data>
+  <data name="help_active" xml:space="preserve">
+    <value>HƯỚNG DẪN KÍCH HOẠT</value>
+  </data>
+  <data name="history_call" xml:space="preserve">
+    <value>Lịch sử gọi</value>
+  </data>
+  <data name="home_hotline" xml:space="preserve">
+    <value>Liên hệ tổng đài</value>
+  </data>
+  <data name="home_note" xml:space="preserve">
+    <value>Lưu ý khách hàng có thể kích hoạt và báo lỗi sản phẩm qua tổng đài</value>
+  </data>
+  <data name="index" xml:space="preserve">
+    <value>STT</value>
+  </data>
+  <data name="info" xml:space="preserve">
+    <value>Thông tin</value>
+  </data>
+  <data name="info_help" xml:space="preserve">
+    <value>THÔNG TIN HỖ TRỢ</value>
+  </data>
+  <data name="info_prod" xml:space="preserve">
+    <value>THÔNG TIN SẢN PHẨM</value>
+  </data>
+  <data name="info_warranti" xml:space="preserve">
+    <value>Thông tin lịch</value>
+  </data>
+  <data name="input_serial" xml:space="preserve">
+    <value>Nhập serial sản phẩm</value>
+  </data>
+  <data name="install" xml:space="preserve">
+    <value>Lắp đặt</value>
+  </data>
+  <data name="installdate" xml:space="preserve">
+    <value>Ngày lắp đặt</value>
+  </data>
+  <data name="login" xml:space="preserve">
+    <value>Đăng nhập</value>
+  </data>
+  <data name="login_des" xml:space="preserve">
+    <value>Vui lòng đăng nhập theo form dưới đây</value>
+  </data>
+  <data name="logout" xml:space="preserve">
+    <value>Đăng xuất</value>
+  </data>
+  <data name="menu_active" xml:space="preserve">
+    <value>KÍCH HOẠT BẢO HÀNH TRỰC TUYẾN</value>
+  </data>
+  <data name="menu_help" xml:space="preserve">
+    <value>HƯỚNG DẪN</value>
+  </data>
+  <data name="menu_home" xml:space="preserve">
+    <value>TRANG CHỦ</value>
+  </data>
+  <data name="menu_login" xml:space="preserve">
+    <value>ĐĂNG NHẬP</value>
+  </data>
+  <data name="menu_search" xml:space="preserve">
+    <value>TRA CỨU</value>
+  </data>
+  <data name="menu_warranti" xml:space="preserve">
+    <value>ĐẶT LỊCH TRỰC TUYẾN</value>
+  </data>
+  <data name="news" xml:space="preserve">
+    <value>Mới tạo</value>
+  </data>
+  <data name="not_active" xml:space="preserve">
+    <value>Chưa kích hoạt</value>
+  </data>
+  <data name="not_answer" xml:space="preserve">
+    <value>Không trả lời</value>
+  </data>
+  <data name="outdate" xml:space="preserve">
+    <value>Quá hạn</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>Mật khẩu</value>
+  </data>
+  <data name="pass_confirm" xml:space="preserve">
+    <value>Xác nhận mật khẩu</value>
+  </data>
+  <data name="pass_new" xml:space="preserve">
+    <value>Mật khẩu mới</value>
+  </data>
+  <data name="pass_now" xml:space="preserve">
+    <value>Mật khẩu hiện tại</value>
+  </data>
+  <data name="payment" xml:space="preserve">
+    <value>Thanh toán</value>
+  </data>
+  <data name="payment_not" xml:space="preserve">
+    <value>Chưa thanh toán</value>
+  </data>
+  <data name="payment_ok" xml:space="preserve">
+    <value>Đã thanh toán</value>
+  </data>
+  <data name="pay_check" xml:space="preserve">
+    <value>Xác nhận thanh toán</value>
+  </data>
+  <data name="pay_time" xml:space="preserve">
+    <value>TG tính tiền</value>
+  </data>
+  <data name="phoneserial_not_valid" xml:space="preserve">
+    <value>Số điện thoại/ Serial này không tồn tại trong hệ thống TEKA.</value>
+  </data>
+  <data name="phone_active" xml:space="preserve">
+    <value>Số điện thoại kích hoạt</value>
+  </data>
+  <data name="phone_call" xml:space="preserve">
+    <value>Số liên hệ</value>
+  </data>
+  <data name="photo" xml:space="preserve">
+    <value>Hình ảnh</value>
+  </data>
+  <data name="place_teka_good" xml:space="preserve">
+    <value>Vui lòng điền đầy đủ họ tên để TEKA hỗ trợ tốt nhất</value>
+  </data>
+  <data name="play_rec" xml:space="preserve">
+    <value>Phát file ghi âm</value>
+  </data>
+  <data name="policy" xml:space="preserve">
+    <value>CHÍNH SÁCH BẢO HÀNH</value>
+  </data>
+  <data name="price" xml:space="preserve">
+    <value>Giá</value>
+  </data>
+  <data name="processing" xml:space="preserve">
+    <value>Đang xử lý</value>
+  </data>
+  <data name="product" xml:space="preserve">
+    <value>Sản phẩm</value>
+  </data>
+  <data name="product_cate_list" xml:space="preserve">
+    <value>Tất cả sản phẩm</value>
+  </data>
+  <data name="product_list" xml:space="preserve">
+    <value>Sản phẩm xuất kho</value>
+  </data>
+  <data name="prod_cate" xml:space="preserve">
+    <value>Loại sản phẩm</value>
+  </data>
+  <data name="prod_code" xml:space="preserve">
+    <value>Mã sản phẩm</value>
+  </data>
+  <data name="prod_name" xml:space="preserve">
+    <value>Tên sản phẩm</value>
+  </data>
+  <data name="prod_notvalid" xml:space="preserve">
+    <value>Không tìm thấy thông tin sản phẩm</value>
+  </data>
+  <data name="prod_serial" xml:space="preserve">
+    <value>Serial sản phẩm</value>
+  </data>
+  <data name="PXK" xml:space="preserve">
+    <value>PXK</value>
+  </data>
+  <data name="question" xml:space="preserve">
+    <value>Câu hỏi</value>
+  </data>
+  <data name="range" xml:space="preserve">
+    <value>Khoản cách</value>
+  </data>
+  <data name="rec" xml:space="preserve">
+    <value>Ghi âm</value>
+  </data>
+  <data name="recall" xml:space="preserve">
+    <value>Thu hồi</value>
+  </data>
+  <data name="refuse_station" xml:space="preserve">
+    <value>Trạm từ chối</value>
+  </data>
+  <data name="report_warranti" xml:space="preserve">
+    <value>Thống kê bảo hành</value>
+  </data>
+  <data name="required" xml:space="preserve">
+    <value>Các đề mục đánh dấu sao (*) là bắt buộc</value>
+  </data>
+  <data name="result" xml:space="preserve">
+    <value>Kết quả</value>
+  </data>
+  <data name="rule_active" xml:space="preserve">
+    <value>ĐIỀU KHOẢN KÍCH HOẠT</value>
+  </data>
+  <data name="save" xml:space="preserve">
+    <value>Lưu thông tin</value>
+  </data>
+  <data name="sch_active" xml:space="preserve">
+    <value>TRA CỨU THÔNG TIN KÍCH HOẠT BẢO HÀNH</value>
+  </data>
+  <data name="sch_active_des" xml:space="preserve">
+    <value>Chào mừng thành viên của TEKA, để tra cứu bảo hành vui lòng điền đầy đủ thông tin dưới đây.</value>
+  </data>
+  <data name="sch_warranti" xml:space="preserve">
+    <value>TRA CỨU THÔNG TIN BẢO HÀNH</value>
+  </data>
+  <data name="sch_warranti_des" xml:space="preserve">
+    <value>Chào mừng thành viên của TEKA, để tra cứu bảo hành vui lòng điền đầy đủ thông tin dưới đây.</value>
+  </data>
+  <data name="search" xml:space="preserve">
+    <value>Tìm kiếm</value>
+  </data>
+  <data name="search_active" xml:space="preserve">
+    <value>TRA CỨU KÍCH HOẠT</value>
+  </data>
+  <data name="search_active_product" xml:space="preserve">
+    <value>TRA CỨU KÍCH HOẠT SẢN PHẨM</value>
+  </data>
+  <data name="sent_notifi" xml:space="preserve">
+    <value>Gửi notifi</value>
+  </data>
+  <data name="slogan" xml:space="preserve">
+    <value>TRUNG TÂM BẢO HÀNH ĐIỆN TỬ TEKA</value>
+  </data>
+  <data name="sms_active" xml:space="preserve">
+    <value>Đại lý kích hoạt</value>
+  </data>
+  <data name="sort" xml:space="preserve">
+    <value>Sắp xếp</value>
+  </data>
+  <data name="start_date" xml:space="preserve">
+    <value>Từ ngày</value>
+  </data>
+  <data name="station" xml:space="preserve">
+    <value>Trạm bảo hành</value>
+  </data>
+  <data name="status" xml:space="preserve">
+    <value>Trạng thái</value>
+  </data>
+  <data name="status_end" xml:space="preserve">
+    <value>Hết hạn</value>
+  </data>
+  <data name="status_not" xml:space="preserve">
+    <value>Chưa kích hoạt</value>
+  </data>
+  <data name="status_ok" xml:space="preserve">
+    <value>Đã kích hoạt</value>
+  </data>
+  <data name="store" xml:space="preserve">
+    <value>Cửa hàng</value>
+  </data>
+  <data name="success" xml:space="preserve">
+    <value>Hoàn thành</value>
+  </data>
+  <data name="succ_date" xml:space="preserve">
+    <value>Ngày hoàn thành</value>
+  </data>
+  <data name="sum_money" xml:space="preserve">
+    <value>Tổng tiền</value>
+  </data>
+  <data name="taxcode" xml:space="preserve">
+    <value>Mã số thuế</value>
+  </data>
+  <data name="technicians" xml:space="preserve">
+    <value>Kỹ thuật viên</value>
+  </data>
+  <data name="title" xml:space="preserve">
+    <value>Tiêu đề</value>
+  </data>
+  <data name="to_number" xml:space="preserve">
+    <value>Đến số</value>
+  </data>
+  <data name="update" xml:space="preserve">
+    <value>Cập nhật</value>
+  </data>
+  <data name="update_status" xml:space="preserve">
+    <value>Cập nhật trạng thái</value>
+  </data>
+  <data name="wait_access" xml:space="preserve">
+    <value>Chờ linh kiện</value>
+  </data>
+  <data name="wait_response" xml:space="preserve">
+    <value>Chờ phản hồi</value>
+  </data>
+  <data name="warranti" xml:space="preserve">
+    <value>Bảo hành</value>
+  </data>
+  <data name="warranti_check" xml:space="preserve">
+    <value>Xác nhận bảo hành</value>
+  </data>
+  <data name="warranti_multi_prod" xml:space="preserve">
+    <value>Nhiều sản phẩm</value>
+  </data>
+  <data name="warranti_success" xml:space="preserve">
+    <value>Hoàn thành phiếu</value>
+  </data>
+  <data name="war_create" xml:space="preserve">
+    <value>Tạo mới thông tin bảo hành</value>
+  </data>
+  <data name="war_des" xml:space="preserve">
+    <value>Mô tả lỗi</value>
+  </data>
+  <data name="war_note" xml:space="preserve">
+    <value>Ghi chú</value>
+  </data>
+  <data name="war_person" xml:space="preserve">
+    <value>Người phụ trách</value>
+  </data>
+</root>

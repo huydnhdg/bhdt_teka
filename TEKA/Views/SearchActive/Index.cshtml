@@ -1,0 +1,118 @@
+﻿@model IEnumerable<TEKA.Models.ActiveSearch>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var index = 0;
+}
+
+<section id="multiactive">
+    <div>
+        <h1>@Resources.Resources.sch_active</h1>
+        <p class="text-justify">@Resources.Resources.sch_active_des</p>
+        <p class="p-red">@Resources.Resources.required</p>
+        <div style="text-align:center;margin: 15px 0;"><img src="~/Image/teka3_03.png" alt="" class="img-responsive" /></div>
+    </div>
+    <form class="forms-sample" id="form" method="post">
+        <table>
+            <tr>
+                <td>
+                    <label class="">
+                        -*@Resources.Resources.phone_active<br />
+                        -*@Resources.Resources.prod_serial
+                    </label>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" id="phone" type="text" required name="phone" value="@ViewBag.phone" />
+                    </div>
+
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td style="text-align:center;">
+                    <button class="btn" id="btn" value="save" type="submit">@Resources.Resources.menu_search</button>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+    @if (ViewBag.message != null)
+    {
+        <div>
+            <p class="text-center text-danger">@Resources.Resources.phoneserial_not_valid</p>
+        </div>
+    }
+    @if (Model != null)
+    {
+
+
+        <div class="table-responsive">
+            @if (ViewBag.customer != null)
+            {
+                <div>
+                    <label>@Resources.Resources.cus_name: </label><label style="margin-left:5px;"><b> @ViewBag.customer.Name</b></label>
+                </div>
+                <div>
+                    <label>@Resources.Resources.phone_active: </label><label style="margin-left: 5px;"><b> @ViewBag.customer.Phone</b></label>
+                </div>
+                <div>
+                    <label>@Resources.Resources.cus_address: </label><label style="margin-left: 5px;"><b> @ViewBag.customer.Address @ViewBag.customer.County @ViewBag.customer.City</b></label>
+
+                </div>
+            }
+
+            <table class="table table-bordered">
+                <thead class="alert-info">
+                    <tr>
+                        <th>#</th>
+                        <th>@Resources.Resources.prod_name</th>
+                        <th>@Resources.Resources.prod_code</th>
+                        <th>Serial</th>
+                        <th>Model</th>
+                        <th>@Resources.Resources.exportdate</th>
+                        <th>@Resources.Resources.active_date</th>
+                        <th>@Resources.Resources.end_date</th>
+                        <th>@Resources.Resources.buydate</th>
+                        <th>@Resources.Resources.agent</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        ++index;
+                        <tr>
+                            <td>@index</td>
+                            <td>@item.Product</td>
+                            <td>@item.CodeProduct</td>
+                            <td>@item.Serial</td>
+                            <td>@item.Model</td>
+                            <td>
+                                @if (item.Exportdate != null)
+                                {<span>@item.Exportdate.Value.ToString("dd/MM/yyyy")</span>}
+                            </td>
+                            <td>
+                                @if (item.ActiveDate != null)
+                                {<span>@item.ActiveDate.Value.ToString("dd/MM/yyyy")</span>}
+                            </td>
+                            <td>
+                                @if (item.EndDate != null)
+                                {<span>@item.EndDate.Value.ToString("dd/MM/yyyy")</span>}
+                            </td>
+                            <td>
+                                @if (item.Buydate != null)
+                                {<span>@item.Buydate.Value.ToString("dd/MM/yyyy")</span>}
+                            </td>
+                            <td>@item.NameAgency</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    <div style="text-align:center;margin: 15px 0;"><img src="~/Image/teka3_03.png" alt="" class="img-responsive" /></div>
+</section>
+
+
+

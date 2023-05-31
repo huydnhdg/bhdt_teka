@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "UploadFileExcel";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    List<int> line = new List<int>();
+    if (ViewBag.line != null)
+    {
+        line = ViewBag.line;
+    }
+}
+@using (Html.BeginForm("UploadFileExcel", "CheckProduct", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div style="margin:100px 100px;line-height:30px;">
+        <div class="form-group">
+            <input class="form-control" type="file" name="UploadedFile" placeholder="" />
+        </div>
+        <div class="form-group">
+            <input type="submit" name="Submit" value="Upload" class="btn btn-outline-info btn-fw" />
+        </div>
+    </div>
+    <p>Đã duyệt đến dòng @ViewBag.mess</p>
+
+}
+@if (ViewBag.line != null)
+{
+    foreach (var item in line)
+    {
+        <p>|@item.ToString()|<br /></p>
+    }
+}
+

@@ -1,0 +1,306 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<TEKA.Models.ProAgenModel>
+@{
+    ViewBag.Title = "Agent";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    List<TEKA.Models.AspNetUser> agency = ViewBag.agency;
+    List<TEKA.Models.Province> province = ViewBag.province;
+}
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('#s7').datetimepicker({
+                format: 'DD/MM/YYYY',
+                allowInputToggle: true,
+                useCurrent: false
+            }).on('dp.change', function (e) {
+                var minNew = e.date;
+                var maxNew = e.date.clone().add(30, 'days');
+                var pickEnd = $('#s8');
+                var minOld = pickEnd.data('DateTimePicker').minDate();
+                var maxOld = pickEnd.data('DateTimePicker').maxDate();
+                if (minOld && minOld.isAfter(maxNew)) {
+                    pickEnd.data('DateTimePicker').minDate(minNew);
+                    pickEnd.data('DateTimePicker').maxDate(maxNew);
+                } else {
+                    pickEnd.data('DateTimePicker').maxDate(maxNew);
+                    pickEnd.data('DateTimePicker').minDate(minNew);
+                }
+            });
+            $('#s8').datetimepicker({
+                format: 'DD/MM/YYYY',
+                allowInputToggle: true,
+                useCurrent: true
+            });
+
+        });
+    </script>
+    <script>
+        function getCityList() {
+            var name = $("#s2").val();
+            $.ajax
+                ({
+                    url: '/DSDaily/GetCityList',
+                    type: 'POST',
+                    datatype: 'application/json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        name: name
+                    }),
+                    success: function (result) {
+                        $("#s3").html("");
+                        $.each($.parseJSON(result), function (i, city) {
+                            $("#s3").append
+                                ($('<option></option>').val(city.Name).html(city.Name))
+                        })
+                    },
+                    error: function () {
+                        alert("Whooaaa! Something went wrong..")
+                    },
+                });
+        }
+    </script>
+    <script type="text/javascript">
+        function exportexcel() {
+            $("#mytable").table2excel({
+                name: "Table2Excel",
+                filename: "ds-daily-sp",
+                fileext: ".xls"
+            });
+        }
+    </script>
+}
+    <section id="agency">
+        <div class="card">
+            <div class="card-body">
+                @using (Html.BeginForm("In", "DSDaily", FormMethod.Get))
+                {
+                    <table>
+                        <tr>
+                            <td class="form-group"><label>@Resources.Resources.agent</label></td>
+                            <td>
+                                <div class="form-group">
+                                    @*@Html.TextBox("s1", ViewBag.c1 as string, new { @class = "form-control" })*@
+                                    <select class="form-control" id="s1" name="s1">
+                                        @if (!string.IsNullOrEmpty(ViewBag.c1))
+                                        {
+                                            <option value="@ViewBag.c1">@ViewBag.c1</option>
+                                        }
+                                        else
+                                        {
+                                    <option value="">@Resources.Resources.all</option>
+                                        }
+                                        @foreach (var item in agency)
+                                        {
+                                            <option value="@item.UserName">@item.NameAgency</option>
+                                        }
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="form-group"><label>@Resources.Resources.cus_province</label></td>
+                            <td>
+                                <div class="form-group">
+                                    @*@Html.TextBox("s2", ViewBag.c2 as string, new { @class = "form-control" })*@
+                                    <select class="form-control" id="s2" name="s2" onchange="getCityList()">
+                                        @if (!string.IsNullOrEmpty(ViewBag.c2))
+                                        {
+                                            <option value="@ViewBag.c2">@ViewBag.c2</option>
+                                        }
+                                        else
+                                        {
+                                    <option value="">@Resources.Resources.all</option>
+                                        }
+                                        @foreach (var item in province)
+                                        {
+                                            <option value="@item.Name">@item.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="form-group"><label>@Resources.Resources.cus_district</label></td>
+                            <td>
+                                <div class="form-group">
+                                    @*@Html.TextBox("s3", ViewBag.c3 as string, new { @class = "form-control" })*@
+                                    <select class="form-control" id="s3" name="s3">
+                                        @if (!string.IsNullOrEmpty(ViewBag.c3))
+                                        {
+                                            <option value="@ViewBag.c3">@ViewBag.c3</option>
+                                        }
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="form-group"><label>Serial</label></td>
+                            <td>
+                                <div class="form-group">
+                                    @Html.TextBox("s4", ViewBag.c4 as string, new { @class = "form-control" })
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="form-group"><label>@Resources.Resources.payment</label></td>
+                            <td>
+                                <div class="form-group">
+                                    <select class="form-control" id="s5" name="s5">
+                                        <option value="">@Resources.Resources.all</option>
+                                        <option value="0">@Resources.Resources.customer_active</option>
+                                        <option value="10">@Resources.Resources.payment_ok</option>
+                                        <option value="11">@Resources.Resources.payment_not</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="form-group"><label>@Resources.Resources.status</label></td>
+                            <td>
+                                <div class="form-group">
+                                    <select class="form-control" id="s6" name="s6">
+                                        <option value="">@Resources.Resources.all</option>
+                                        <option value="0">@Resources.Resources.not_active</option>
+                                        <option value="1">@Resources.Resources.active</option>
+                                        <option value="2">@Resources.Resources.outdate</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="form-group"><label>@Resources.Resources.active_date</label></td>
+                            <td style="max-width:480px;">
+                                <div class="col-sm-6 col-lg-6 col-md-6 col-xs-6 row">
+                                    <div class="form-group">
+                                        <div class='input-group date'>
+                                            @Html.TextBox("s7", ViewBag.c7 as string, new { @class = "form-control inpdate" })
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-lg-6 col-md-6 row" style="float:right;">
+                                    <div class="form-group">
+                                        <div class='input-group date'>
+                                            @Html.TextBox("s8", ViewBag.c8 as string, new { @class = "form-control inpdate" })
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <div class="form-group">
+                                    <button class="btn btn-outline-primary btn-fw">
+                                        <i class="mdi mdi-magnify"></i>@Resources.Resources.search
+                                    </button>
+
+
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                }
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="mytable">
+                        <tr>
+                            <th>
+                                Serial
+                            </th>
+                            <th>
+                                @Resources.Resources.prod_code
+                            </th>
+                            <th>
+                                @Resources.Resources.cus_name
+                            </th>
+                            <th>
+                                @Resources.Resources.cus_phone
+                            </th>
+                            <th>
+                                @Resources.Resources.cus_address
+                            </th>
+                            <th>
+                                @Resources.Resources.active_date
+                            </th>
+                            <th>
+                                @Resources.Resources.status
+                            </th>
+                            <th>
+                                @Resources.Resources.payment
+                            </th>
+                            <th>
+                                @Resources.Resources.end_date
+                            </th>
+                            <th>
+                                @Resources.Resources.agent
+                            </th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Serial)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ProductCode)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Phone)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Address)
+                                </td>
+                                <td>
+                                    @if (item.ActiveDate != null)
+                                    {@Convert.ToDateTime(item.ActiveDate).ToString("dd/MM/yyyy")}
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>
+                                <td>
+                                    @if (item.TT == 10)
+                                    {
+                                    <p>@Resources.Resources.payment_ok</p>
+                                    }
+                                    else if (item.TT == 11)
+                                    {
+                                <p>@Resources.Resources.payment_not</p>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.EndDate != null)
+                                    {@Convert.ToDateTime(item.EndDate).ToString("dd/MM/yyyy")}
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AgencyName)
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        @using (Html.BeginForm("ExportToExcel", "DSDaily", FormMethod.Post))
+        {
+            <input type="submit" value="Export to Excel" class="button btn" />
+        }
+        <div>
+            @Html.PagedListPager(Model, page => Url.Action("In",
+                                                                    new { page, c1 = ViewBag.c1, c2 = ViewBag.c2, c3 = ViewBag.c3, c4 = ViewBag.c4, c5 = ViewBag.c5, c6 = ViewBag.c6, c7 = ViewBag.c7, c8 = ViewBag.c8 }))
+        </div>
+    </section>

@@ -1,0 +1,63 @@
+﻿@model List<TEKA.Models.Warranti>
+@{
+    ViewBag.Title = "Upload Model";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    var index = 0;
+}
+@using (Html.BeginForm("UploadModel", "Error", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div style="margin:100px 100px;line-height:30px;">
+        <div class="form-group">
+            <input class="form-control" type="file" name="UploadedFile" placeholder="" />
+        </div>
+        <div class="form-group">
+            <input type="submit" name="Submit" value="Upload" class="btn btn-outline-info btn-fw" />
+            <a class="btn btn-danger" href="~/Areas/Admin/Data/template_warranti_model.xlsx"><i class="fa fa-file-excel-o"></i> Teamplate</a>
+        </div>
+    </div>
+}
+
+
+@if (ViewBag.text != null)
+{
+    <div class="text-danger">@ViewBag.text</div>
+}
+@if (Model != null)
+{
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>@Resources.Resources.code_warranti</th>
+                <th>@Resources.Resources.prod_cate</th>
+                <th>Model</th>
+                <th>#</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                ++index;
+                <tr>
+                    <td>@index</td>
+                    <td>@item.CodeWarr</td>
+                    <td>@item.ProductCate</td>
+                    <th>@item.Model</th>
+                    <td>
+                        @if (item.Status == -1)
+                        {
+                        <span class="text-danger">@Resources.Resources.code_notvalid</span>
+                        }
+                        else
+                        {
+                    <span class="text-success">@Resources.Resources.success</span>
+                        }
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}
+

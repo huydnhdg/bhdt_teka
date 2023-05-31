@@ -1,0 +1,65 @@
+﻿@model TEKA.Areas.Admin.ChangePasswordViewModel
+@{
+    ViewBag.Title = "Đổi mật khẩu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="changepass">
+    <div>
+        <h1 style="text-transform:uppercase">@Resources.Resources.change_pass</h1>
+        <p class="text-justify">@Resources.Resources.change_pass_des</p>
+    </div>
+    <div style="text-align:center;margin: 15px 0;"><img src="~/Image/teka3_03.png" alt="" class="img-responsive" /></div>
+    @using (Html.BeginForm("Index", "ChangePassword", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <table>
+            <tr>
+                <td><label>@Resources.Resources.account</label></td>
+                <td>
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @Value=User.Identity.Name, @readonly="readonly" })
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label>@Resources.Resources.pass_now</label></td>
+                <td>
+                    <div class="form-group">
+                        @Html.PasswordFor(m => m.OldPassword, new { @class = "form-control" })
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label>@Resources.Resources.pass_new</label></td>
+                <td>
+                    <div class="form-group">
+                        @Html.PasswordFor(m => m.NewPassword, new { @class = "form-control" })
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label>@Resources.Resources.pass_confirm</label></td>
+                <td>
+                    <div class="form-group">
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <div class="form-group">
+                        <input type="submit" value="@Resources.Resources.save" class="btn" />
+                    </div>
+                </td>
+            </tr>
+        </table>
+    }
+    <div style="text-align:center;margin: 15px 0;"><img src="~/Image/teka3_03.png" alt="" class="img-responsive" /></div>
+</section>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

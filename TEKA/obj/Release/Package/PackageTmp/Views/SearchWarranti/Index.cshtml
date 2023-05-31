@@ -1,0 +1,174 @@
+﻿@model TEKA.Models.WarrantiSearch
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section id="multiactive">
+    <div>
+        <h1>@Resources.Resources.sch_warranti</h1>
+        <p class="text-justify">@Resources.Resources.sch_warranti_des</p>
+        <p class="p-red">@Resources.Resources.required</p>
+        <div style="text-align:center;margin: 15px 0;"><img src="~/Image/teka3_03.png" alt="" class="img-responsive" /></div>
+    </div>
+    <form class="forms-sample" id="form" method="post">
+        <table>
+            <tr>
+                <td>
+                    <label class="">
+                        -*@Resources.Resources.phone_active<br />
+                        -*@Resources.Resources.prod_serial<br />
+                        -*@Resources.Resources.code_warranti
+                    </label>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" id="textSearch" type="text" required name="textSearch" value="@ViewBag.textSearch" />
+                    </div>
+
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td style="text-align:center;">
+                    <button class="btn" id="btn" value="save" type="submit">@Resources.Resources.menu_search</button>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+    @if (ViewBag.message != null)
+    {
+        <div>
+            <p class="text-center text-danger">@Resources.Resources.prod_notvalid</p>
+        </div>
+    }
+
+
+    @if (Model != null)
+    {
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <td>@Resources.Resources.status</td>
+                    <td>
+                        @if (Model.Status == 0)
+                        {
+                        <div class="text-danger">
+
+                            @Resources.Resources.news
+
+                        </div>
+                        }
+                        else if (Model.Status == 9)
+                        {
+                    <div class="text-black">
+
+                        @Resources.Resources.cancel
+
+                    </div>
+                        }
+                        else if (Model.Status == 1)
+                        {
+                    <div class="text-success">
+                        @Resources.Resources.success
+                    </div>
+                        }
+                        else if (Model.Status == 2)
+                        {
+                    <div class="text-primary">
+                        @Resources.Resources.change_station
+                    </div>
+                        }
+                        else if (Model.Status == 3)
+                        {
+                    <div class="text-black">
+                        @Resources.Resources.refuse_station
+                    </div>
+                        }
+                        else if (Model.Status == 5)
+                        {
+                    <div class="text-primary">
+                        @Resources.Resources.processing
+                    </div>
+                        }
+                        else if (Model.Status == 6)
+                        {
+                    <div class="text-primary">
+                        @Resources.Resources.bringback
+                    </div>
+                        }
+                        else if (Model.Status == 7)
+                        {
+                    <div class="text-primary">
+                        @Resources.Resources.wait_access
+                    </div>
+                        }
+                        else if (Model.Status == 8)
+                        {
+                    <div class="text-primary">
+                        @Resources.Resources.wait_response
+                    </div>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Resources.Resources.code_warranti</td>
+                    <td><b>@Model.CodeWarr</b></td>
+                </tr>
+                <tr>
+                    <td>@Resources.Resources.cate</td>
+                    <td>@Model.Category</td>
+                </tr>
+                <tr>
+                    <td>@Resources.Resources.createdate</td>
+                    <td>@Model.Createdate.Value.ToString("dd/MM/yyyy")</td>
+                </tr>
+                <tr>
+                    <td>@Resources.Resources.war_note</td>
+                    <td>@Model.Note</td>
+                </tr>
+                <tr>
+                    <td>@Resources.Resources.prod_cate</td>
+                    <td>@Model.ProductCate</td>
+                </tr>
+                <tr>
+                    <td>Serial</td>
+                    <td>@Model.Serial</td>
+                </tr>
+                <tr>
+                    <td>Model</td>
+                    <td>@Model.Model</td>
+                </tr>
+                <tr>
+                    <td>@Resources.Resources.active_date</td>
+                    <td>
+                        @if (Model.Activedate != null)
+                        {
+                            <span>@Model.Activedate.Value.ToString("dd/MM/yyyy") - @Model.Activedate.Value.AddMonths(Model.Limited ?? 0).ToString("dd/MM/yyyy")</span>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Resources.Resources.station</td>
+                    <td>@Model.KeyWarranti</td>
+                </tr>
+                <tr>
+                    <td>@Resources.Resources.war_person</td>
+                    <td>@Model.KTV</td>
+                </tr>
+                <tr>
+                    <td>@Resources.Resources.result</td>
+                    <td class="text-success">@Model.Comback</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="col-md-3"></div>
+    }
+    <div style="text-align:center;margin: 15px 0;"><img src="~/Image/teka3_03.png" alt="" class="img-responsive" /></div>
+</section>
+
+
+

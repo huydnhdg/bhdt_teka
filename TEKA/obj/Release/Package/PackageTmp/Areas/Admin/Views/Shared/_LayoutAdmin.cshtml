@@ -1,0 +1,572 @@
+﻿@using Microsoft.AspNet.Identity
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@ViewBag.Title</title>
+
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="/Areas/Admin/Template/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <!-- ... -->
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="/Areas/Admin/Template/css/style.css">
+    <link href="~/Areas/Admin/Content/Site.css" rel="stylesheet" />
+
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css" rel="stylesheet" />
+
+    <!-- endinject -->
+    <link rel="shortcut icon" type="image/png" href="~/Image/favi.png" />
+    <style>
+        body {
+            overflow-x: unset;
+        }
+
+        .phone-coming {
+            position: fixed;
+            bottom: 100px;
+            background: #DD1A5B;
+            border-top-left-radius: 100px;
+            border-bottom-left-radius: 100px;
+            -moz-border-radius-topleft: 100px;
+            -moz-border-radius-bottomleft: 100px;
+            -webkit-border-top-left-radius: 100px;
+            -webkit-border-bottom-left-radius: 100px;
+            padding: 10px;
+            font-size: 18pt;
+            transition: all .1s;
+            -o-transition: all .1s;
+            -webkit-transition: all .1s;
+            -moz-transition: all .1s;
+            right: -1000px;
+            z-index: 3000;
+            color: #fff;
+            cursor: pointer;
+        }
+
+            .phone-coming .extension {
+                padding: 15px;
+                border-radius: 50%;
+                -moz-border-radius: 50%;
+                -webkit-border-radius: 50%;
+                background: #ffff00;
+                display: inline-block;
+                font-weight: bold;
+                color: #333;
+            }
+
+            .phone-coming .phone {
+                display: inline-block;
+                padding: 10px;
+            }
+
+            .phone-coming .phone-icon {
+                font-size: 24pt;
+            }
+
+        .ui-widget-content {
+            border: none;
+        }
+        .form-group{
+            margin-bottom: 5px;
+        }
+        
+        #my-table th,td{
+            font-size: 11px!important;
+        }
+        .btn{
+            padding: 5px;
+
+        }
+        
+    </style>
+    <link href="~/Areas/Admin/Template/css/flip-text.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container-scroller">
+        <!-- partial:partials/_navbar.html -->
+        <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+            <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
+                <a class="navbar-brand brand-logo" href="~/" style="color:red;">
+                    TEKA ADMIN
+                </a>
+                <a class="navbar-brand brand-logo-mini" href="~/" style="color:red;">
+                    TEKA ADMIN
+                </a>
+            </div>
+            <div class="navbar-menu-wrapper d-flex align-items-center">
+                <ul class="navbar-nav navbar-nav-left header-links d-none d-md-flex">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav navbar-nav-right">
+                    @{Html.RenderAction("LoadNoti", "Home");}
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        using (Html.BeginForm("Logoff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <li class="nav-item dropdown d-none d-xl-inline-block">
+                                <a href="/Admin/Manage" style="color:#ffffff;"><i class="mdi mdi-bookmark-plus-outline"></i>Hello @User.Identity.GetUserName() !</a>
+                            </li>
+                            <li class="nav-item dropdown d-none d-xl-inline-block">
+                                <a style="color:#ffffff;" href="javascript:document.getElementById('logoutForm').submit()"><i class="mdi mdi-bookmark-plus-outline"></i>@Resources.Resources.logout</a>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        @*<li class="nav-item dropdown d-none d-xl-inline-block">
+                                <a style="color:#ffffff;" href="/Admin/Account/Register"><i class="mdi mdi-bookmark-plus-outline"></i>Đăng ký</a>
+                            </li>*@
+                        <li class="nav-item dropdown d-none d-xl-inline-block">
+                            <a style="color:#ffffff;" href="/Admin/Account/Login"><i class="mdi mdi-bookmark-plus-outline"></i>@Resources.Resources.login</a>
+                        </li>
+                    }
+
+                </ul>
+                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+                    <span class="mdi mdi-menu"></span>
+                </button>
+            </div>
+        </nav>
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper" style="padding-top:15px;">
+            <!-- partial:partials/_sidebar.html -->
+
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <ul class="nav">
+                    <li class="nav-item nav-profile">
+                        <div class="nav-link">
+                            <div class="user-wrapper">
+                                <div class="profile-image">
+                                    <img src="https://www.teka.com/vi-vn/wp-content/themes/teka/img/teka-new-logo.svg" style="width:100px;" alt="">
+                                </div>
+                                <div class="text-wrapper">
+                                    <p class="profile-name">TEKA</p>
+                                    <div>
+                                        <small class="designation text-muted">Manager</small>
+                                        <span class="status-indicator online"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    @if (User.IsInRole("Sale"))
+                    {
+                        <li class="nav-item @(ViewBag.Title == "Active" ? "active-war" : "")">
+                            <a class="nav-link" href="/Admin/Kichhoat">
+                                <i class="menu-icon mdi mdi-check-all"></i>
+                                <span class="menu-title">@Resources.Resources.active_list</span>
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewBag.Title == "Home" ? "active-war" : "")" href="/Admin/Home">
+                                <i class="menu-icon mdi mdi-home-map-marker"></i>
+                                <span class="menu-title">Home</span>
+                            </a>
+                        </li>
+                        <li class="nav-item @(ViewBag.Title == "Customer" ? "active-war" : "")">
+                            <a class="nav-link" href="/Admin/Customer">
+                                <i class="menu-icon mdi mdi-human-child"></i>
+                                <span class="menu-title">@Resources.Resources.customer</span>
+                            </a>
+                        </li>
+                        <li class="nav-item @(ViewBag.Title == "History" ? "active-war" : "")">
+                            <a class="nav-link" href="/Admin/HistoryCall">
+                                <i class="menu-icon mdi mdi-record-rec"></i>
+                                <span class="menu-title">@Resources.Resources.history_call</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item @(ViewBag.Title == "Active" ? "active-war" : "")">
+                            <a class="nav-link" href="/Admin/Kichhoat">
+                                <i class="menu-icon mdi mdi-check-all"></i>
+                                <span class="menu-title">@Resources.Resources.active_list</span>
+                            </a>
+                        </li>
+                        <li class="nav-item @(ViewBag.Title == "LOG_MO" ? "active-war" : "")">
+                            <a class="nav-link" href="/Admin/LOG_MO">
+                                <i class="menu-icon mdi mdi-email-open"></i>
+                                <span class="menu-title">Tin nhắn</span>
+                            </a>
+                        </li>
+                        <li class="nav-item @(ViewBag.Title == "ServiceFee" ? "active-war" : "")">
+                            <a class="nav-link" href="/Admin/ServiceFee">
+                                <i class="menu-icon mdi mdi-book-open"></i>
+                                <span class="menu-title">Phí dịch vụ</span>
+                            </a>
+                        </li>
+                        <li class="nav-item @(ViewBag.Title == "Warranti" ? "active-war" : "")">
+                            <a class="nav-link" href="/Admin/Error">
+                                <i class="menu-icon mdi mdi-alert-circle-outline"></i>
+                                <span class="menu-title">@Resources.Resources.create_warranti</span>
+                            </a>
+                        </li>
+                        <li class="nav-item @(ViewBag.Title == "Sent" ? "active-war" : "")">
+                            <a class="nav-link" href="/Admin/SentNotifi/Index">
+                                <i class="menu-icon mdi mdi-send"></i>
+                                <span class="menu-title">@Resources.Resources.sent_notifi</span>
+                            </a>
+                        </li>
+                        <li class="nav-item @(ViewBag.Title == "Agent" ? "active-war" : "")">
+                            <a class="nav-link" href="/Admin/DSDaily/In">
+                                <i class="menu-icon mdi mdi-home-map-marker"></i>
+                                <span class="menu-title">@Resources.Resources.agent</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item @(ViewBag.Title == "Product" ? "active-war" : "")">
+                            <a class="nav-link" href="/Admin/Product">
+                                <i class="menu-icon mdi mdi-package-variant"></i>
+                                <span class="menu-title">@Resources.Resources.product_list</span>
+                            </a>
+                        </li>
+                        <li class="nav-item @(ViewBag.Title == "Category" ? "active-war" : "")">
+                            <a class="nav-link" href="/Admin/ProductCate">
+                                <i class="menu-icon mdi  mdi-zip-box"></i>
+                                <span class="menu-title">@Resources.Resources.prod_cate</span>
+                            </a>
+                        </li>
+                        <li class="nav-item @(ViewBag.Title == "Move" ? "active-war" : "")">
+                            <a class="nav-link" href="/Admin/MoveFee">
+                                <i class="menu-icon mdi mdi-run"></i>
+                                <span class="menu-title">@Resources.Resources.fee_move</span>
+                            </a>
+                        </li>
+                        <li class="nav-item @(ViewBag.Title == "Accessary" ? "active-war" : "")">
+                            <a class="nav-link" data-toggle="collapse" href="#ui-device" aria-expanded="false" aria-controls="ui-basic">
+                                <i class="menu-icon mdi mdi-wallet-giftcard"></i>
+                                <span class="menu-title">@Resources.Resources.accessary</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="ui-device">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/Admin/device"> @Resources.Resources.access_code</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/Admin/device/devicesendkey"> @Resources.Resources.export</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item @(ViewBag.Title == "Manage" ? "active-war" : "")">
+                                <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                                    <i class="menu-icon mdi mdi-settings"></i>
+                                    <span class="menu-title">@Resources.Resources.account</span>
+                                    <i class="menu-arrow"></i>
+                                </a>
+                                <div class="collapse" id="ui-basic">
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/Admin/ManagePG"> PG </a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/Admin/Agency"> Agency </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/Admin/ManagerUser"> Partner</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/Admin/ManageKey"> @Resources.Resources.station</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/Admin/ManageSale"> Sale</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        }
+                        <li class="nav-item @(ViewBag.Title == "Config" ? "active-war" : "")">
+                            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+                                <i class="menu-icon mdi mdi-tooltip-edit"></i>
+                                <span class="menu-title">Config</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="auth">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/Admin/Setup"> Setup </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/Admin/Article"> @Resources.Resources.article</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/Admin/Slide"> Slide</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/Admin/DescriptionHome/Edit"> @Resources.Resources.des_for_home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/Admin/Policy"> @Resources.Resources.policy</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/Admin/Question"> @Resources.Resources.question</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/Admin/Help"> @Resources.Resources.menu_help</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+
+                    <li class="nav-item"></li>
+                </ul>
+            </nav>
+
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    @RenderBody()
+                </div>
+            </div>
+
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <!--Bootstrap Pop Up modal-->
+    <div class="phone-coming" id="phoneComing">
+        <div class="extension" id="extension"></div>
+        <div class="phone">
+            <span class="phone-icon"><i class="mdi mdi-phone"></i></span>
+            <span class="phone-number" id="phoneNumber"></span>
+            <span class="phone-fullname" id="phoneFullname"></span>
+        </div>
+    </div>
+    <!--End of Bootstrap Pop-Up modal-->
+    <style>
+
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .row > .column {
+            padding: 0 8px;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .column {
+            float: left;
+            width: 25%;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+        }
+
+        /* Modal Content */
+        .modal-content {
+            position: relative;
+            background-color: #fefefe;
+            margin: auto;
+            padding: 0;
+            width: 90%;
+            max-width: 1200px;
+            border: unset;
+        }
+
+        /* The Close Button */
+        .close {
+            color: white;
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: #999;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        .mySlides {
+            display: none;
+        }
+
+        .cursor {
+            cursor: pointer;
+        }
+
+        /* Next & previous buttons */
+        .prev,
+        .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -50px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* Position the "next button" to the right */
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+            /* On hover, add a black background color with a little bit see-through */
+            .prev:hover,
+            .next:hover {
+                background-color: rgba(0, 0, 0, 0.8);
+            }
+
+        /* Number text (1/3 etc) */
+        .numbertext {
+            color: #f2f2f2;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+
+        img {
+            margin-bottom: -4px;
+        }
+
+        .caption-container {
+            text-align: center;
+            background-color: black;
+            padding: 2px 16px;
+            color: white;
+        }
+
+        .demo {
+            opacity: 0.6;
+        }
+
+            .active,
+            .demo:hover {
+                opacity: 1;
+            }
+
+        img.hover-shadow {
+            transition: 0.3s;
+        }
+
+        .hover-shadow:hover {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+    </style>
+    <div id="ImageModal" class="modal fade" role="dialog">
+        <span class="close cursor" data-dismiss="modal">&times;</span>
+        <!-- Modal content-->
+        <div class="modal-content" id="ImageContent">
+        </div>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment-with-locales.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="https://cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page-->
+    <!-- End plugin js for this page-->
+    <!-- inject:js -->
+
+    <script src="~/Areas/Admin/Scripts/utils.js"></script>
+
+    <script src="~/ckeditor/ckeditor.js"></script>
+    <script src="~/ckfinder/ckfinder.js"></script>
+
+    <script src="~/Scripts/jquery.signalR-2.4.2.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script>
+
+        $(function () {
+
+            var chatHub = $.connection.call;
+            loadClient(chatHub);
+            //khởi chạy connect hub
+            $.connection.hub.start().done(function () {
+                chatHub.server.connect();
+            });
+
+        });
+
+        // load các ham bên phía client
+        function loadClient(chatHub) {
+
+            chatHub.client.message = function (source, destination, name) {
+                $('#phoneNumber').html(source);
+                $('#phoneFullname').html(name);
+                $('#extension').html(destination);
+                if (source.length > 5) {
+                    $('#phoneComing').animate({ right: '0px' }, 500);
+                }
+                setTimeout(function () {
+                    $('#phoneComing').animate({ right: '-1000px' }, 500);
+                }, 30000);
+            }
+        }
+        $('#phoneComing').click(function () {
+            var des = $('#phoneNumber').html();
+            window.location.href = '/admin/error/createnew?phone=' + des;
+            return false;
+        });
+
+    </script>
+    @RenderSection("scripts", required: false)
+    <script>
+        $(".datepicker").datepicker({
+            dateFormat: 'dd/mm/yy'
+        });
+    </script>
+
+
+
+</body>
+</html>

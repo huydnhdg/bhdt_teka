@@ -1,0 +1,360 @@
+﻿@model TEKA.Models.Customer
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<TEKA.Models.Province> province = ViewBag.province;
+    string message = ViewBag.message;
+}
+@section scripts{
+    <script>
+        function getCityList() {
+            var name = $("#city").val();
+            $.ajax
+                ({
+                    url: '/CustomerMultiActive/GetCityList',
+                    type: 'POST',
+                    datatype: 'application/json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        name: name
+                    }),
+                    success: function (result) {
+                        $("#county").html("");
+                        $.each($.parseJSON(result), function (i, city) {
+                            $("#county").append
+                                ($('<option></option>').val(city.Name).html(city.Name))
+                        })
+                    },
+                    error: function () {
+                        alert("Whooaaa! Something went wrong..")
+                    },
+                });
+        }
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $('#birthday').datetimepicker({
+                format: 'DD/MM/YYYY',
+                allowInputToggle: true,
+                useCurrent: false
+            }).on('dp.change', function (e) {
+                var minNew = e.date;
+                var maxNew = e.date.clone().add(9, 'days');
+                var pickEnd = $('#denngay');
+                var minOld = pickEnd.data('DateTimePicker').minDate();
+                var maxOld = pickEnd.data('DateTimePicker').maxDate();
+                if (minOld && minOld.isAfter(maxNew)) {
+                    pickEnd.data('DateTimePicker').minDate(minNew);
+                    pickEnd.data('DateTimePicker').maxDate(maxNew);
+                } else {
+                    pickEnd.data('DateTimePicker').maxDate(maxNew);
+                    pickEnd.data('DateTimePicker').minDate(minNew);
+                }
+            });
+            $('#denngay').datetimepicker({
+                format: 'DD/MM/YYYY',
+                allowInputToggle: true,
+                useCurrent: true
+            });
+
+        });
+    </script>
+
+    <script>
+        function checkSerial(form) {
+            var serial = $("#serial").val();
+            $.ajax
+                ({
+                    url: '/CustomerMultiActive/CheckSerial',
+                    type: 'POST',
+                    datatype: 'application/json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        serial: serial
+                    }),
+                    success: function (mess) {
+                        $('#txtmess').css('display', 'block');
+                        $("#txtmess").text(mess);
+
+                    },
+                    error: function () {
+                        alert("Whooaaa! Something went wrong..")
+                    },
+                });
+            $.ajax
+                ({
+                    url: '/CustomerMultiActive/GetListProduct',
+                    type: 'POST',
+                    datatype: 'application/json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        serial: serial
+                    }),
+                    success: function (result) {
+                        $("#namesp").html("");
+                        $.each($.parseJSON(result), function (i, name) {
+                            $("#namesp").append
+                                ($('<option></option>').val(name).html(name))
+                        })
+                    },
+                    error: function () {
+                        alert("Whooaaa! Something went wrong..")
+                    },
+                });
+        }
+    </script>
+    <script>
+        var contact = {
+            init: function () {
+                contact.registerEvent();
+            },
+            registerEvent: function () {
+                $('#btn').off('click').on('click', function () {
+                    var serial = $('#serial').val();
+                    var namesp = $('#namesp').val();
+                    var namekh = $('#namekh').val();
+                    var city = $('#city').val();
+                    var county = $('#county').val();
+                    var address = $('#address').val();
+                    var phone = $('#phone').val();
+                    var email = $('#email').val();
+                    var birthday = $('#birthday').val();
+                    $.ajax({
+                        url: '/CustomerMultiActive/MultiActive',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {
+                            serial: serial,
+                            namesp: namesp,
+                            namekh: namekh,
+                            city: city,
+                            county: county,
+                            address: address,
+                            phone: phone,
+                            email: email,
+                            birthday: birthday
+                        },
+                        success: function (result) {
+
+                            if ($.parseJSON(result).customer!=null) {
+                                alert($.parseJSON(result).message + "\n- Tên sản phẩm: " + $.parseJSON(result).customer.Name + "\n- Serial: " + $.parseJSON(result).customer.Serial + "\n- Ngày kích hoạt: " + dateFormat(new Date(parseInt(($.parseJSON(result).customer.ActiveDate).match(/\d+/)[0]))) + "\n- Thời hạn bảo hành: " + dateFormat(new Date(parseInt(($.parseJSON(result).customer.EndDate).match(/\d+/)[0]))));
+                            }
+                            else {
+                                alert($.parseJSON(result).message);
+                            }
+                            
+                            contact.resetForm();
+                        },
+                        error: function () {
+                            alert("Whooaaa! Something went wrong..")
+                        },
+                    });
+                });
+                
+            },
+            resetForm: function () {
+                $('#serial').val("");
+                $('#namesp').val("");
+            }
+        }
+        contact.init();
+        function dateFormat(d) {
+            console.log(d);
+            return ((d.getMonth() + 1) + "").padStart(2, "0")
+                + "/" + (d.getDate() + "").padStart(2, "0")
+                + "/" + d.getFullYear();
+        }
+    </script>
+    <script>
+        function checkPhone(form) {
+            var phone = $("#phone").val();
+            $.ajax
+                ({
+                    url: '/CustomerMultiActive/CheckPhone',
+                    type: 'POST',
+                    datatype: 'application/json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        phone: phone
+                    }),
+                    success: function (cus) {
+                        var ob = $.parseJSON(cus);
+                        $('#namekh').val(ob.Name);
+                        $('#city').val(ob.City);
+                        $("#county").html("");
+                        $("#county").append
+                            ($('<option></option>').val(ob.County).html(ob.County))
+                        $('#address').val(ob.Address);
+                        $('#email').val(ob.Email);
+                        $('#birthday').val(dateFormat(new Date(parseInt((ob.Birthday).match(/\d+/)[0]))));
+                    },
+                    error: function () {
+                        alert("Whooaaa! Something went wrong..")
+                    },
+                });
+        }
+        function dateFormat(d) {
+            console.log(d);
+            return ((d.getMonth() + 1) + "").padStart(2, "0")
+                + "/" + (d.getDate() + "").padStart(2, "0")
+                + "/" + d.getFullYear();
+        }
+
+        
+    </script>
+}
+
+<section id="active">
+    <div>
+        <h1>KÍCH HOẠT BẢO HÀNH TRỰC TUYẾN</h1>
+        <p class="text-justify">Để kích hoạt sản phẩm vui lòng điền đầy đủ thông tin dưới đây.</p>
+        <p class="p-red">Các đề mục đánh dấu sao (*) là bắt buộc</p>
+        <div style="text-align:center;margin: 15px 0;"><img src="~/Image/teka3_03.png" alt="" class="img-responsive" /></div>
+    </div>
+    <form class="forms-sample" id="form">
+        <table>
+            <tr>
+                <td><label class="">*Serial sản phẩm</label></td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" onblur="checkSerial(this);" id="serial" type="text" required name="serial" placeholder="" />
+                    </div>
+                    @*<p id="txtmess" style="font-size: 13px; color: #bb2418; font-style: italic;display:none">(*)</p>*@
+
+                </td>
+            </tr>
+            <tr>
+                <td><label class="">*Tên sản phẩm</label></td>
+                <td>
+                    <div class="form-group">
+                        <select class="form-control form-control-sm" id="namesp" required>
+                            <option value="">Tên sản phẩm</option>
+                        </select>
+                    </div>
+
+                </td>
+            </tr>
+            <tr>
+                <td><label class="">Ngày mua hàng</label></td>
+                <td>
+                    <div class="form-group">
+                        <div id="buydate">
+                            <input class="form-control datepicker" type="text" value="" name="buydate" placeholder="dd/mm/yyyy"/>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label class="">Ngày lắp đặt</label></td>
+                <td>
+                    <div class="form-group">
+                        <div id="installdate">
+                            <input class="form-control datepicker" type="text" value="" name="installdate" placeholder="dd/mm/yyyy"/>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label class="">*Họ tên khách hàng</label></td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="text" required id="namekh" placeholder="Vui lòng điền đầy đủ họ tên để TEKA hỗ trợ tốt nhất" />
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label class="">*Tỉnh/ Thành phố</label></td>
+                <td>
+                    <div class="form-group">
+                        <select class="form-control form-control-sm" name="city" required id="city" onchange="getCityList()">
+                            <option value="">Tỉnh/ Thành phố</option>
+                            @foreach (var item in province)
+                            {
+                                <option value="@item.Name">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label class="">*Quận/ Huyện</label></td>
+                <td>
+                    <div class="form-group">
+                        <select class="form-control form-control-sm" name="county" required id="county">
+                            <option value="">Huyện/ Quận</option>
+                        </select>
+                    </div>
+
+                </td>
+            </tr>
+            <tr>
+                <td><label class="">*Địa chỉ</label></td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="text" required id="address" placeholder="" />
+                    </div>
+
+                </td>
+            </tr>
+            <tr>
+                <td><label class="">*Số điện thoại</label></td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="number" required id="phone" placeholder="" onblur="checkPhone(this);" />
+                    </div>
+
+                </td>
+            </tr>
+            <tr>
+                <td><label class="">Email</label></td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" type="email" id="email" placeholder="" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label class="">Ngày sinh</label></td>
+                <td>
+                    <div class="form-group">
+                        <div class='input-group date'>
+                            <input type='text' class="form-control" id="birthday" placeholder="" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td></td>
+                <td style="text-align:center;"><button class="btn" id="btn" value="save" type="button">KÍCH HOẠT</button></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    @if (message.Length != 0)
+                    {
+                        <div class="box" style="border:1px solid #bb2418;border-radius:4px;width:480px;margin:0 auto;padding:5px;color:#bb2418;">
+                            <p>@message</p>
+                            @if (Model != null)
+                            {
+                                <p>THÔNG TIN SẢN PHẨM</p>
+                                <p>Tên sảm phẩm: @ViewBag.product</p>
+                                <p>Serial: @Model.Serial</p>
+                                <p>Ngày kích hoạt: @Model.ActiveDate</p>
+                                <p>Thời hạn bảo hành: @Model.EndDate</p>
+                            }
+
+                        </div>
+                    }
+
+                </td>
+            </tr>
+        </table>
+    </form>
+    <div style="text-align:center;margin: 15px 0;"><img src="~/Image/teka3_03.png" alt="" class="img-responsive" /></div>
+</section>

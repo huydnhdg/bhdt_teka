@@ -1,0 +1,10 @@
+2021-03-03 10:52:57.0688 TEKA.Controllers.HomeController --
+2021-03-03 10:53:06.5145 TEKA.Controllers.HomeController --
+2021-03-24 10:07:20.1023 TEKA.Controllers.ErrorController Error-Active-serial--message-
+2021-03-24 10:08:25.7228 TEKA.Controllers.ErrorController Error-Active-serial-TP149R00677-message-Serial s?n ph?m chua du?c kích ho?t.
+2021-03-24 10:09:34.2012 TEKA.Controllers.ErrorController Error-Active-serial-sc17c400871-message-Serial s?n ph?m dã h?t h?n b?o hành.
+2021-03-24 10:10:43.3745 TEKA.Controllers.ErrorController Error-Active-serial-TP184901791-message-Serial s?n ph?m dã h?t h?n b?o hành.
+2021-03-24 10:11:08.9497 TEKA.Controllers.ErrorController Error-Active-serial--message-
+2021-03-24 10:11:25.1758 TEKA.Controllers.ErrorController Error-Active-serial-TP184901791-message-
+2021-03-24 15:48:39.4820 TEKA.Controllers.ErrorController Error-Active-serial--message-
+2021-03-24 16:02:07.9135 TEKA.Controllers.ErrorController Error-Active-serial--message-

@@ -1,0 +1,18 @@
+﻿@model TEKA.Models.Article
+@{
+    ViewBag.Title = "Bài viết";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var title = Culture.Contains("vi") ? @Model.Title : @Model.Title_en;
+    var description = Culture.Contains("vi") ? @Model.Description : @Model.Description_en;
+    var text = Culture.Contains("vi") ? @Model.Text : @Model.Text_en;
+}
+<section id="article">
+    <h1>@title</h1>
+    <p style="margin: 0;font-size: 11px;">@Model.CreateDate</p>
+    <h2 style="margin: 10px 0;font-style: italic;font-size: 13px;font-weight: bold;">@description</h2>
+    <div class="main-article">
+        @Html.Raw(text)
+    </div>
+</section>
+
